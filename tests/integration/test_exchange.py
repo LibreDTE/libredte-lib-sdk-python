@@ -50,7 +50,7 @@ _RESULTADO_DTE = {
 }
 
 
-def test_build_envio_recibos_returns_the_parsed_data_and_the_xml(
+def test_build_envio_recibos_returns_the_datos_and_the_xml(
     fake_certificate,
     real_sdk,
 ):
@@ -82,7 +82,7 @@ def test_build_envio_recibos_result_chains_into_validator(
     assert len(results) >= 1
 
 
-def test_build_respuesta_envio_returns_the_parsed_data_and_the_xml(
+def test_build_respuesta_envio_returns_the_datos_and_the_xml(
     fake_certificate,
     real_sdk,
 ):

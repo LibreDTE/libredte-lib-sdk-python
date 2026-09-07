@@ -17,7 +17,7 @@ class DocumentExamplesService:
     de `libredte-lib-core` (`tests/fixtures/yaml/documentos_ok/`) — uno
     por variante de negocio real (descuentos, impuesto adicional, pago a
     crédito, exportación, etc.), no datos inventados por el SDK.
-    `Example.parsed_data` de `get()` se le pasa tal cual a
+    `Example.input_data` de `get()` se le pasa tal cual a
     `DocumentBuilderService.build_draft()`/`.build_signed()`, típicamente
     reemplazando `Encabezado.IdDoc.Folio` y `Encabezado.Receptor` por los
     propios de quien usa el SDK antes de construir el documento.

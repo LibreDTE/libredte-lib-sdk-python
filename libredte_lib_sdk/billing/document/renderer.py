@@ -32,6 +32,7 @@ class DocumentRendererService:
         *,
         format: str = 'pdf',  # noqa: A002
         renderings: dict[str, int] | None = None,
+        libredte_data: dict[str, Any] | None = None,
     ) -> RenderResult:
         """
         Genera el PDF (u otro formato soportado por la API) de un documento.
@@ -48,16 +49,24 @@ class DocumentRendererService:
         generarse (ej. pedir solo `'cedible'` para un tipo de documento
         sin acuse de recibo). Ver `RenderResult` para cómo se identifica
         cada copia en la respuesta.
+
+        `libredte_data` son datos adicionales que no están en el XML del
+        documento pero sí se usan al renderizar la plantilla — ej.
+        `{'extra': {'dte': {...}, 'historial': [...]}}`: lo que va en
+        `extra.dte` se combina con los datos del documento antes de
+        renderizar; el resto de `extra` (ej. `historial`) queda
+        disponible aparte para la plantilla.
         """
         renderer_options: dict[str, Any] = {'format': format}
         if renderings is not None:
             renderer_options['renderings'] = renderings
 
-        data = self._client.call(
-            self._RENDER_OPERATION,
-            bag={
-                'xmlDocument': document_xml_base64,
-                'options': {'renderer': renderer_options},
-            },
-        )
+        bag: dict[str, Any] = {
+            'xmlDocument': document_xml_base64,
+            'options': {'renderer': renderer_options},
+        }
+        if libredte_data is not None:
+            bag['libredteData'] = libredte_data
+
+        data = self._client.call(self._RENDER_OPERATION, bag=bag)
         return RenderResult.from_api(data)

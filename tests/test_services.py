@@ -42,7 +42,7 @@ _REAL_SIGNED_DOCUMENT_RESPONSE = {
     },
 }
 
-_PARSED_DATA = {
+_INPUT_DATA = {
     'Encabezado': {
         'IdDoc': {'TipoDTE': 33, 'Folio': 1},
         'Emisor': {'RUTEmisor': '76192083-9', 'RznSoc': 'SASCO SpA'},
@@ -64,12 +64,33 @@ def test_build_draft_omits_caf_and_certificate_from_the_payload(sdk):
         f'{TEST_BASE_URL}/billing/document/builder/build',
     ).mock(return_value=httpx.Response(200, json=draft_response))
 
-    document = sdk.billing.document.builder.build_draft(_PARSED_DATA)
+    document = sdk.billing.document.builder.build_draft(_INPUT_DATA)
 
     sent = json.loads(route.calls.last.request.content)
-    assert sent['parameters']['bag'].keys() == {'parsedData'}
+    assert sent['parameters']['bag'].keys() == {'inputData'}
     assert document.id == '76192083-9_T033F000000001'
     assert document.is_timbrado is False
+
+
+@respx.mock
+def test_build_draft_sends_options_when_given(sdk):
+    draft_response = {
+        'meta': _REAL_SIGNED_DOCUMENT_RESPONSE['meta'],
+        'data': {**_REAL_SIGNED_DOCUMENT_RESPONSE['data'], 'ted': None},
+    }
+    route = respx.post(
+        f'{TEST_BASE_URL}/billing/document/builder/build',
+    ).mock(return_value=httpx.Response(200, json=draft_response))
+
+    sdk.billing.document.builder.build_draft(
+        '<DTE>...</DTE>',
+        options={'parser': {'strategy': 'default.xml'}},
+    )
+
+    sent = json.loads(route.calls.last.request.content)
+    bag = sent['parameters']['bag']
+    assert bag['inputData'] == '<DTE>...</DTE>'
+    assert bag['options'] == {'parser': {'strategy': 'default.xml'}}
 
 
 @respx.mock
@@ -81,7 +102,7 @@ def test_build_signed_includes_caf_and_certificate(sdk):
     )
 
     document = sdk.billing.document.builder.build_signed(
-        _PARSED_DATA,
+        _INPUT_DATA,
         caf_xml='<AUTORIZACION/>',
         certificate=_CERTIFICATE,
     )
@@ -451,6 +472,33 @@ def test_renderer_render_omits_renderings_key_by_default(sdk):
 
     sent = json.loads(route.calls.last.request.content)['parameters']
     assert 'renderings' not in sent['bag']['options']['renderer']
+    assert 'libredteData' not in sent['bag']
+
+
+@respx.mock
+def test_renderer_render_sends_libredte_data_when_given(sdk):
+    """`libredte_data` viaja como `bag.libredteData` cuando se indica."""
+    route = respx.post(
+        f'{TEST_BASE_URL}/billing/document/renderer/render',
+    ).mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                'meta': {},
+                'data': {'renderings': [_rendering_response(b'ok')]},
+            },
+        ),
+    )
+
+    sdk.billing.document.renderer.render(
+        'ZG9jdW1lbnRv',
+        libredte_data={'extra': {'historial': ['evento 1']}},
+    )
+
+    sent = json.loads(route.calls.last.request.content)['parameters']
+    assert sent['bag']['libredteData'] == {
+        'extra': {'historial': ['evento 1']},
+    }
 
 
 @respx.mock
@@ -492,7 +540,7 @@ def test_document_examples_get_sends_id_and_splits_expected(sdk):
                 'meta': {},
                 'data': {
                     'id': '033_factura_afecta/033_001_simple',
-                    'example': _PARSED_DATA,
+                    'example': _INPUT_DATA,
                     'expected': {
                         'Encabezado': {'Totales': {'MntTotal': 1190}},
                     },
@@ -507,7 +555,7 @@ def test_document_examples_get_sends_id_and_splits_expected(sdk):
 
     sent = json.loads(route.calls.last.request.content)['parameters']
     assert sent['id'] == '033_factura_afecta/033_001_simple'
-    assert example.parsed_data == _PARSED_DATA
+    assert example.input_data == _INPUT_DATA
     assert example.expected['Encabezado']['Totales']['MntTotal'] == 1190
 
 

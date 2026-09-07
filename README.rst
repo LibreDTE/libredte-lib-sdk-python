@@ -36,7 +36,7 @@ Uso
     sdk = LibreDTE()  # base_url y api_token también vía env vars, ver abajo
     b = sdk.billing
 
-    parsed_data = {
+    input_data = {
         'Encabezado': {
             'IdDoc': {
                 'TipoDTE': 33,
@@ -81,11 +81,11 @@ Uso
     # b.identifier.caf_validator.validate(caf.xml_base64)
 
     # 1. Borrador.
-    borrador = b.document.builder.build_draft(parsed_data)
+    borrador = b.document.builder.build_draft(input_data)
 
     # 2. Documento real, timbrado y firmado.
     documento = b.document.builder.build_signed(
-        parsed_data, caf_xml=caf.xml_base64, certificate=certificate,
+        input_data, caf_xml=caf.xml_base64, certificate=certificate,
     )
 
     # 3. Envío al SII (arma el sobre EnvioDTE y luego lo envía).
@@ -176,7 +176,7 @@ necesita para poblar sus propios datos, no operaciones de facturación.
     ejemplos = b.document.examples.list()  # [ExampleSummary(id=..., category=..., case=...), ...]
     ejemplo = b.document.examples.get(ejemplos[0].id)
     documento = b.document.builder.build_signed(
-        ejemplo.parsed_data, caf_xml=caf.xml_base64, certificate=certificate,
+        ejemplo.input_data, caf_xml=caf.xml_base64, certificate=certificate,
     )
 
     # Catálogos/repositorios reales (comunas, tipos de documento, etc.)

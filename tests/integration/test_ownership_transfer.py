@@ -36,7 +36,7 @@ def built_aec(signed_document, fake_certificate, real_sdk):
     )
 
 
-def test_build_returns_the_parsed_data_and_the_xml(built_aec):
+def test_build_returns_the_datos_and_the_xml(built_aec):
     assert (
         built_aec.datos['DocumentoAEC']['Caratula']['RutCedente']
         == '76192083-9'

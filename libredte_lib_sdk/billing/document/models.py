@@ -163,7 +163,7 @@ class Example:
     """
     Un ejemplo de documento, tal como lo devuelve `examples::get()`.
 
-    `parsed_data` es directamente el `parsedData` que esperan
+    `input_data` se pasa directamente al parámetro homónimo de
     `DocumentBuilderService.build_draft()`/`.build_signed()` — mismo
     `Encabezado`/`Detalle` que usa el resto del SDK, sin transformación.
     `expected` son los valores esperados del caso (totales, etc.) que usa
@@ -172,7 +172,7 @@ class Example:
     """
 
     id: str
-    parsed_data: dict[str, Any]
+    input_data: dict[str, Any]
     expected: dict[str, Any]
 
     @classmethod
@@ -180,7 +180,7 @@ class Example:
         """Construye un `Example` desde el `data` que devuelve la API."""
         return cls(
             id=data['id'],
-            parsed_data=data['example'],
+            input_data=data['example'],
             expected=data.get('expected') or {},
         )
 

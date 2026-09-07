@@ -34,14 +34,14 @@ class LibreDTE:
             sdk.billing.integration,
         )
 
-        borrador = doc.builder.build_draft(parsed_data)
+        borrador = doc.builder.build_draft(input_data)
 
         caf = ident.caf_faker.create(emisor, codigo_documento=33)
         certificate = tp.mandatario_manager.create_fake_certificate(
             mandatario,
         )
         documento = doc.builder.build_signed(
-            parsed_data, caf_xml=caf.xml_base64, certificate=certificate,
+            input_data, caf_xml=caf.xml_base64, certificate=certificate,
         )
         sobre = doc.dispatcher.create(
             documento.xml_base64, certificate=certificate, emisor=emisor_dto,

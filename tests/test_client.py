@@ -67,7 +67,7 @@ def test_call_returns_the_data_payload_on_success(api_client):
 
     result = api_client.call(
         'billing.document.builder::build',
-        bag={'parsedData': {}},
+        bag={'inputData': {}},
     )
 
     assert result == {'id': 'doc-1'}

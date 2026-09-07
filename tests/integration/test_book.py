@@ -42,7 +42,7 @@ _BAG = {
 }
 
 
-def test_builder_build_returns_the_parsed_data_and_the_xml(
+def test_builder_build_returns_the_datos_and_the_xml(
     fake_certificate,
     real_sdk,
 ):

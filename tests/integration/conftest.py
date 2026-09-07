@@ -17,7 +17,7 @@ import pytest
 from libredte_lib_sdk import LibreDTE
 from libredte_lib_sdk.billing.trading_parties import Mandatario
 
-_PARSED_DATA = {
+_INPUT_DATA = {
     'Encabezado': {
         'IdDoc': {'TipoDTE': 33, 'Folio': 1},
         'Emisor': {
@@ -38,7 +38,7 @@ _PARSED_DATA = {
     'Detalle': [{'NmbItem': 'Producto A', 'QtyItem': 1, 'PrcItem': 1000}],
 }
 
-_PARSED_DATA_BOLETA = {
+_INPUT_DATA_BOLETA = {
     'Encabezado': {
         'IdDoc': {'TipoDTE': 39, 'Folio': 1},
         'Emisor': {
@@ -68,7 +68,7 @@ def real_sdk():
 @pytest.fixture
 def draft_document(real_sdk):
     """Un borrador real (factura afecta, tipo 33), construido en vivo."""
-    return real_sdk.billing.document.builder.build_draft(_PARSED_DATA)
+    return real_sdk.billing.document.builder.build_draft(_INPUT_DATA)
 
 
 @pytest.fixture
@@ -80,7 +80,7 @@ def draft_boleta(real_sdk):
     API omite en silencio una presentación `'cedible'` pedida sobre un
     tipo de documento que no la soporta (ver `RenderResult`).
     """
-    return real_sdk.billing.document.builder.build_draft(_PARSED_DATA_BOLETA)
+    return real_sdk.billing.document.builder.build_draft(_INPUT_DATA_BOLETA)
 
 
 @pytest.fixture
@@ -111,7 +111,7 @@ def signed_document(real_sdk, fake_certificate):
         folio_hasta=100,
     )
     return real_sdk.billing.document.builder.build_signed(
-        _PARSED_DATA,
+        _INPUT_DATA,
         caf_xml=caf.xml_base64,
         certificate=fake_certificate,
     )
