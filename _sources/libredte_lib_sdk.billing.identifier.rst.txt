@@ -1,0 +1,21 @@
+libredte\_lib\_sdk.billing.identifier package
+=============================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.identifier.caf_faker
+   libredte_lib_sdk.billing.identifier.caf_loader
+   libredte_lib_sdk.billing.identifier.caf_validator
+   libredte_lib_sdk.billing.identifier.models
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.billing.identifier
+   :members:
+   :show-inheritance:
+   :undoc-members:

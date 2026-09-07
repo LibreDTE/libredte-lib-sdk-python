@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.human\_resources.payroll.calculator module
+=============================================================
+
+.. automodule:: libredte_lib_sdk.human_resources.payroll.calculator
+   :members:
+   :show-inheritance:
+   :undoc-members:

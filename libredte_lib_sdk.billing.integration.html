@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libredte_lib_sdk.billing.integration package &mdash; documentación de LibreDTE: SDK Python para la API de LibreDTE Lib - 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ba61de6b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=f85f4cfb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="libredte_lib_sdk.billing.integration.models module" href="libredte_lib_sdk.billing.integration.models.html" />
+    <link rel="prev" title="libredte_lib_sdk.billing.identifier.models module" href="libredte_lib_sdk.billing.identifier.models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            LibreDTE: SDK Python para la API de LibreDTE Lib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Referencia de API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">libredte_lib_sdk</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="libredte_lib_sdk.html">libredte_lib_sdk package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="libredte_lib_sdk.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="libredte_lib_sdk.billing.html">libredte_lib_sdk.billing package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.human_resources.html">libredte_lib_sdk.human_resources package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.system.html">libredte_lib_sdk.system package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.html#module-libredte_lib_sdk">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LibreDTE: SDK Python para la API de LibreDTE Lib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">libredte_lib_sdk</a></li>
+          <li class="breadcrumb-item"><a href="libredte_lib_sdk.html">libredte_lib_sdk package</a></li>
+          <li class="breadcrumb-item"><a href="libredte_lib_sdk.billing.html">libredte_lib_sdk.billing package</a></li>
+      <li class="breadcrumb-item active">libredte_lib_sdk.billing.integration package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/libredte_lib_sdk.billing.integration.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="libredte-lib-sdk-billing-integration-package">
+<h1>libredte_lib_sdk.billing.integration package<a class="headerlink" href="#libredte-lib-sdk-billing-integration-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html">libredte_lib_sdk.billing.integration.models module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse"><code class="docutils literal notranslate"><span class="pre">CheckDocumentAssignabilityResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse.codigo"><code class="docutils literal notranslate"><span class="pre">CheckDocumentAssignabilityResponse.codigo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse.from_api"><code class="docutils literal notranslate"><span class="pre">CheckDocumentAssignabilityResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse.glosa"><code class="docutils literal notranslate"><span class="pre">CheckDocumentAssignabilityResponse.glosa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse.raw"><code class="docutils literal notranslate"><span class="pre">CheckDocumentAssignabilityResponse.raw</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse"><code class="docutils literal notranslate"><span class="pre">CheckXmlDocumentSentStatusResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse.description"><code class="docutils literal notranslate"><span class="pre">CheckXmlDocumentSentStatusResponse.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse.error"><code class="docutils literal notranslate"><span class="pre">CheckXmlDocumentSentStatusResponse.error</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse.from_api"><code class="docutils literal notranslate"><span class="pre">CheckXmlDocumentSentStatusResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse.raw"><code class="docutils literal notranslate"><span class="pre">CheckXmlDocumentSentStatusResponse.raw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse.status"><code class="docutils literal notranslate"><span class="pre">CheckXmlDocumentSentStatusResponse.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent"><code class="docutils literal notranslate"><span class="pre">DocumentEvent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent.codigo"><code class="docutils literal notranslate"><span class="pre">DocumentEvent.codigo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent.fecha"><code class="docutils literal notranslate"><span class="pre">DocumentEvent.fecha</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent.from_api"><code class="docutils literal notranslate"><span class="pre">DocumentEvent.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent.glosa"><code class="docutils literal notranslate"><span class="pre">DocumentEvent.glosa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent.responsable"><code class="docutils literal notranslate"><span class="pre">DocumentEvent.responsable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse"><code class="docutils literal notranslate"><span class="pre">GetDocumentSiiReceptionDateResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse.from_api"><code class="docutils literal notranslate"><span class="pre">GetDocumentSiiReceptionDateResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse.raw"><code class="docutils literal notranslate"><span class="pre">GetDocumentSiiReceptionDateResponse.raw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse.reception_date"><code class="docutils literal notranslate"><span class="pre">GetDocumentSiiReceptionDateResponse.reception_date</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ListDocumentEventsResponse"><code class="docutils literal notranslate"><span class="pre">ListDocumentEventsResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ListDocumentEventsResponse.events"><code class="docutils literal notranslate"><span class="pre">ListDocumentEventsResponse.events</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ListDocumentEventsResponse.from_api"><code class="docutils literal notranslate"><span class="pre">ListDocumentEventsResponse.from_api()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse"><code class="docutils literal notranslate"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse.description"><code class="docutils literal notranslate"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse.from_api"><code class="docutils literal notranslate"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse.raw"><code class="docutils literal notranslate"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse.raw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse.status"><code class="docutils literal notranslate"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendAecResponse"><code class="docutils literal notranslate"><span class="pre">SendAecResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendAecResponse.from_api"><code class="docutils literal notranslate"><span class="pre">SendAecResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendAecResponse.raw"><code class="docutils literal notranslate"><span class="pre">SendAecResponse.raw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendAecResponse.track_id"><code class="docutils literal notranslate"><span class="pre">SendAecResponse.track_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse"><code class="docutils literal notranslate"><span class="pre">SendXmlDocumentResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse.from_api"><code class="docutils literal notranslate"><span class="pre">SendXmlDocumentResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse.raw"><code class="docutils literal notranslate"><span class="pre">SendXmlDocumentResponse.raw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse.track_id"><code class="docutils literal notranslate"><span class="pre">SendXmlDocumentResponse.track_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse"><code class="docutils literal notranslate"><span class="pre">SubmitDocumentAcceptanceResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse.codigo"><code class="docutils literal notranslate"><span class="pre">SubmitDocumentAcceptanceResponse.codigo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse.from_api"><code class="docutils literal notranslate"><span class="pre">SubmitDocumentAcceptanceResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse.glosa"><code class="docutils literal notranslate"><span class="pre">SubmitDocumentAcceptanceResponse.glosa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse.raw"><code class="docutils literal notranslate"><span class="pre">SubmitDocumentAcceptanceResponse.raw</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse.description"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentResponse.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse.from_api"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse.raw"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentResponse.raw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse.received"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentResponse.received</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse.status"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentResponse.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentSignatureResponse</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse.description"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentSignatureResponse.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse.from_api"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentSignatureResponse.from_api()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse.raw"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentSignatureResponse.raw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse.received"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentSignatureResponse.received</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse.status"><code class="docutils literal notranslate"><span class="pre">ValidateDocumentSignatureResponse.status</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_dte.html">libredte_lib_sdk.billing.integration.sii_dte module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_dte.html#libredte_lib_sdk.billing.integration.sii_dte.SiiDteService"><code class="docutils literal notranslate"><span class="pre">SiiDteService</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_dte.html#libredte_lib_sdk.billing.integration.sii_dte.SiiDteService.check_status"><code class="docutils literal notranslate"><span class="pre">SiiDteService.check_status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_dte.html#libredte_lib_sdk.billing.integration.sii_dte.SiiDteService.request_status_by_email"><code class="docutils literal notranslate"><span class="pre">SiiDteService.request_status_by_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_dte.html#libredte_lib_sdk.billing.integration.sii_dte.SiiDteService.send"><code class="docutils literal notranslate"><span class="pre">SiiDteService.send()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_dte.html#libredte_lib_sdk.billing.integration.sii_dte.SiiDteService.validate_document"><code class="docutils literal notranslate"><span class="pre">SiiDteService.validate_document()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_dte.html#libredte_lib_sdk.billing.integration.sii_dte.SiiDteService.validate_document_signature"><code class="docutils literal notranslate"><span class="pre">SiiDteService.validate_document_signature()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rcv.html">libredte_lib_sdk.billing.integration.sii_rcv module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rcv.html#libredte_lib_sdk.billing.integration.sii_rcv.SiiRcvService"><code class="docutils literal notranslate"><span class="pre">SiiRcvService</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rcv.html#libredte_lib_sdk.billing.integration.sii_rcv.SiiRcvService.check_document_assignability"><code class="docutils literal notranslate"><span class="pre">SiiRcvService.check_document_assignability()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rcv.html#libredte_lib_sdk.billing.integration.sii_rcv.SiiRcvService.get_document_sii_reception_date"><code class="docutils literal notranslate"><span class="pre">SiiRcvService.get_document_sii_reception_date()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rcv.html#libredte_lib_sdk.billing.integration.sii_rcv.SiiRcvService.list_document_events"><code class="docutils literal notranslate"><span class="pre">SiiRcvService.list_document_events()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rcv.html#libredte_lib_sdk.billing.integration.sii_rcv.SiiRcvService.submit_document_acceptance"><code class="docutils literal notranslate"><span class="pre">SiiRcvService.submit_document_acceptance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rtc.html">libredte_lib_sdk.billing.integration.sii_rtc module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rtc.html#libredte_lib_sdk.billing.integration.sii_rtc.SiiRtcService"><code class="docutils literal notranslate"><span class="pre">SiiRtcService</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.integration.sii_rtc.html#libredte_lib_sdk.billing.integration.sii_rtc.SiiRtcService.send_aec"><code class="docutils literal notranslate"><span class="pre">SiiRtcService.send_aec()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-libredte_lib_sdk.billing.integration">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-libredte_lib_sdk.billing.integration" title="Link to this heading"></a></h2>
+<p>Componente <cite>billing.integration</cite>: integración con el SII.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">CheckDocumentAssignabilityResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">codigo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glosa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Resultado <cite>{codigo, glosa}</cite> de <cite>checkDocumentAssignability</cite>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.codigo">
+<span class="sig-name descname"><span class="pre">codigo</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.codigo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse" title="libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse"><span class="pre">CheckDocumentAssignabilityResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.glosa">
+<span class="sig-name descname"><span class="pre">glosa</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.glosa" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckDocumentAssignabilityResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">CheckXmlDocumentSentStatusResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Estado de revisión de un envío al SII (<cite>checkXmlDocumentSentStatus</cite>).</p>
+<p>La respuesta trae <cite>track_id</cite>, <cite>status</cite> (código crudo del SII, ej.
+<cite>“EPR”</cite>), <cite>error</cite> (bool), <cite>description</cite> (glosa), <cite>resume</cite>
+(<cite>reported</cite>/<cite>accepted</cite>/<cite>rejected</cite>/<cite>repairs</cite>) y <cite>documents</cite> — las dos
+últimas, y <cite>track_id</cite>, solo disponibles vía <cite>.raw</cite> si se necesitan
+sin tipar.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse" title="libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse"><span class="pre">CheckXmlDocumentSentStatusResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.CheckXmlDocumentSentStatusResponse.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.DocumentEvent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">DocumentEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">codigo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glosa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responsable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fecha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.DocumentEvent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Un evento del historial de un DTE en el RCV del SII.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.DocumentEvent.codigo">
+<span class="sig-name descname"><span class="pre">codigo</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.DocumentEvent.codigo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.DocumentEvent.fecha">
+<span class="sig-name descname"><span class="pre">fecha</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.DocumentEvent.fecha" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.DocumentEvent.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent" title="libredte_lib_sdk.billing.integration.models.DocumentEvent"><span class="pre">DocumentEvent</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.DocumentEvent.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye un <cite>DocumentEvent</cite> desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.DocumentEvent.glosa">
+<span class="sig-name descname"><span class="pre">glosa</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.DocumentEvent.glosa" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.DocumentEvent.responsable">
+<span class="sig-name descname"><span class="pre">responsable</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.DocumentEvent.responsable" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">GetDocumentSiiReceptionDateResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reception_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Fecha de recepción de un DTE en el SII (<cite>getDocumentSiiReceptionDate</cite>).</p>
+<p>Si el documento consultado no tiene fecha de recepción registrada,
+la API levanta <cite>LibreDteApiError</cite> — <cite>reception_date</cite> nunca es
+<cite>None</cite>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse" title="libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse"><span class="pre">GetDocumentSiiReceptionDateResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse.reception_date">
+<span class="sig-name descname"><span class="pre">reception_date</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.GetDocumentSiiReceptionDateResponse.reception_date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.IntegrationComponent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">IntegrationComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.client.html#libredte_lib_sdk.client.ApiClient" title="libredte_lib_sdk.client.ApiClient"><span class="pre">ApiClient</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.IntegrationComponent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Agrupa los servicios de <cite>billing.integration</cite>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ListDocumentEventsResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">ListDocumentEventsResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent" title="libredte_lib_sdk.billing.integration.models.DocumentEvent"><span class="pre">DocumentEvent</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ListDocumentEventsResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Historial de eventos de un DTE en el RCV del SII (<cite>listDocumentEvents</cite>).</p>
+<p>La API devuelve la lista de eventos directamente, sin envoltorio.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ListDocumentEventsResponse.events">
+<span class="sig-name descname"><span class="pre">events</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.DocumentEvent" title="libredte_lib_sdk.billing.integration.models.DocumentEvent"><span class="pre">DocumentEvent</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ListDocumentEventsResponse.events" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ListDocumentEventsResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ListDocumentEventsResponse" title="libredte_lib_sdk.billing.integration.models.ListDocumentEventsResponse"><span class="pre">ListDocumentEventsResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ListDocumentEventsResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Confirmación de la solicitud de estado por correo.</p>
+<p><cite>requestXmlDocumentSentStatusByEmail</cite> no trae <cite>received</cite>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse" title="libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.RequestXmlDocumentSentStatusByEmailResponse.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendAecResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">SendAecResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendAecResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Resultado del envío de un AEC al SII (<cite>sii_rtc::sendAec</cite>).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendAecResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendAecResponse" title="libredte_lib_sdk.billing.integration.models.SendAecResponse"><span class="pre">SendAecResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendAecResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendAecResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendAecResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendAecResponse.track_id">
+<span class="sig-name descname"><span class="pre">track_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendAecResponse.track_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendXmlDocumentResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">SendXmlDocumentResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendXmlDocumentResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Resultado del envío de un DTE al SII (<cite>sendXmlDocument</cite>).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendXmlDocumentResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse" title="libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse"><span class="pre">SendXmlDocumentResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendXmlDocumentResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendXmlDocumentResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendXmlDocumentResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SendXmlDocumentResponse.track_id">
+<span class="sig-name descname"><span class="pre">track_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SendXmlDocumentResponse.track_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiDteService">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">SiiDteService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.client.html#libredte_lib_sdk.client.ApiClient" title="libredte_lib_sdk.client.ApiClient"><span class="pre">ApiClient</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiDteService" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Envío y consulta de estado ante el SII (<cite>billing.integration.sii_dte</cite>).</p>
+<p>Todas las operaciones autentican contra el SII real con el
+certificado dado; un certificado no válido para el SII (ej. uno
+autofirmado de prueba, como los que genera <cite>TradingPartiesComponent
+.mandatario_manager.create_fake_certificate</cite>) resulta en un
+<cite>LibreDteApiError</cite> (la propia excepción de autenticación del SII,
+accesible vía <cite>.php_class</cite>), no en una excepción distinta.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiDteService.check_status">
+<span class="sig-name descname"><span class="pre">check_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse" title="libredte_lib_sdk.billing.integration.models.CheckXmlDocumentSentStatusResponse"><span class="pre">CheckXmlDocumentSentStatusResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiDteService.check_status" title="Link to this definition"></a></dt>
+<dd><p>Consulta el estado de un envío al SII mediante su Track ID.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiDteService.request_status_by_email">
+<span class="sig-name descname"><span class="pre">request_status_by_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse" title="libredte_lib_sdk.billing.integration.models.RequestXmlDocumentSentStatusByEmailResponse"><span class="pre">RequestXmlDocumentSentStatusByEmailResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiDteService.request_status_by_email" title="Link to this definition"></a></dt>
+<dd><p>Pide al SII que envíe el estado de un envío por correo.</p>
+<p>El correo de destino es el configurado en el SII para la
+empresa — no se puede indicar acá. El correo del SII incluye
+el detalle de los rechazos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiDteService.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envelope_xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse" title="libredte_lib_sdk.billing.integration.models.SendXmlDocumentResponse"><span class="pre">SendXmlDocumentResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiDteService.send" title="Link to this definition"></a></dt>
+<dd><p>Envía el sobre <cite>EnvioDTE</cite> al SII y devuelve su Track ID.</p>
+<p><cite>envelope_xml_base64</cite> es el XML en base64 del sobre ya armado
+(<cite>DocumentEnvelope.xml_base64</cite> de <cite>DocumentDispatcherService.create</cite>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiDteService.validate_document">
+<span class="sig-name descname"><span class="pre">validate_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse" title="libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse"><span class="pre">ValidateDocumentResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiDteService.validate_document" title="Link to this definition"></a></dt>
+<dd><p>Confirma si un documento existe en el SII (aceptado o con reparos).</p>
+<p>Valida que el documento exista y que los datos dados (folio,
+fecha, total, receptor) coincidan con lo que el SII tiene
+registrado. <cite>date</cite> en formato <cite>AAAA-MM-DD</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiDteService.validate_document_signature">
+<span class="sig-name descname"><span class="pre">validate_document_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse" title="libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse"><span class="pre">ValidateDocumentSignatureResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiDteService.validate_document_signature" title="Link to this definition"></a></dt>
+<dd><p>Igual que <cite>validate_document()</cite>, verificando además la firma.</p>
+<p><cite>signature</cite> es el tag <cite>DTE/Signature/SignatureValue</cite> del XML del
+documento (no el XML completo).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiRcvService">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">SiiRcvService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.client.html#libredte_lib_sdk.client.ApiClient" title="libredte_lib_sdk.client.ApiClient"><span class="pre">ApiClient</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiRcvService" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Registro de Compra y Venta del SII (<cite>billing.integration.sii_rcv</cite>).</p>
+<p>Cubre las 4 operaciones del worker — todo el lado «recibo un
+documento de un tercero» (cesión, recepción, reclamos), no el de
+emitir un DTE propio (eso es <cite>SiiDteService</cite>).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiRcvService.check_document_assignability">
+<span class="sig-name descname"><span class="pre">check_document_assignability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse" title="libredte_lib_sdk.billing.integration.models.CheckDocumentAssignabilityResponse"><span class="pre">CheckDocumentAssignabilityResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiRcvService.check_document_assignability" title="Link to this definition"></a></dt>
+<dd><p>Consulta si un documento es cedible (apto para factoring).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiRcvService.get_document_sii_reception_date">
+<span class="sig-name descname"><span class="pre">get_document_sii_reception_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse" title="libredte_lib_sdk.billing.integration.models.GetDocumentSiiReceptionDateResponse"><span class="pre">GetDocumentSiiReceptionDateResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiRcvService.get_document_sii_reception_date" title="Link to this definition"></a></dt>
+<dd><p>Consulta la fecha de recepción de un documento en el SII.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiRcvService.list_document_events">
+<span class="sig-name descname"><span class="pre">list_document_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ListDocumentEventsResponse" title="libredte_lib_sdk.billing.integration.models.ListDocumentEventsResponse"><span class="pre">ListDocumentEventsResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiRcvService.list_document_events" title="Link to this definition"></a></dt>
+<dd><p>Lista los eventos (acuses, reclamos, etc.) de un documento.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiRcvService.submit_document_acceptance">
+<span class="sig-name descname"><span class="pre">submit_document_acceptance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse" title="libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse"><span class="pre">SubmitDocumentAcceptanceResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiRcvService.submit_document_acceptance" title="Link to this definition"></a></dt>
+<dd><p>Informa al SII la aceptación/reclamo de un documento recibido.</p>
+<p><cite>action</cite> no se modela como enum cerrado (ej. <cite>“ACD”</cite> acepta
+contenido, <cite>“RCD”</cite> reclama contenido) — la propia API valida
+los valores conocidos.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiRtcService">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">SiiRtcService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.client.html#libredte_lib_sdk.client.ApiClient" title="libredte_lib_sdk.client.ApiClient"><span class="pre">ApiClient</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiRtcService" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Envía un AEC al SII (Registro de Transferencia de Créditos).</p>
+<p>Solo cubre <cite>sendAec</cite>, para el AEC (Archivo Electrónico de Cesión)
+armado por <cite>OwnershipTransferComponent.aec.build()</cite>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SiiRtcService.send_aec">
+<span class="sig-name descname"><span class="pre">send_aec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aec_xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">company_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email_notif</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SiiEnvironment.PRODUCTION</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SendAecResponse" title="libredte_lib_sdk.billing.integration.models.SendAecResponse"><span class="pre">SendAecResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SiiRtcService.send_aec" title="Link to this definition"></a></dt>
+<dd><p>Envía el AEC (XML en base64) al SII y devuelve su Track ID.</p>
+<p><cite>company_rut</cite> es el RUT del cedente. <cite>email_notif</cite> es el correo
+al que el SII notificará el resultado del procesamiento del AEC
+(obligatorio para la API, no configurable desde otro lugar).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">SubmitDocumentAcceptanceResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">codigo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glosa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Resultado <cite>{codigo, glosa}</cite> de <cite>submitDocumentAcceptance</cite>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.codigo">
+<span class="sig-name descname"><span class="pre">codigo</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.codigo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse" title="libredte_lib_sdk.billing.integration.models.SubmitDocumentAcceptanceResponse"><span class="pre">SubmitDocumentAcceptanceResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.glosa">
+<span class="sig-name descname"><span class="pre">glosa</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.glosa" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.SubmitDocumentAcceptanceResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">ValidateDocumentResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">received</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Resultado de confirmar un documento en el SII (<cite>validateDocument</cite>).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentResponse.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentResponse.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse" title="libredte_lib_sdk.billing.integration.models.ValidateDocumentResponse"><span class="pre">ValidateDocumentResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentResponse.received">
+<span class="sig-name descname"><span class="pre">received</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentResponse.received" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentResponse.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentResponse.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.integration.</span></span><span class="sig-name descname"><span class="pre">ValidateDocumentSignatureResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">received</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Confirma un documento y su firma en el SII.</p>
+<p>Operación <cite>validateDocumentSignature</cite>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.integration.models.html#libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse" title="libredte_lib_sdk.billing.integration.models.ValidateDocumentSignatureResponse"><span class="pre">ValidateDocumentSignatureResponse</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.received">
+<span class="sig-name descname"><span class="pre">received</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.received" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.integration.ValidateDocumentSignatureResponse.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="libredte_lib_sdk.billing.identifier.models.html" class="btn btn-neutral float-left" title="libredte_lib_sdk.billing.identifier.models module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="libredte_lib_sdk.billing.integration.models.html" class="btn btn-neutral float-right" title="libredte_lib_sdk.billing.integration.models module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2026, LibreDTE.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

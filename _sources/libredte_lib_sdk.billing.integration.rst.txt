@@ -1,0 +1,21 @@
+libredte\_lib\_sdk.billing.integration package
+==============================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.integration.models
+   libredte_lib_sdk.billing.integration.sii_dte
+   libredte_lib_sdk.billing.integration.sii_rcv
+   libredte_lib_sdk.billing.integration.sii_rtc
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.billing.integration
+   :members:
+   :show-inheritance:
+   :undoc-members:

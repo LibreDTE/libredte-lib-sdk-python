@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.integration.sii\_dte module
+======================================================
+
+.. automodule:: libredte_lib_sdk.billing.integration.sii_dte
+   :members:
+   :show-inheritance:
+   :undoc-members:

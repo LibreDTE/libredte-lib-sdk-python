@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.document.dispatcher module
+=====================================================
+
+.. automodule:: libredte_lib_sdk.billing.document.dispatcher
+   :members:
+   :show-inheritance:
+   :undoc-members:

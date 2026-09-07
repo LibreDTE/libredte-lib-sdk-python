@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.sdk module
+=============================
+
+.. automodule:: libredte_lib_sdk.sdk
+   :members:
+   :show-inheritance:
+   :undoc-members:

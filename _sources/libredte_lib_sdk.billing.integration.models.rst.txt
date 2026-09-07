@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.integration.models module
+====================================================
+
+.. automodule:: libredte_lib_sdk.billing.integration.models
+   :members:
+   :show-inheritance:
+   :undoc-members:

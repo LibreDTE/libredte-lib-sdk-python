@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.human\_resources.integration.previred\_provider module
+=========================================================================
+
+.. automodule:: libredte_lib_sdk.human_resources.integration.previred_provider
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.identifier.caf\_faker module
+=======================================================
+
+.. automodule:: libredte_lib_sdk.billing.identifier.caf_faker
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.document.examples module
+===================================================
+
+.. automodule:: libredte_lib_sdk.billing.document.examples
+   :members:
+   :show-inheritance:
+   :undoc-members:

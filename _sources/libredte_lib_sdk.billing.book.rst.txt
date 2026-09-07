@@ -1,0 +1,21 @@
+libredte\_lib\_sdk.billing.book package
+=======================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.book.builder
+   libredte_lib_sdk.billing.book.loader
+   libredte_lib_sdk.billing.book.models
+   libredte_lib_sdk.billing.book.validator
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.billing.book
+   :members:
+   :show-inheritance:
+   :undoc-members:

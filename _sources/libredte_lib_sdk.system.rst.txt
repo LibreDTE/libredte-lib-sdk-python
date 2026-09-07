@@ -1,0 +1,19 @@
+libredte\_lib\_sdk.system package
+=================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.system.certificate
+   libredte_lib_sdk.system.repository
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.system
+   :members:
+   :show-inheritance:
+   :undoc-members:

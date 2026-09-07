@@ -1,0 +1,19 @@
+libredte\_lib\_sdk.billing.trading\_parties package
+===================================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.trading_parties.mandatario_manager
+   libredte_lib_sdk.billing.trading_parties.models
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.billing.trading_parties
+   :members:
+   :show-inheritance:
+   :undoc-members:

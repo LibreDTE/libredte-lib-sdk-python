@@ -1,0 +1,19 @@
+libredte\_lib\_sdk.human\_resources.payroll package
+===================================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.human_resources.payroll.calculator
+   libredte_lib_sdk.human_resources.payroll.renderer
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.human_resources.payroll
+   :members:
+   :show-inheritance:
+   :undoc-members:

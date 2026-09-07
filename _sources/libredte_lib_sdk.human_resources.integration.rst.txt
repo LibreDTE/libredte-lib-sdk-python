@@ -1,0 +1,18 @@
+libredte\_lib\_sdk.human\_resources.integration package
+=======================================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.human_resources.integration.previred_provider
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.human_resources.integration
+   :members:
+   :show-inheritance:
+   :undoc-members:

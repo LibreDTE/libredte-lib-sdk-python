@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibreDTE: SDK Python para la API de LibreDTE Lib &mdash; documentación de LibreDTE: SDK Python para la API de LibreDTE Lib - 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ba61de6b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=f85f4cfb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="libredte_lib_sdk" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            LibreDTE: SDK Python para la API de LibreDTE Lib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Referencia de API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">libredte_lib_sdk</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">LibreDTE: SDK Python para la API de LibreDTE Lib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">LibreDTE: SDK Python para la API de LibreDTE Lib</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="libredte-sdk-python-para-la-api-de-libredte-lib">
+<h1>LibreDTE: SDK Python para la API de LibreDTE Lib<a class="headerlink" href="#libredte-sdk-python-para-la-api-de-libredte-lib" title="Link to this heading"></a></h1>
+<p>SDK Python (<code class="docutils literal notranslate"><span class="pre">libredte_lib_sdk</span></code>) que orquesta la API de LibreDTE Lib
+(<code class="docutils literal notranslate"><span class="pre">https://core.libredte.cl/api</span></code> por defecto) para cubrir el ciclo de
+emisión de un DTE: borrador, documento timbrado y firmado,
+envío al SII, consulta de estado por Track ID, y generación de HTML/PDF
+— más carga y validación de CAF real, y generación de CAF y certificado
+ficticios para poder probar todo lo anterior sin credenciales reales.</p>
+<p>Pensado como base de una app de facturación (ej. Django): este SDK
+concentra la lógica de negocio/orquestación de DTE, para que la app web
+sea solo vista, autenticación y persistencia.</p>
+<p>El paquete Python espeja la organización de la propia API
+(<code class="docutils literal notranslate"><span class="pre">package.component.worker::operation</span></code>): <code class="docutils literal notranslate"><span class="pre">sdk.billing.&lt;component&gt;</span>
+<span class="pre">.&lt;worker&gt;</span></code> para negocio DTE, <code class="docutils literal notranslate"><span class="pre">sdk.system.&lt;component&gt;.&lt;worker&gt;</span></code> para
+infraestructura de la biblioteca (catálogos reales, carga de certificados
+— ver «Recursos de <cite>system</cite>» más abajo).</p>
+<section id="instalacion">
+<h2>Instalación<a class="headerlink" href="#instalacion" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>libredte-lib-sdk
+</pre></div>
+</div>
+</section>
+<section id="uso">
+<h2>Uso<a class="headerlink" href="#uso" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">libredte_lib_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">LibreDTE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libredte_lib_sdk.billing.trading_parties</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mandatario</span>
+
+<span class="n">sdk</span> <span class="o">=</span> <span class="n">LibreDTE</span><span class="p">()</span>  <span class="c1"># base_url y api_token también vía env vars, ver abajo</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">sdk</span><span class="o">.</span><span class="n">billing</span>
+
+<span class="n">parsed_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Encabezado'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'IdDoc'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'TipoDTE'</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+            <span class="s1">'Folio'</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="s1">'Emisor'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'RUTEmisor'</span><span class="p">:</span> <span class="s1">'76192083-9'</span><span class="p">,</span>
+            <span class="s1">'RznSoc'</span><span class="p">:</span> <span class="s1">'SASCO SpA'</span><span class="p">,</span>
+            <span class="s1">'GiroEmis'</span><span class="p">:</span> <span class="s1">'Servicios'</span><span class="p">,</span>
+            <span class="s1">'DirOrigen'</span><span class="p">:</span> <span class="s1">'Santiago'</span><span class="p">,</span>
+            <span class="s1">'CmnaOrigen'</span><span class="p">:</span> <span class="s1">'Santiago'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">'Receptor'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'RUTRecep'</span><span class="p">:</span> <span class="s1">'12345678-5'</span><span class="p">,</span>
+            <span class="s1">'RznSocRecep'</span><span class="p">:</span> <span class="s1">'Cliente de prueba'</span><span class="p">,</span>
+            <span class="s1">'GiroRecep'</span><span class="p">:</span> <span class="s1">'Giro'</span><span class="p">,</span>
+            <span class="s1">'DirRecep'</span><span class="p">:</span> <span class="s1">'Santiago'</span><span class="p">,</span>
+            <span class="s1">'CmnaRecep'</span><span class="p">:</span> <span class="s1">'Santiago'</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s1">'Detalle'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">'NmbItem'</span><span class="p">:</span> <span class="s1">'Producto A'</span><span class="p">,</span>
+            <span class="s1">'QtyItem'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">'PrcItem'</span><span class="p">:</span> <span class="mi">1000</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="c1"># CAF y certificado ficticios, para pruebas/desarrollo:</span>
+<span class="n">caf</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">identifier</span><span class="o">.</span><span class="n">caf_faker</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">'rut'</span><span class="p">:</span> <span class="s1">'76192083-9'</span><span class="p">,</span> <span class="s1">'razon_social'</span><span class="p">:</span> <span class="s1">'SASCO SpA'</span><span class="p">},</span>
+    <span class="n">codigo_documento</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span> <span class="n">folio_desde</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">folio_hasta</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">certificate</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">trading_parties</span><span class="o">.</span><span class="n">mandatario_manager</span><span class="o">.</span><span class="n">create_fake_certificate</span><span class="p">(</span>
+    <span class="n">Mandatario</span><span class="p">(</span><span class="n">rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span> <span class="n">nombre</span><span class="o">=</span><span class="s1">'SASCO SpA'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'sasco@example.com'</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># En producción: cargar y validar el CAF real que el SII le entregó</span>
+<span class="c1"># al emisor, en vez del CAF ficticio de arriba.</span>
+<span class="c1"># caf = b.identifier.caf_loader.load(xml_base64_del_caf_subido)</span>
+<span class="c1"># b.identifier.caf_validator.validate(caf.xml_base64)</span>
+
+<span class="c1"># 1. Borrador.</span>
+<span class="n">borrador</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">build_draft</span><span class="p">(</span><span class="n">parsed_data</span><span class="p">)</span>
+
+<span class="c1"># 2. Documento real, timbrado y firmado.</span>
+<span class="n">documento</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">build_signed</span><span class="p">(</span>
+    <span class="n">parsed_data</span><span class="p">,</span> <span class="n">caf_xml</span><span class="o">=</span><span class="n">caf</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. Envío al SII (arma el sobre EnvioDTE y luego lo envía).</span>
+<span class="n">emisor</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'rut'</span><span class="p">:</span> <span class="s1">'76192083-9'</span><span class="p">,</span>
+    <span class="s1">'razon_social'</span><span class="p">:</span> <span class="s1">'SASCO SpA'</span><span class="p">,</span>
+    <span class="s1">'autorizacion_dte'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'fecha_resolucion'</span><span class="p">:</span> <span class="s1">'2014-08-22'</span><span class="p">,</span> <span class="s1">'numero_resolucion'</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="n">sobre</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">documento</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">emisor</span><span class="o">=</span><span class="n">emisor</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">envio</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+    <span class="n">sobre</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">company_rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 4. Estado del envío, por Track ID.</span>
+<span class="n">estado</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">check_status</span><span class="p">(</span>
+    <span class="n">envio</span><span class="o">.</span><span class="n">track_id</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">company_rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 5. HTML o PDF — misma forma de respuesta para ambos.</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">documento</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'html'</span><span class="p">)</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">documento</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'pdf'</span><span class="p">)</span>
+<span class="n">pdf_bytes</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">content_bytes</span>
+
+<span class="c1"># Varias copias/presentaciones en una sola llamada (ej. cedible +</span>
+<span class="c1"># tributaria):</span>
+<span class="n">copias</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+    <span class="n">documento</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s1">'pdf'</span><span class="p">,</span>
+    <span class="n">renderings</span><span class="o">=</span><span class="p">{</span><span class="s1">'tributaria'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'cedible'</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">cedible_bytes</span> <span class="o">=</span> <span class="n">copias</span><span class="o">.</span><span class="n">by_label</span><span class="p">(</span><span class="s1">'cedible'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">content_bytes</span>
+</pre></div>
+</div>
+<p>Cada componente (<code class="docutils literal notranslate"><span class="pre">document</span></code>, <code class="docutils literal notranslate"><span class="pre">identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">trading_parties</span></code>,
+<code class="docutils literal notranslate"><span class="pre">integration</span></code>) agrupa servicios independientes, uno por <em>worker</em> de la
+API: cada método hace exactamente una llamada HTTP, sin encadenar red por
+detrás. Encadenar los pasos (ej. armar el documento, el sobre, y
+enviarlo) es responsabilidad de quien use el SDK.</p>
+</section>
+<section id="configuracion">
+<h2>Configuración<a class="headerlink" href="#configuracion" title="Link to this heading"></a></h2>
+<section id="base-url">
+<h3>Base URL<a class="headerlink" href="#base-url" title="Link to this heading"></a></h3>
+<p>Por defecto el SDK apunta a <code class="docutils literal notranslate"><span class="pre">https://core.libredte.cl/api</span></code>. Para usar
+otra API (ej. <code class="docutils literal notranslate"><span class="pre">https://pro.libredte.cl/api</span></code>, o un ambiente propio),
+pasar <code class="docutils literal notranslate"><span class="pre">base_url</span></code> al construir <code class="docutils literal notranslate"><span class="pre">LibreDTE</span></code> o setear la variable de
+entorno <code class="docutils literal notranslate"><span class="pre">LIBREDTE_LIB_SDK_BASE_URL</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span> <span class="o">=</span> <span class="n">LibreDTE</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s1">'https://pro.libredte.cl/api'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LIBREDTE_LIB_SDK_BASE_URL</span><span class="o">=</span>https://pro.libredte.cl/api
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">core.libredte.cl</span></code> y <code class="docutils literal notranslate"><span class="pre">pro.libredte.cl</span></code> exponen el mismo contrato con
+límites de solicitudes distintos; ambos aceptan la variante <code class="docutils literal notranslate"><span class="pre">LibreDTE</span>
+<span class="pre">(base_url=...,</span> <span class="pre">...)</span></code> con el resto de los parámetros de configuración
+(<code class="docutils literal notranslate"><span class="pre">api_token</span></code>, <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">http_client</span></code>).</p>
+</section>
+<section id="autenticacion">
+<h3>Autenticación<a class="headerlink" href="#autenticacion" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">LibreDTE(api_token=...)</span></code> o la variable de entorno
+<code class="docutils literal notranslate"><span class="pre">LIBREDTE_LIB_SDK_TOKEN</span></code> — si está presente, se manda como header
+<code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;token&gt;</span></code>.</p>
+</section>
+</section>
+<section id="recursos-de-system">
+<h2>Recursos de <code class="docutils literal notranslate"><span class="pre">system</span></code><a class="headerlink" href="#recursos-de-system" title="Link to this heading"></a></h2>
+<p>Además de <code class="docutils literal notranslate"><span class="pre">billing</span></code> (negocio DTE), el SDK expone <code class="docutils literal notranslate"><span class="pre">system</span></code>:
+infraestructura de la biblioteca que una app consumidora
+necesita para poblar sus propios datos, no operaciones de facturación.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">sdk</span><span class="o">.</span><span class="n">system</span>
+
+<span class="c1"># Ejemplos de documentos reales (los mismos casos de prueba,</span>
+<span class="c1"># validados, de libredte-lib-core) — útiles para poblar datos de</span>
+<span class="c1"># demostración con variedad real en vez de inventada a mano.</span>
+<span class="n">ejemplos</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>  <span class="c1"># [ExampleSummary(id=..., category=..., case=...), ...]</span>
+<span class="n">ejemplo</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ejemplos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="n">documento</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">build_signed</span><span class="p">(</span>
+    <span class="n">ejemplo</span><span class="o">.</span><span class="n">parsed_data</span><span class="p">,</span> <span class="n">caf_xml</span><span class="o">=</span><span class="n">caf</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Catálogos/repositorios reales (comunas, tipos de documento, etc.)</span>
+<span class="c1"># — el esquema de cada elemento depende del repositorio pedido, no</span>
+<span class="c1"># hay un DTO fijo: se devuelve el dict/list tal cual la API.</span>
+<span class="n">repositorios</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>  <span class="c1"># FQCN de cada repositorio disponible</span>
+<span class="n">tipos_dte</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">find_by</span><span class="p">(</span>
+    <span class="s1">'libredte</span><span class="se">\\</span><span class="s1">lib</span><span class="se">\\</span><span class="s1">Core</span><span class="se">\\</span><span class="s1">Package</span><span class="se">\\</span><span class="s1">Billing</span><span class="se">\\</span><span class="s1">Component</span><span class="se">\\</span><span class="s1">Document'</span>
+    <span class="s1">'</span><span class="se">\\</span><span class="s1">Contract</span><span class="se">\\</span><span class="s1">TipoDocumentoInterface'</span><span class="p">,</span>
+    <span class="n">criteria</span><span class="o">=</span><span class="p">{</span><span class="s1">'codigo'</span><span class="p">:</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">39</span><span class="p">]},</span>  <span class="c1"># coincidencia con cualquiera de estos códigos</span>
+<span class="p">)</span>
+
+<span class="c1"># Cargar un certificado real (.p12/.pfx) sin desempaquetarlo</span>
+<span class="c1"># localmente: la API entrega certificado (PEM) + RUT/nombre/correo</span>
+<span class="c1"># ya extraídos en una sola llamada — mismo `Certificate` que usan</span>
+<span class="c1"># build_signed()/dispatcher.create(), ya con todos los datos.</span>
+<span class="n">certificate</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">certificate</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">datos_del_archivo_pfx</span><span class="p">,</span> <span class="s1">'contraseña'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">certificate</span><span class="o">.</span><span class="n">rut</span><span class="p">,</span> <span class="n">certificate</span><span class="o">.</span><span class="n">nombre</span><span class="p">,</span> <span class="n">certificate</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="errores">
+<h2>Errores<a class="headerlink" href="#errores" title="Link to this heading"></a></h2>
+<p>Cualquier error de la API (validación, regla de negocio, error interno)
+levanta <code class="docutils literal notranslate"><span class="pre">libredte_lib_sdk.LibreDteApiError</span></code>, con <code class="docutils literal notranslate"><span class="pre">.status_code</span></code>,
+<code class="docutils literal notranslate"><span class="pre">.detail</span></code> y <code class="docutils literal notranslate"><span class="pre">.php_class</span></code> (la clase real de la excepción PHP detrás,
+si la API la informó — ej. <code class="docutils literal notranslate"><span class="pre">DocumentException</span></code>, o una excepción de
+autenticación del SII). Un <code class="docutils literal notranslate"><span class="pre">429</span></code> de la API levanta
+<code class="docutils literal notranslate"><span class="pre">LibreDteRateLimitError</span></code> (subclase de lo anterior), con
+<code class="docutils literal notranslate"><span class="pre">.retry_after</span></code>/<code class="docutils literal notranslate"><span class="pre">.limit</span></code>/<code class="docutils literal notranslate"><span class="pre">.remaining</span></code>. Un problema de red levanta
+<code class="docutils literal notranslate"><span class="pre">libredte_lib_sdk.LibreDteConnectionError</span></code>.</p>
+</section>
+<section id="desarrollo">
+<h2>Desarrollo<a class="headerlink" href="#desarrollo" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>install-dev
+make<span class="w"> </span>check<span class="w">       </span><span class="c1"># ruff + tests unitarios (offline, sin red)</span>
+make<span class="w"> </span>test-live<span class="w">   </span><span class="c1"># tests de integración reales contra la API</span>
+</pre></div>
+</div>
+<p>Los tests unitarios no hacen red real: mockean la API con <code class="docutils literal notranslate"><span class="pre">respx</span></code>. Los
+de <code class="docutils literal notranslate"><span class="pre">tests/integration/</span></code> sí (marker <code class="docutils literal notranslate"><span class="pre">live</span></code>), y están excluidos por
+defecto de <code class="docutils literal notranslate"><span class="pre">pytest</span></code>/<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>/<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code>.</p>
+</section>
+<section id="terminos-y-condiciones-de-uso">
+<h2>Términos y condiciones de uso<a class="headerlink" href="#terminos-y-condiciones-de-uso" title="Link to this heading"></a></h2>
+<p>Este proyecto está licenciado bajo la Licencia MIT. Ver
+<a class="reference external" href="LICENSE">LICENSE</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Referencia de API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">libredte_lib_sdk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.html">libredte_lib_sdk package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-y-tablas">
+<h1>Índices y tablas<a class="headerlink" href="#indices-y-tablas" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Índice</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Índice de Módulos</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Página de Búsqueda</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="modules.html" class="btn btn-neutral float-right" title="libredte_lib_sdk" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2026, LibreDTE.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+libredte\_lib\_sdk package
+==========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing
+   libredte_lib_sdk.human_resources
+   libredte_lib_sdk.system
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.client
+   libredte_lib_sdk.exceptions
+   libredte_lib_sdk.sdk
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk
+   :members:
+   :show-inheritance:
+   :undoc-members:

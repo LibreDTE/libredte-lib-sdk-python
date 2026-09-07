@@ -1,0 +1,19 @@
+libredte\_lib\_sdk.billing.ownership\_transfer package
+======================================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.ownership_transfer.aec
+   libredte_lib_sdk.billing.ownership_transfer.models
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.billing.ownership_transfer
+   :members:
+   :show-inheritance:
+   :undoc-members:

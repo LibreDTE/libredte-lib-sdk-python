@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.trading\_parties.mandatario\_manager module
+======================================================================
+
+.. automodule:: libredte_lib_sdk.billing.trading_parties.mandatario_manager
+   :members:
+   :show-inheritance:
+   :undoc-members:

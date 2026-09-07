@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libredte_lib_sdk.billing.document.models module &mdash; documentación de LibreDTE: SDK Python para la API de LibreDTE Lib - 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ba61de6b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=f85f4cfb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="libredte_lib_sdk.billing.document.renderer module" href="libredte_lib_sdk.billing.document.renderer.html" />
+    <link rel="prev" title="libredte_lib_sdk.billing.document.loader module" href="libredte_lib_sdk.billing.document.loader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            LibreDTE: SDK Python para la API de LibreDTE Lib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Referencia de API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">libredte_lib_sdk</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="libredte_lib_sdk.html">libredte_lib_sdk package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="libredte_lib_sdk.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="libredte_lib_sdk.billing.html">libredte_lib_sdk.billing package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.human_resources.html">libredte_lib_sdk.human_resources package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.system.html">libredte_lib_sdk.system package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.html#module-libredte_lib_sdk">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LibreDTE: SDK Python para la API de LibreDTE Lib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">libredte_lib_sdk</a></li>
+          <li class="breadcrumb-item"><a href="libredte_lib_sdk.html">libredte_lib_sdk package</a></li>
+          <li class="breadcrumb-item"><a href="libredte_lib_sdk.billing.html">libredte_lib_sdk.billing package</a></li>
+          <li class="breadcrumb-item"><a href="libredte_lib_sdk.billing.document.html">libredte_lib_sdk.billing.document package</a></li>
+      <li class="breadcrumb-item active">libredte_lib_sdk.billing.document.models module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/libredte_lib_sdk.billing.document.models.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-libredte_lib_sdk.billing.document.models">
+<span id="libredte-lib-sdk-billing-document-models-module"></span><h1>libredte_lib_sdk.billing.document.models module<a class="headerlink" href="#module-libredte_lib_sdk.billing.document.models" title="Link to this heading"></a></h1>
+<p>DTO del componente <cite>billing.document</cite>.</p>
+<p><cite>Encabezado</cite>/<cite>Detalle</cite>/etc. se pasan como <cite>dict</cite> tal cual el formato
+SII (ver <cite>builder.py</cite>); estas clases tipan solo lo que el SDK arma o
+recibe de la API.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Document">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.document.models.</span></span><span class="sig-name descname"><span class="pre">Document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Document" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.XmlPayloadMixin" title="libredte_lib_sdk.billing.common.XmlPayloadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">XmlPayloadMixin</span></code></a></p>
+<p>Documento tributario construido.</p>
+<p>Puede ser un borrador, un documento timbrado, o timbrado y firmado —
+lo distingue <cite>is_timbrado</cite> (<cite>ted is not None</cite>), no una subclase
+distinta: es el mismo recurso en distintos estados, según qué datos
+se le hayan pasado a <cite>DocumentBuilderService</cite>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Document.datos">
+<span class="sig-name descname"><span class="pre">datos</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Document.datos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Document.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.Document" title="libredte_lib_sdk.billing.document.models.Document"><span class="pre">Document</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Document.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye un <cite>Document</cite> desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Document.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Document.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Document.is_timbrado">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_timbrado</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Document.is_timbrado" title="Link to this definition"></a></dt>
+<dd><p>Si el documento ya tiene Timbre Electrónico (TED).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Document.ted">
+<span class="sig-name descname"><span class="pre">ted</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Document.ted" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Document.xml_base64">
+<span class="sig-name descname"><span class="pre">xml_base64</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Document.xml_base64" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.document.models.</span></span><span class="sig-name descname"><span class="pre">DocumentBag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stamp_xml</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Bolsa normalizada devuelta por <cite>document.loader::loadXml</cite>.</p>
+<p>No trae el XML del documento ni <cite>id</cite> — solo la bolsa ya
+normalizada: <cite>datos</cite> (<cite>Encabezado</cite>/<cite>Detalle</cite>), <cite>document_type</cite>
+(metadatos del tipo de documento: <cite>codigo</cite>, <cite>nombre</cite>, <cite>categoria</cite>,
+<cite>es_boleta</cite>, etc., sin tipar) y <cite>stamp_xml</cite> (el TED, como XML
+plano, no en base64 ni parseado). Sirve para reconstruir los datos
+de un DTE ya emitido a partir de su XML.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag.auth">
+<span class="sig-name descname"><span class="pre">auth</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag.auth" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag.datos">
+<span class="sig-name descname"><span class="pre">datos</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag.datos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag.document_type">
+<span class="sig-name descname"><span class="pre">document_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag.document_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag.extra">
+<span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag.extra" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye un <cite>DocumentBag</cite> desde el <cite>data</cite> de la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag.raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentBag.stamp_xml">
+<span class="sig-name descname"><span class="pre">stamp_xml</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentBag.stamp_xml" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentEnvelope">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.document.models.</span></span><span class="sig-name descname"><span class="pre">DocumentEnvelope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.XmlPayloadMixin" title="libredte_lib_sdk.billing.common.XmlPayloadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">XmlPayloadMixin</span></code></a></p>
+<p>Sobre <cite>EnvioDTE</cite> construido y firmado, listo para enviar al SII.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentEnvelope.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentEnvelope.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye un <cite>DocumentEnvelope</cite> desde el <cite>data</cite> de la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentEnvelope.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentEnvelope.tag" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.DocumentEnvelope.xml_base64">
+<span class="sig-name descname"><span class="pre">xml_base64</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.DocumentEnvelope.xml_base64" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Example">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.document.models.</span></span><span class="sig-name descname"><span class="pre">Example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsed_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Example" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Un ejemplo de documento, tal como lo devuelve <cite>examples::get()</cite>.</p>
+<p><cite>parsed_data</cite> es directamente el <cite>parsedData</cite> que esperan
+<cite>DocumentBuilderService.build_draft()</cite>/<cite>.build_signed()</cite> — mismo
+<cite>Encabezado</cite>/<cite>Detalle</cite> que usa el resto del SDK, sin transformación.
+<cite>expected</cite> son los valores esperados del caso (totales, etc.) que usa
+la suite de tests de <cite>libredte-lib-core</cite> para validarlo — información
+de referencia, no un dato del documento en sí.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Example.expected">
+<span class="sig-name descname"><span class="pre">expected</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Example.expected" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Example.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.Example" title="libredte_lib_sdk.billing.document.models.Example"><span class="pre">Example</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Example.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye un <cite>Example</cite> desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Example.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Example.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.Example.parsed_data">
+<span class="sig-name descname"><span class="pre">parsed_data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.Example.parsed_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.ExampleSummary">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.document.models.</span></span><span class="sig-name descname"><span class="pre">ExampleSummary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.ExampleSummary" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Un ejemplo listado por <cite>DocumentExamplesService.list()</cite>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.ExampleSummary.case">
+<span class="sig-name descname"><span class="pre">case</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.ExampleSummary.case" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.ExampleSummary.category">
+<span class="sig-name descname"><span class="pre">category</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.ExampleSummary.category" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.ExampleSummary.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.ExampleSummary" title="libredte_lib_sdk.billing.document.models.ExampleSummary"><span class="pre">ExampleSummary</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.ExampleSummary.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye un <cite>ExampleSummary</cite> desde un ítem de la lista.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.ExampleSummary.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.ExampleSummary.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.document.models.</span></span><span class="sig-name descname"><span class="pre">RenderResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">renderings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.RenderedDocument" title="libredte_lib_sdk.billing.document.models.RenderedDocument"><span class="pre">RenderedDocument</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderResult" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Resultado de un renderizador.</p>
+<p>Ej. <cite>DocumentRendererService.render()</cite>, <cite>PayrollRendererService
+.render()</cite>. <cite>renderings</cite> trae un ítem por copia generada. Para
+<cite>document.renderer</cite>:
+por defecto (sin pedir <cite>renderings</cite> explícito) es un único
+<cite>“tributaria”</cite>; pidiendo más de una presentación y/o copia (ej.
+<cite>renderings={“tributaria”: 2, “cedible”: 1}</cite>), trae uno por cada
+copia efectivamente generada — una presentación que la API no pudo
+generar para ese documento (ej. <cite>“cedible”</cite> en un tipo de documento
+sin acuse de recibo) se omite en silencio, no rompe la llamada. Para
+<cite>payroll.renderer</cite> (que no modela presentaciones) siempre trae un
+único elemento, sin <cite>label</cite>.
+<cite>.first</cite> es un atajo para el caso más común (un solo archivo);
+<cite>.by_label()</cite> filtra por presentación cuando se pidió más de una.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderResult.by_label">
+<span class="sig-name descname"><span class="pre">by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.RenderedDocument" title="libredte_lib_sdk.billing.document.models.RenderedDocument"><span class="pre">RenderedDocument</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderResult.by_label" title="Link to this definition"></a></dt>
+<dd><p>Los renderings de una presentación (ej. <cite>“tributaria”</cite>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderResult.first">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">first</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.RenderedDocument" title="libredte_lib_sdk.billing.document.models.RenderedDocument"><span class="pre">RenderedDocument</span></a></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderResult.first" title="Link to this definition"></a></dt>
+<dd><p>El primer archivo generado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderResult.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.RenderResult" title="libredte_lib_sdk.billing.document.models.RenderResult"><span class="pre">RenderResult</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderResult.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye un <cite>RenderResult</cite> desde el <cite>data</cite> que devuelve la API.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderResult.renderings">
+<span class="sig-name descname"><span class="pre">renderings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.RenderedDocument" title="libredte_lib_sdk.billing.document.models.RenderedDocument"><span class="pre">RenderedDocument</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderResult.renderings" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.document.models.</span></span><span class="sig-name descname"><span class="pre">RenderedDocument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mime_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Un archivo generado por un renderizador.</p>
+<p>Ej. <cite>DocumentRendererService.render()</cite>, <cite>PayrollRendererService
+.render()</cite>. <cite>content_base64</cite> es el archivo completo en base64 (un PDF, un
+HTML, lo que sea — <cite>mime_type</cite> dice qué es).
+<cite>label</cite> es la presentación pedida en <cite>renderings</cite> (ej.
+<cite>“tributaria”</cite>, <cite>“cedible”</cite>) cuando el renderizador modela más de
+una presentación posible; <cite>None</cite> cuando no aplica (ej. una
+liquidación de sueldo, que siempre es un único archivo).
+<cite>copies</cite>/<cite>copy_number</cite> identifican esta copia entre las pedidas de
+ese mismo <cite>label</cite> (ej. <cite>copies=2, copy_number=1</cite> es la primera de
+2 copias tributarias). El nombre de los campos en la API
+(<cite>content</cite>/<cite>mimeType</cite>/<cite>filename</cite>/<cite>copyNumber</cite>) es camelCase; acá
+quedan en snake_case como el resto del SDK.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.content_base64">
+<span class="sig-name descname"><span class="pre">content_base64</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.content_base64" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.content_bytes">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">content_bytes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bytes</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.content_bytes" title="Link to this definition"></a></dt>
+<dd><p>Contenido del archivo, decodificado desde base64.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.copies">
+<span class="sig-name descname"><span class="pre">copies</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.copies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.copy_number">
+<span class="sig-name descname"><span class="pre">copy_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.copy_number" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.filename" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.from_api">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.billing.document.models.RenderedDocument" title="libredte_lib_sdk.billing.document.models.RenderedDocument"><span class="pre">RenderedDocument</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.from_api" title="Link to this definition"></a></dt>
+<dd><p>Construye desde un ítem de <cite>data.renderings</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.label">
+<span class="sig-name descname"><span class="pre">label</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.models.RenderedDocument.mime_type">
+<span class="sig-name descname"><span class="pre">mime_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.models.RenderedDocument.mime_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="libredte_lib_sdk.billing.document.loader.html" class="btn btn-neutral float-left" title="libredte_lib_sdk.billing.document.loader module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="libredte_lib_sdk.billing.document.renderer.html" class="btn btn-neutral float-right" title="libredte_lib_sdk.billing.document.renderer module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2026, LibreDTE.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libredte_lib_sdk.exceptions module &mdash; documentación de LibreDTE: SDK Python para la API de LibreDTE Lib - 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ba61de6b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=f85f4cfb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="libredte_lib_sdk.sdk module" href="libredte_lib_sdk.sdk.html" />
+    <link rel="prev" title="libredte_lib_sdk.client module" href="libredte_lib_sdk.client.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            LibreDTE: SDK Python para la API de LibreDTE Lib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Referencia de API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">libredte_lib_sdk</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="libredte_lib_sdk.html">libredte_lib_sdk package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="libredte_lib_sdk.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.client.html">libredte_lib_sdk.client module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">libredte_lib_sdk.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.sdk.html">libredte_lib_sdk.sdk module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.html#module-libredte_lib_sdk">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LibreDTE: SDK Python para la API de LibreDTE Lib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">libredte_lib_sdk</a></li>
+          <li class="breadcrumb-item"><a href="libredte_lib_sdk.html">libredte_lib_sdk package</a></li>
+      <li class="breadcrumb-item active">libredte_lib_sdk.exceptions module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/libredte_lib_sdk.exceptions.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-libredte_lib_sdk.exceptions">
+<span id="libredte-lib-sdk-exceptions-module"></span><h1>libredte_lib_sdk.exceptions module<a class="headerlink" href="#module-libredte_lib_sdk.exceptions" title="Link to this heading"></a></h1>
+<p>Excepciones del SDK de LibreDTE Lib.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteApiError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteApiError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'about:blank'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteApiError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#libredte_lib_sdk.exceptions.LibreDteSdkError" title="libredte_lib_sdk.exceptions.LibreDteSdkError"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibreDteSdkError</span></code></a></p>
+<p>La API de LibreDTE Lib respondió un error para una operación.</p>
+<p>Envuelve el <cite>Problem Details</cite> (RFC 7807) que la API entrega en sus
+respuestas de error: <cite>type</cite>/<cite>title</cite>/<cite>detail</cite>/<cite>instance</cite>/<cite>extensions</cite>.
+<cite>php_class</cite> expone la clase de la excepción PHP real (si la API la
+informó en <cite>extensions.throwable.class</cite>), útil para distinguir
+errores de negocio (ej. <cite>DocumentException</cite>) de errores de
+infraestructura sin tener que parsear <cite>detail</cite>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteApiError.from_problem_details">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_problem_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#libredte_lib_sdk.exceptions.LibreDteApiError" title="libredte_lib_sdk.exceptions.LibreDteApiError"><span class="pre">LibreDteApiError</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteApiError.from_problem_details" title="Link to this definition"></a></dt>
+<dd><p>Construye la excepción a partir de un body Problem Details.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteApiError.php_class">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">php_class</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteApiError.php_class" title="Link to this definition"></a></dt>
+<dd><p>Clase PHP real detrás del error, si la API la informó.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteConnectionError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteConnectionError</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteConnectionError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#libredte_lib_sdk.exceptions.LibreDteSdkError" title="libredte_lib_sdk.exceptions.LibreDteSdkError"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibreDteSdkError</span></code></a></p>
+<p>No fue posible completar la conexión HTTP con la API.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteOperationNotFoundError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteOperationNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'about:blank'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteOperationNotFoundError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#libredte_lib_sdk.exceptions.LibreDteApiError" title="libredte_lib_sdk.exceptions.LibreDteApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibreDteApiError</span></code></a></p>
+<p>La operación llamada no existe en la instancia de la API consultada.</p>
+<p>Se distingue de un <cite>LibreDteApiError</cite> genérico (parámetros
+inválidos, error de negocio, etc.) para permitir detectar en un
+solo <cite>except</cite> que la operación no está registrada en el ambiente
+configurado, sin parsear <cite>detail</cite>. Se reconoce por <cite>php_class</cite>
+(<cite>DerafuBackboneDispatcherExceptionOperationNotFoundException</cite>),
+no por el status HTTP: la API la informa con <cite>500</cite>, igual que
+cualquier otro error de servidor.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteRateLimitError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">429</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Límite</span> <span class="pre">de</span> <span class="pre">solicitudes</span> <span class="pre">excedido.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'about:blank'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#libredte_lib_sdk.exceptions.LibreDteApiError" title="libredte_lib_sdk.exceptions.LibreDteApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibreDteApiError</span></code></a></p>
+<p>La API rechazó la llamada por exceso de solicitudes (HTTP 429).</p>
+<p><cite>retry_after</cite> trae el valor del header <cite>Retry-After</cite> en segundos
+(<cite>None</cite> si la API no lo informó). <cite>limit</cite>/<cite>remaining</cite> traen
+<cite>X-RateLimit-Limit</cite>/<cite>X-RateLimit-Remaining</cite> cuando la API los
+informa. No hay retry/backoff automático: quien llame decide si
+reintentar, y cuándo, con esta información.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteSdkError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteSdkError</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteSdkError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Cualquier error propio de <cite>libredte_lib_sdk</cite>.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="libredte_lib_sdk.client.html" class="btn btn-neutral float-left" title="libredte_lib_sdk.client module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="libredte_lib_sdk.sdk.html" class="btn btn-neutral float-right" title="libredte_lib_sdk.sdk module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2026, LibreDTE.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.trading\_parties.models module
+=========================================================
+
+.. automodule:: libredte_lib_sdk.billing.trading_parties.models
+   :members:
+   :show-inheritance:
+   :undoc-members:

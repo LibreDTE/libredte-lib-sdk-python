@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.exceptions module
+====================================
+
+.. automodule:: libredte_lib_sdk.exceptions
+   :members:
+   :show-inheritance:
+   :undoc-members:

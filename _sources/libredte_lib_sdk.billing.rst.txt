@@ -1,0 +1,33 @@
+libredte\_lib\_sdk.billing package
+==================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.book
+   libredte_lib_sdk.billing.document
+   libredte_lib_sdk.billing.exchange
+   libredte_lib_sdk.billing.identifier
+   libredte_lib_sdk.billing.integration
+   libredte_lib_sdk.billing.ownership_transfer
+   libredte_lib_sdk.billing.trading_parties
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.common
+   libredte_lib_sdk.billing.enums
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.billing
+   :members:
+   :show-inheritance:
+   :undoc-members:

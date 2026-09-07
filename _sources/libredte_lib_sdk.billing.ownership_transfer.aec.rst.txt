@@ -1,0 +1,7 @@
+libredte\_lib\_sdk.billing.ownership\_transfer.aec module
+=========================================================
+
+.. automodule:: libredte_lib_sdk.billing.ownership_transfer.aec
+   :members:
+   :show-inheritance:
+   :undoc-members:

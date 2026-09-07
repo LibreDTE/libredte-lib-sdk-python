@@ -1,0 +1,19 @@
+libredte\_lib\_sdk.billing.exchange package
+===========================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   libredte_lib_sdk.billing.exchange.document_response
+   libredte_lib_sdk.billing.exchange.models
+
+Module contents
+---------------
+
+.. automodule:: libredte_lib_sdk.billing.exchange
+   :members:
+   :show-inheritance:
+   :undoc-members:
