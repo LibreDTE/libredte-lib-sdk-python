@@ -1,0 +1,110 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "libredte-lib-sdk"
+version = "0.1.0"
+description = "SDK Python para la API de LibreDTE Lib (facturacion electronica de Chile)."
+readme = "README.rst"
+license = { file = "LICENSE" }
+authors = [
+  { name = "LibreDTE" },
+]
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["ruff", "mypy", "pytest", "pytest-cov", "respx", "build", "twine"]
+docs = ["sphinx", "sphinx-rtd-theme"]
+
+[project.urls]
+Homepage = "https://www.libredte.cl"
+Source = "https://github.com/libredte/libredte-lib-sdk-python"
+
+[tool.hatch.build.targets.wheel]
+packages = ["libredte_lib_sdk"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -m 'not live'"
+markers = [
+  "live: hits the real LibreDTE API over the network; excluded by default, run with `pytest -m live`.",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["libredte_lib_sdk"]
+
+[tool.ruff]
+
+include = ["**/*.py", "**/*.pyi"]
+
+exclude = [
+  ".git",
+  "__pycache__",
+  ".venv",
+  "venv",
+]
+
+line-length = 79
+target-version = "py311"
+respect-gitignore = true
+fix = true
+
+[tool.ruff.lint]
+
+select = [
+  "D",
+  "F",
+  "E",
+  "W",
+  "I",
+  "UP",
+  "N",
+  "B",
+  "A",
+  "C90",
+  "ARG",
+  "DTZ",
+  "TRY",
+  "SLF",
+  "ERA",
+  "PL",
+  "RUF",
+]
+
+ignore = [
+  "D102",
+  "D203",
+  "D212",
+  "D401",
+  "TRY400",
+  "N818",
+  "UP031",
+  "TRY003",
+  "ARG001",
+  "Q001",
+  "ERA001",
+  "PLC0415",
+  "N802",
+  "N806",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 25
+
+[tool.ruff.lint.pylint]
+max-args = 10
+max-branches = 25
+max-statements = 60
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "SLF", "PLR2004"]
+"docs/conf.py" = ["D100", "A001"]
+
+[tool.ruff.format]
+quote-style = "single"

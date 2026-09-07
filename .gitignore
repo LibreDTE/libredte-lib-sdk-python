@@ -1,0 +1,21 @@
+# Python.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+.coverage
+var/
+# Referencia de API generada por `sphinx-apidoc` (ver `make docs` /
+# `build.jobs.pre_build` en `.readthedocs.yaml`) — no se commitea, se
+# regenera en cada build a partir de los docstrings.
+docs/_build/
+docs/libredte_lib_sdk*.rst
+docs/modules.rst
+
+# Archivos específicos del sistema operativo.
+.DS_Store
