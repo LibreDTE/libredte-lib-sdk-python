@@ -233,7 +233,7 @@ necesita para poblar sus propios datos, no operaciones de facturación.</p>
 <span class="n">ejemplos</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>  <span class="c1"># [ExampleSummary(id=..., category=..., case=...), ...]</span>
 <span class="n">ejemplo</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ejemplos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 <span class="n">documento</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">build_signed</span><span class="p">(</span>
-    <span class="n">ejemplo</span><span class="o">.</span><span class="n">input_data</span><span class="p">,</span> <span class="n">caf_xml</span><span class="o">=</span><span class="n">caf</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span>
+    <span class="n">ejemplo</span><span class="o">.</span><span class="n">example</span><span class="p">,</span> <span class="n">caf_xml</span><span class="o">=</span><span class="n">caf</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># Catálogos/repositorios reales (comunas, tipos de documento, etc.)</span>
@@ -251,7 +251,7 @@ necesita para poblar sus propios datos, no operaciones de facturación.</p>
 <span class="c1"># ya extraídos en una sola llamada — mismo `Certificate` que usan</span>
 <span class="c1"># build_signed()/dispatcher.create(), ya con todos los datos.</span>
 <span class="n">certificate</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">certificate</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">datos_del_archivo_pfx</span><span class="p">,</span> <span class="s1">'contraseña'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">certificate</span><span class="o">.</span><span class="n">rut</span><span class="p">,</span> <span class="n">certificate</span><span class="o">.</span><span class="n">nombre</span><span class="p">,</span> <span class="n">certificate</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">certificate</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">certificate</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">certificate</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
