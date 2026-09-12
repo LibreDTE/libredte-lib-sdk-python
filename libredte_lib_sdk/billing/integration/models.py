@@ -193,11 +193,11 @@ class GetDocumentSiiReceptionDateResponse:
     Fecha de recepción de un DTE en el SII (`getDocumentSiiReceptionDate`).
 
     Si el documento consultado no tiene fecha de recepción registrada,
-    la API levanta `LibreDteApiError` — `reception_date` nunca es
+    la API levanta `LibreDteApiError` — `fecha_recepcion_sii` nunca es
     `None`.
     """
 
-    reception_date: datetime
+    fecha_recepcion_sii: datetime
     raw: dict[str, Any]
 
     @classmethod
@@ -207,7 +207,7 @@ class GetDocumentSiiReceptionDateResponse:
     ) -> GetDocumentSiiReceptionDateResponse:
         """Construye desde el `data` que devuelve la API."""
         return cls(
-            reception_date=datetime.fromisoformat(
+            fecha_recepcion_sii=datetime.fromisoformat(
                 data['fecha_recepcion_sii'],
             ),
             raw=data,

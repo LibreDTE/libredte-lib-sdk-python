@@ -176,7 +176,7 @@ necesita para poblar sus propios datos, no operaciones de facturación.
     ejemplos = b.document.examples.list()  # [ExampleSummary(id=..., category=..., case=...), ...]
     ejemplo = b.document.examples.get(ejemplos[0].id)
     documento = b.document.builder.build_signed(
-        ejemplo.input_data, caf_xml=caf.xml_base64, certificate=certificate,
+        ejemplo.example, caf_xml=caf.xml_base64, certificate=certificate,
     )
 
     # Catálogos/repositorios reales (comunas, tipos de documento, etc.)
@@ -194,7 +194,7 @@ necesita para poblar sus propios datos, no operaciones de facturación.
     # ya extraídos en una sola llamada — mismo `Certificate` que usan
     # build_signed()/dispatcher.create(), ya con todos los datos.
     certificate = s.certificate.loader.load(datos_del_archivo_pfx, 'contraseña')
-    print(certificate.rut, certificate.nombre, certificate.email)
+    print(certificate.id, certificate.name, certificate.email)
 
 Errores
 -------

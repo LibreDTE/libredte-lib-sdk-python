@@ -31,8 +31,8 @@ class BookLoaderService:
         Normaliza `caratula`/`detalle` de `bag` en un `BookBag`.
 
         `bag` trae `tipo`/`caratula`/`detalle`/`emisor`, tal cual el
-        formato SII. `BookBag.datos` siempre viene `None` (no construye
-        el libro); `BookBag.auth` viene poblado solo si
+        formato SII. `BookBag.book` siempre viene `None` (no construye
+        el libro); `BookBag.book_auth` viene poblado solo si
         `bag['emisor']` incluye `autorizacion_dte`.
         """
         data = self._client.call(

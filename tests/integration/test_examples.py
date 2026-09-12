@@ -6,7 +6,7 @@ Tests en vivo para `DocumentExamplesService`.
 
 Los ejemplos son los mismos casos de prueba, ya validados, de
 `libredte-lib-core` (`tests/fixtures/yaml/documentos_ok/`) — se prueba
-que `get()` entrega un `input_data` realmente utilizable por
+que `get()` entrega un `example` realmente utilizable por
 `DocumentBuilderService`, no solo que la llamada HTTP responde.
 """
 
@@ -20,7 +20,7 @@ pytestmark = pytest.mark.live
 
 _EMISOR = {'rut': '76192083-9', 'razon_social': 'SASCO SpA'}
 _MANDATARIO = Mandatario(
-    rut='76192083-9',
+    run='76192083-9',
     nombre='SASCO SpA',
     email='demo@sasco.example',
 )
@@ -34,19 +34,19 @@ def test_list_returns_many_examples_across_document_types(real_sdk):
     assert len(categories) > 1
 
 
-def test_get_returns_input_data_and_expected_values(real_sdk):
+def test_get_returns_example_and_expected_values(real_sdk):
     first = real_sdk.billing.document.examples.list()[0]
 
     example = real_sdk.billing.document.examples.get(first.id)
 
     assert example.id == first.id
-    assert 'Encabezado' in example.input_data
-    assert 'Detalle' in example.input_data
+    assert 'Encabezado' in example.example
+    assert 'Detalle' in example.example
     assert example.expected
 
 
 def test_an_example_builds_into_a_real_signed_document(real_sdk):
-    """El `input_data` de un ejemplo debe servir tal cual a `build_signed`."""
+    """El `example` de un ejemplo debe servir tal cual a `build_signed`."""
     b = real_sdk.billing
     example = next(
         e
@@ -57,14 +57,14 @@ def test_an_example_builds_into_a_real_signed_document(real_sdk):
 
     caf = b.identifier.caf_faker.create(
         _EMISOR,
-        codigo_documento=data.input_data['Encabezado']['IdDoc']['TipoDTE'],
+        codigo_documento=data.example['Encabezado']['IdDoc']['TipoDTE'],
     )
     certificate = b.trading_parties.mandatario_manager.create_fake_certificate(
         _MANDATARIO,
     )
 
     documento = b.document.builder.build_signed(
-        data.input_data,
+        data.example,
         caf_xml=caf.xml_base64,
         certificate=certificate,
     )

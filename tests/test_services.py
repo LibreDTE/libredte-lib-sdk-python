@@ -241,15 +241,15 @@ def test_mandatario_manager_create_fake_certificate(sdk):
 
     service = sdk.billing.trading_parties.mandatario_manager
     certificate = service.create_fake_certificate(
-        Mandatario(rut='76192083-9', nombre='SASCO SpA'),
+        Mandatario(run='76192083-9', nombre='SASCO SpA'),
     )
 
     sent = json.loads(route.calls.last.request.content)['parameters']
     assert sent['mandatario']['run'] == '76192083-9'
     assert certificate.certificate == 'CERT-PEM'
     assert certificate.private_key == 'PKEY-PEM'
-    assert certificate.rut == '76192083-9'
-    assert certificate.nombre == 'SASCO SpA'
+    assert certificate.id == '76192083-9'
+    assert certificate.name == 'SASCO SpA'
     assert certificate.email == 'sasco@example.com'
     assert certificate.is_active is True
     assert certificate.issuer == 'Derafu Test Certificate Authority'
@@ -555,7 +555,7 @@ def test_document_examples_get_sends_id_and_splits_expected(sdk):
 
     sent = json.loads(route.calls.last.request.content)['parameters']
     assert sent['id'] == '033_factura_afecta/033_001_simple'
-    assert example.input_data == _INPUT_DATA
+    assert example.example == _INPUT_DATA
     assert example.expected['Encabezado']['Totales']['MntTotal'] == 1190
 
 
@@ -586,7 +586,7 @@ def test_mandatario_manager_create_from_certificate(sdk):
         'certificate': 'cert-pem',
         'privateKey': 'key-pem',
     }
-    assert mandatario.rut == '76192083-9'
+    assert mandatario.run == '76192083-9'
     assert mandatario.nombre == 'SASCO SpA'
     assert mandatario.email == 'demo@sasco.example'
 
@@ -742,8 +742,8 @@ def test_certificate_loader_load_sends_base64_and_decodes_metadata(sdk):
     assert (
         base64.b64decode(sent['certificate']['data']) == b'contenido-del-p12'
     )
-    assert loaded.rut == '76192083-9'
-    assert loaded.nombre == 'SASCO SpA'
+    assert loaded.id == '76192083-9'
+    assert loaded.name == 'SASCO SpA'
     assert loaded.email == 'demo@sasco.example'
     assert loaded.is_active is True
     assert loaded.certificate == 'CERT-PEM'
@@ -1038,7 +1038,7 @@ def test_sii_rcv_get_document_sii_reception_date_parses_the_datetime(sdk):
         certificate=Certificate(certificate='cert-pem', private_key='key-pem'),
     )
 
-    assert result.reception_date.isoformat() == '2025-01-02T10:30:00'
+    assert result.fecha_recepcion_sii.isoformat() == '2025-01-02T10:30:00'
     assert result.raw == {'fecha_recepcion_sii': '2025-01-02 10:30:00'}
 
 
@@ -1154,7 +1154,7 @@ def test_aec_build_sends_cedente_cesionario_cesion(sdk):
     }
     assert sent['cesionario']['RazonSocial'] == 'Factoring S.A.'
     assert sent['cesion']['MontoCesion'] == 119000
-    assert result.datos['DocumentoAEC']['Caratula']['RutCedente'] == (
+    assert result.aec['DocumentoAEC']['Caratula']['RutCedente'] == (
         '76192083-9'
     )
     assert result.xml_base64 == 'PEFFQz48L0FFQz4='
@@ -1218,11 +1218,11 @@ def test_document_loader_load_xml_decodes_the_full_bag(sdk):
 
     sent = json.loads(route.calls.last.request.content)['parameters']
     assert sent['xml'] == 'RFRFeG1s'
-    assert result.datos == {'Encabezado': {}}
+    assert result.document == {'Encabezado': {}}
     assert result.document_type == {'codigo': 33, 'nombre': 'Factura'}
-    assert result.stamp_xml == '<TED/>'
-    assert result.extra is None
-    assert result.auth is None
+    assert result.document_stamp == '<TED/>'
+    assert result.document_extra is None
+    assert result.document_auth is None
 
 
 _BOOK_BAG = {
@@ -1327,8 +1327,8 @@ def test_book_loader_load_decodes_book_type_caratula_and_detalle(sdk):
 
     # `book`/`book_auth` siempre vienen `None` desde `load()` (no
     # construye el libro) — ver docstring de `BookBag`.
-    assert result.datos is None
-    assert result.auth is None
+    assert result.book is None
+    assert result.book_auth is None
     assert result.book_type == {
         'codigo': 'libro_ventas',
         'nombre': 'Libro de ventas',

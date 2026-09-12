@@ -30,8 +30,8 @@ class Certificate:
 
     certificate: str
     private_key: str
-    rut: str | None = None
-    nombre: str | None = None
+    id: str | None = None
+    name: str | None = None
     email: str | None = None
     valid_from: datetime | None = None
     valid_until: datetime | None = None
@@ -63,8 +63,8 @@ class Certificate:
         return cls(
             certificate=data['cert'],
             private_key=data['pkey'],
-            rut=data.get('id'),
-            nombre=data.get('name'),
+            id=data.get('id'),
+            name=data.get('name'),
             email=data.get('email'),
             valid_from=(
                 datetime.fromisoformat(data['from'])
@@ -89,13 +89,13 @@ class Certificate:
 class Mandatario:
     """Mandatario (representante) dueño de un certificado digital."""
 
-    rut: str
+    run: str
     nombre: str
     email: str | None = None
 
     def to_payload(self) -> dict[str, Any]:
         """Payload esperado por la API para un mandatario."""
-        payload: dict[str, Any] = {'run': self.rut, 'nombre': self.nombre}
+        payload: dict[str, Any] = {'run': self.run, 'nombre': self.nombre}
         if self.email is not None:
             payload['email'] = self.email
         return payload
@@ -104,7 +104,7 @@ class Mandatario:
     def from_api(cls, data: dict[str, Any]) -> Mandatario:
         """Construye un `Mandatario` desde el `data` que devuelve la API."""
         return cls(
-            rut=data['run'],
+            run=data['run'],
             nombre=data['nombre'],
             email=data.get('email'),
         )

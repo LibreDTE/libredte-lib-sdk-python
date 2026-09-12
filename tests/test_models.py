@@ -42,7 +42,7 @@ def test_certificate_from_api_maps_cert_and_pkey_fields():
 
 
 def test_mandatario_to_payload_omits_email_when_absent():
-    mandatario = Mandatario(rut='76192083-9', nombre='SASCO SpA')
+    mandatario = Mandatario(run='76192083-9', nombre='SASCO SpA')
 
     assert mandatario.to_payload() == {
         'run': '76192083-9',
@@ -52,7 +52,7 @@ def test_mandatario_to_payload_omits_email_when_absent():
 
 def test_mandatario_to_payload_includes_email_when_present():
     mandatario = Mandatario(
-        rut='76192083-9',
+        run='76192083-9',
         nombre='SASCO SpA',
         email='sasco@example.com',
     )

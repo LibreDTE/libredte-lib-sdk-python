@@ -24,7 +24,7 @@ from libredte_lib_sdk.billing.trading_parties import Mandatario
 pytestmark = pytest.mark.live
 
 _MANDATARIO = Mandatario(
-    rut='76192083-9',
+    run='76192083-9',
     nombre='SASCO SpA',
     email='demo@sasco.example',
 )
@@ -56,8 +56,8 @@ def test_load_extracts_the_mandatario_and_a_usable_certificate(
 ):
     loaded = real_sdk.system.certificate.loader.load(fake_pkcs12, _PASSWORD)
 
-    assert loaded.rut == '76192083-9'
-    assert loaded.nombre == 'SASCO SpA'
+    assert loaded.id == '76192083-9'
+    assert loaded.name == 'SASCO SpA'
     assert loaded.email == 'demo@sasco.example'
     assert loaded.is_active is True
     assert loaded.certificate.startswith('-----BEGIN CERTIFICATE-----')
@@ -69,6 +69,6 @@ def test_create_from_certificate_matches_load(fake_pkcs12, real_sdk):
     mandatario_manager = real_sdk.billing.trading_parties.mandatario_manager
     mandatario = mandatario_manager.create_from_certificate(loaded)
 
-    assert mandatario.rut == loaded.rut
-    assert mandatario.nombre == loaded.nombre
+    assert mandatario.run == loaded.id
+    assert mandatario.nombre == loaded.name
     assert mandatario.email == loaded.email

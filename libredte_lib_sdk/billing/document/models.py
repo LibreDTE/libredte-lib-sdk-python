@@ -56,29 +56,29 @@ class DocumentBag:
     Bolsa normalizada devuelta por `document.loader::loadXml`.
 
     No trae el XML del documento ni `id` — solo la bolsa ya
-    normalizada: `datos` (`Encabezado`/`Detalle`), `document_type`
+    normalizada: `document` (`Encabezado`/`Detalle`), `document_type`
     (metadatos del tipo de documento: `codigo`, `nombre`, `categoria`,
-    `es_boleta`, etc., sin tipar) y `stamp_xml` (el TED, como XML
+    `es_boleta`, etc., sin tipar) y `document_stamp` (el TED, como XML
     plano, no en base64 ni parseado). Sirve para reconstruir los datos
     de un DTE ya emitido a partir de su XML.
     """
 
-    datos: dict[str, Any]
+    document: dict[str, Any]
     document_type: dict[str, Any]
-    stamp_xml: str | None
-    extra: dict[str, Any] | None
-    auth: dict[str, Any] | None
+    document_stamp: str | None
+    document_extra: dict[str, Any] | None
+    document_auth: dict[str, Any] | None
     raw: dict[str, Any]
 
     @classmethod
     def from_api(cls, data: dict[str, Any]) -> DocumentBag:
         """Construye un `DocumentBag` desde el `data` de la API."""
         return cls(
-            datos=data['document'],
+            document=data['document'],
             document_type=data['document_type'],
-            stamp_xml=data.get('document_stamp'),
-            extra=data.get('document_extra'),
-            auth=data.get('document_auth'),
+            document_stamp=data.get('document_stamp'),
+            document_extra=data.get('document_extra'),
+            document_auth=data.get('document_auth'),
             raw=data,
         )
 
@@ -163,7 +163,7 @@ class Example:
     """
     Un ejemplo de documento, tal como lo devuelve `examples::get()`.
 
-    `input_data` se pasa directamente al parámetro homónimo de
+    `example` se pasa directamente al parámetro `input_data` de
     `DocumentBuilderService.build_draft()`/`.build_signed()` — mismo
     `Encabezado`/`Detalle` que usa el resto del SDK, sin transformación.
     `expected` son los valores esperados del caso (totales, etc.) que usa
@@ -172,7 +172,7 @@ class Example:
     """
 
     id: str
-    input_data: dict[str, Any]
+    example: dict[str, Any]
     expected: dict[str, Any]
 
     @classmethod
@@ -180,7 +180,7 @@ class Example:
         """Construye un `Example` desde el `data` que devuelve la API."""
         return cls(
             id=data['id'],
-            input_data=data['example'],
+            example=data['example'],
             expected=data.get('expected') or {},
         )
 
