@@ -154,16 +154,9 @@ infraestructura de la biblioteca (catálogos reales, carga de certificados
 <span class="p">)</span>
 
 <span class="c1"># 3. Envío al SII (arma el sobre EnvioDTE y luego lo envía).</span>
-<span class="n">emisor</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'rut'</span><span class="p">:</span> <span class="s1">'76192083-9'</span><span class="p">,</span>
-    <span class="s1">'razon_social'</span><span class="p">:</span> <span class="s1">'SASCO SpA'</span><span class="p">,</span>
-    <span class="s1">'autorizacion_dte'</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">'fecha_resolucion'</span><span class="p">:</span> <span class="s1">'2014-08-22'</span><span class="p">,</span> <span class="s1">'numero_resolucion'</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="p">},</span>
-<span class="p">}</span>
-<span class="n">sobre</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">documento</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">emisor</span><span class="o">=</span><span class="n">emisor</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="c1"># `documento` ya trae certificate/emisor incluidos — no hace falta</span>
+<span class="c1"># pasarlos aparte.</span>
+<span class="n">sobre</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">documento</span><span class="p">)</span>
 <span class="n">envio</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
     <span class="n">sobre</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">company_rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span>
 <span class="p">)</span>

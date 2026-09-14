@@ -114,9 +114,7 @@ resources</cite> solo existe en Lib Pro (ver <cite>HumanResourcesPackage</cite>)
 <span class="n">documento</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">build_signed</span><span class="p">(</span>
     <span class="n">input_data</span><span class="p">,</span> <span class="n">caf_xml</span><span class="o">=</span><span class="n">caf</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">sobre</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">documento</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">emisor</span><span class="o">=</span><span class="n">emisor_dto</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="n">sobre</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">documento</span><span class="p">)</span>
 <span class="n">envio</span> <span class="o">=</span> <span class="n">sii</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
     <span class="n">sobre</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">company_rut</span><span class="o">=</span><span class="n">rut</span><span class="p">,</span>
 <span class="p">)</span>

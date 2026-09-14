@@ -105,6 +105,10 @@ respaldo.</p>
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.loader.DocumentLoaderService.load_xml">
 <span class="sig-name descname"><span class="pre">load_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.loader.DocumentLoaderService.load_xml" title="Link to this definition"></a></dt>
 <dd><p>Carga y normaliza el documento cuyo XML (base64) es <cite>xml_base64</cite>.</p>
+<p>Devuelve la misma <cite>DocumentBag</cite> que <cite>DocumentBuilderService</cite> —
+<cite>document_id</cite>/<cite>xml_base64</cite> reconstruyen lo que ya se le pasó
+acá, <cite>document</cite>/<cite>document_type</cite>/<cite>document_stamp_base64</cite>/etc.
+son el valor agregado real: los datos ya normalizados.</p>
 </dd></dl>
 
 </dd></dl>

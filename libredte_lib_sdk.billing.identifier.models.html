@@ -94,13 +94,44 @@
 <p>DTO del componente <cite>billing.identifier</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.identifier.models.</span></span><span class="sig-name descname"><span class="pre">Caf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo_documento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folio_desde</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folio_hasta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.identifier.models.</span></span><span class="sig-name descname"><span class="pre">Caf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emisor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tipo_documento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folio_desde</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folio_hasta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cantidad_folios</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fecha_autorizacion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fecha_vencimiento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meses_autorizacion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vigente</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ambiente</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificacion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">private_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.XmlPayloadMixin" title="libredte_lib_sdk.billing.common.XmlPayloadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">XmlPayloadMixin</span></code></a></p>
 <p>CAF (Código de Autorización de Folios) de un emisor.</p>
-<p>Expone los campos más usados directamente; <cite>.raw</cite> trae el <cite>dict</cite>
-completo que devuelve la API (incluye además, entre otros, la
-llave RSA del CAF y si está vigente) por si algo más específico
-hace falta más adelante.</p>
+<p>Expone todos los campos que devuelve la API — es el estado real del
+CAF al momento de la consulta (<cite>vigente</cite>/<cite>meses_autorizacion</cite>
+dependen de la fecha en que se pidió, no son un valor fijo). <cite>.raw</cite>
+igual se conserva con el <cite>dict</cite> completo, por si la API agrega algo
+nuevo que este DTO todavía no tipa.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.ambiente">
+<span class="sig-name descname"><span class="pre">ambiente</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="libredte_lib_sdk.billing.enums.html#libredte_lib_sdk.billing.enums.SiiEnvironment" title="libredte_lib_sdk.billing.enums.SiiEnvironment"><span class="pre">SiiEnvironment</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.ambiente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.cantidad_folios">
+<span class="sig-name descname"><span class="pre">cantidad_folios</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.cantidad_folios" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.certificacion">
+<span class="sig-name descname"><span class="pre">certificacion</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.certificacion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.emisor">
+<span class="sig-name descname"><span class="pre">emisor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.emisor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.fecha_autorizacion">
+<span class="sig-name descname"><span class="pre">fecha_autorizacion</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.fecha_autorizacion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.fecha_vencimiento">
+<span class="sig-name descname"><span class="pre">fecha_vencimiento</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.fecha_vencimiento" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.folio_desde">
 <span class="sig-name descname"><span class="pre">folio_desde</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.folio_desde" title="Link to this definition"></a></dt>
@@ -118,6 +149,31 @@ hace falta más adelante.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.idk">
+<span class="sig-name descname"><span class="pre">idk</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.idk" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.meses_autorizacion">
+<span class="sig-name descname"><span class="pre">meses_autorizacion</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.meses_autorizacion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.private_key">
+<span class="sig-name descname"><span class="pre">private_key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.private_key" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.public_key">
+<span class="sig-name descname"><span class="pre">public_key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.public_key" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.raw">
 <span class="sig-name descname"><span class="pre">raw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.raw" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -125,6 +181,16 @@ hace falta más adelante.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.tipo_documento">
 <span class="sig-name descname"><span class="pre">tipo_documento</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.tipo_documento" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.vence">
+<span class="sig-name descname"><span class="pre">vence</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.vence" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.identifier.models.Caf.vigente">
+<span class="sig-name descname"><span class="pre">vigente</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.identifier.models.Caf.vigente" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

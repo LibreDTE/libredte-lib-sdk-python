@@ -99,24 +99,33 @@
 <p>Arma y valida el sobre <cite>EnvioDTE</cite> (<cite>billing.document.dispatcher</cite>).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document_xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.trading_parties.models.html#libredte_lib_sdk.billing.trading_parties.models.Certificate" title="libredte_lib_sdk.billing.trading_parties.models.Certificate"><span class="pre">Certificate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">emisor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create" title="Link to this definition"></a></dt>
 <dd><p>Envuelve y firma un documento ya timbrado en un sobre <cite>EnvioDTE</cite>.</p>
-<p><cite>document_xml_base64</cite> es el XML en base64 del documento a
-envolver — típicamente <cite>Document.xml_base64</cite> de un documento ya
-timbrado y firmado (<cite>DocumentBuilderService.build_signed</cite>). El
-sobre resultante es lo que se envía al SII (<cite>SiiDteService.send</cite>).</p>
-<p><cite>emisor</cite> es un <cite>dict</cite> con <cite>rut</cite>/<cite>razon_social</cite>/
-<cite>autorizacion_dte</cite> (esta última con <cite>fecha_resolucion</cite>/
-<cite>numero_resolucion</cite>), tal como lo espera la API.</p>
+<p><cite>bag</cite> es el <cite>DocumentBag</cite> ya timbrado y firmado que devuelve
+<cite>DocumentBuilderService.build_signed()</cite> — trae <cite>certificate</cite>/
+<cite>emisor</cite> incluidos, no hace falta pasarlos aparte. El sobre
+resultante es lo que se envía al SII (<cite>SiiDteService.send</cite>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create_many">
+<span class="sig-name descname"><span class="pre">create_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create_many" title="Link to this definition"></a></dt>
+<dd><p>Envuelve y firma 2+ documentos ya timbrados en un sobre <cite>EnvioDTE</cite>.</p>
+<p>Igual que <cite>create()</cite>, pero para un sobre que agrupa más de un
+documento — cada <cite>DocumentBag</cite> trae su propio <cite>certificate</cite>/
+<cite>emisor</cite>. El sobre resultante queda firmado con el certificado
+del PRIMER <cite>DocumentBag</cite> (el sobre en sí también se firma, no
+solo cada documento).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.load_xml">
 <span class="sig-name descname"><span class="pre">load_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.load_xml" title="Link to this definition"></a></dt>
 <dd><p>Carga un sobre <cite>EnvioDTE</cite> ya existente desde su XML (base64).</p>
-<p>Caso de uso típico: reprocesar un sobre ya guardado, o normalizar
-un DTE suelto recibido de un tercero (la API arma un sobre nuevo
-a partir de él).</p>
+<p>El <cite>DocumentEnvelope</cite> resultante trae en <cite>documents</cite> una bolsa
+por cada documento tributario que el sobre agrupaba — uno o
+más — y en <cite>caratula</cite> los datos de la carátula ya presente en
+ese XML.</p>
 </dd></dl>
 
 <dl class="py method">
