@@ -26,6 +26,13 @@ class DocumentLoaderService:
         self._client = client
 
     def load_xml(self, xml_base64: str) -> DocumentBag:
-        """Carga y normaliza el documento cuyo XML (base64) es `xml_base64`."""
+        """
+        Carga y normaliza el documento cuyo XML (base64) es `xml_base64`.
+
+        Devuelve la misma `DocumentBag` que `DocumentBuilderService` —
+        `document_id`/`xml_base64` reconstruyen lo que ya se le pasó
+        acá, `document`/`document_type`/`document_stamp_base64`/etc.
+        son el valor agregado real: los datos ya normalizados.
+        """
         data = self._client.call(self._LOAD_XML_OPERATION, xml=xml_base64)
         return DocumentBag.from_api(data)

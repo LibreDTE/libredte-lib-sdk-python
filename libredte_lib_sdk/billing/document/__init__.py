@@ -11,7 +11,6 @@ from .dispatcher import DocumentDispatcherService
 from .examples import DocumentExamplesService
 from .loader import DocumentLoaderService
 from .models import (
-    Document,
     DocumentBag,
     DocumentEnvelope,
     Example,
@@ -23,7 +22,6 @@ from .renderer import DocumentRendererService
 from .validator import DocumentValidatorService
 
 __all__ = [
-    'Document',
     'DocumentBag',
     'DocumentBuilderService',
     'DocumentComponent',

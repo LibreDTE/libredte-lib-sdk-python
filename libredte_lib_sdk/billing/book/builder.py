@@ -9,7 +9,7 @@ from typing import Any
 
 from ...client import ApiClient
 from ..trading_parties.models import Certificate
-from .models import Book
+from .models import BookBag
 
 
 class BookBuilderService:
@@ -26,17 +26,19 @@ class BookBuilderService:
         bag: dict[str, Any],
         *,
         certificate: Certificate,
-    ) -> Book:
+    ) -> BookBag:
         """
         Construye el libro descrito por `bag`.
 
         `bag` trae `tipo` (`'libro_ventas'`, `'libro_compras'`,
         `'libro_boletas'`, `'libro_guias'`, `'resumen_ventas_diarias'`,
         sin tipar como enum cerrado), `caratula`, `detalle` y `emisor`,
-        tal cual el formato SII.
+        tal cual el formato SII. A diferencia de `BookLoaderService
+        .load()`, acá `BookBag.book` viene poblado (el libro construido
+        y firmado, con su `xml`).
         """
         data = self._client.call(
             self._BUILD_OPERATION,
             bag={**bag, 'certificate': certificate.to_payload()},
         )
-        return Book.from_api(data)
+        return BookBag.from_api(data)

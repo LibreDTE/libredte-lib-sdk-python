@@ -42,7 +42,11 @@ def test_caf_loader_round_trips_a_real_caf_xml(fake_caf, real_sdk):
     assert loaded.tipo_documento == fake_caf.tipo_documento
     assert loaded.folio_desde == fake_caf.folio_desde
     assert loaded.folio_hasta == fake_caf.folio_hasta
-    assert loaded.raw['emisor']['rut'] == '76192083-9'
+    assert loaded.emisor['rut'] == '76192083-9'
+    # `CafFaker::IDK` en libredte-lib-core — un CAF ficticio nunca
+    # corresponde a un ambiente real del SII.
+    assert loaded.idk == 666
+    assert loaded.ambiente is None
 
 
 def test_caf_validator_accepts_a_valid_caf(fake_caf, real_sdk):
@@ -50,7 +54,7 @@ def test_caf_validator_accepts_a_valid_caf(fake_caf, real_sdk):
         fake_caf.xml_base64,
     )
 
-    assert validated.raw['vigente'] is True
+    assert validated.vigente is True
 
 
 def test_caf_loader_rejects_malformed_xml(real_sdk):

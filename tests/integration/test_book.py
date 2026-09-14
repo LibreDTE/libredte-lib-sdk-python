@@ -5,9 +5,9 @@
 Tests en vivo para `BookBuilderService`/`BookLoaderService` (`billing.book`).
 
 `loader.load()` normaliza `caratula`/`detalle` — no construye el libro
-(eso lo hace `builder.build()`), por lo que `datos` (el libro construido)
-siempre viene `None` acá. `auth` solo viene poblado si el emisor incluye
-su autorización (`autorizacion_dte`) — ver docstring de `BookBag`.
+(eso lo hace `builder.build()`), por lo que `book` (el libro construido)
+siempre viene `None` acá. `book_auth` solo viene poblado si el emisor
+incluye su autorización (`autorizacion_dte`) — ver docstring de `BookBag`.
 """
 
 from __future__ import annotations
@@ -51,7 +51,8 @@ def test_builder_build_returns_the_datos_and_the_xml(
         certificate=fake_certificate,
     )
 
-    caratula = result.datos['LibroCompraVenta']['EnvioLibro']['Caratula']
+    assert result.is_construido
+    caratula = result.book['LibroCompraVenta']['EnvioLibro']['Caratula']
     assert caratula['RutEmisorLibro'] == '76192083-9'
     assert caratula['TipoOperacion'] == 'VENTA'
     assert '<LibroCompraVenta' in result.xml
@@ -81,7 +82,8 @@ def test_loader_load_normalizes_caratula_and_detalle(
 
     assert loaded.book_type['codigo'] == 'libro_ventas'
     # load() nunca construye el libro, sin importar el input.
-    assert loaded.datos is None
+    assert not loaded.is_construido
+    assert loaded.book is None
     assert loaded.caratula['RutEmisorLibro'] == '76192083-9'
     assert loaded.caratula['TipoOperacion'] == 'VENTA'
     assert loaded.detalle[0]['RUTDoc'] == '66666666-6'
@@ -106,4 +108,4 @@ def test_loader_load_resolves_auth_when_emisor_has_autorizacion(
         bag, certificate=fake_certificate
     )
 
-    assert loaded.auth == {'FchResol': '2014-08-22', 'NroResol': 80}
+    assert loaded.book_auth == {'FchResol': '2014-08-22', 'NroResol': 80}

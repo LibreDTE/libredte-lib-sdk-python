@@ -14,7 +14,7 @@ class DocumentValidatorService:
     """
     Valida un documento tributario ya construido (`billing.document`).
 
-    `source` es el XML del documento en base64 (ej. `Document.xml_base64`
+    `source` es el XML del documento en base64 (ej. `DocumentBag.xml_base64`
     de un documento ya construido) — la API acepta también la bolsa o el
     documento ya cargado, pero el SDK solo necesita pasar el XML.
     """

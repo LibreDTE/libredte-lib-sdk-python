@@ -9,7 +9,7 @@ from typing import Any
 
 from ...client import ApiClient
 from ..trading_parties.models import Certificate
-from .models import Document
+from .models import DocumentBag
 
 
 class DocumentBuilderService:
@@ -33,27 +33,27 @@ class DocumentBuilderService:
         input_data: str | dict[str, Any],
         *,
         options: dict[str, Any] | None = None,
-    ) -> Document:
+    ) -> DocumentBag:
         """
         Emite el borrador de un DTE a partir de datos de entrada.
 
         `input_data` es el `Encabezado`/`Detalle` (y demás nodos) del
-        formato DTE del SII como `dict`, incluyendo
-        `Encabezado.IdDoc.Folio` (el SDK no asigna folios: eso lo decide
-        quien llama, típicamente porque lleva el correlativo) — o datos
-        en otro formato (XML/YAML, un formulario, etc.) junto con
+        formato DTE del SII como `dict` — o datos en otro formato
+        (XML/YAML, un formulario, etc.) junto con
         `options={'parser': {'strategy': '<estrategia>'}}` para indicar
         cómo parsearlos. Sin `options`, la API asume que `input_data` ya
-        viene en el formato DTE del SII (estrategia `default.json`). Sin
-        CAF ni certificado, el resultado no queda timbrado
-        (`Document.is_timbrado` es `False`).
+        viene en el formato DTE del SII (estrategia `default.json`).
+        `Encabezado.IdDoc.Folio` es opcional acá — un borrador sin folio
+        no falla (queda con folio `0` en `DocumentBag.document_id`, sin
+        nodo `Folio` en el XML). Sin CAF ni certificado, el resultado no
+        queda timbrado (`DocumentBag.is_timbrado` es `False`).
         """
         bag: dict[str, Any] = {'inputData': input_data}
         if options is not None:
             bag['options'] = options
 
         data = self._client.call(self._BUILD_OPERATION, bag=bag)
-        return Document.from_api(data)
+        return DocumentBag.from_api(data)
 
     def build_signed(
         self,
@@ -62,14 +62,16 @@ class DocumentBuilderService:
         options: dict[str, Any] | None = None,
         caf_xml: str,
         certificate: Certificate,
-    ) -> Document:
+    ) -> DocumentBag:
         """
         Genera el DTE real, timbrado y firmado.
 
-        `input_data`/`options` funcionan igual que en `build_draft()`.
-        Requiere un CAF real (XML tal como lo entrega el SII, cubriendo
-        el folio indicado en `input_data`) y el certificado digital del
-        emisor. Para pruebas, ambos se pueden generar con
+        `input_data`/`options` funcionan igual que en `build_draft()` —
+        acá sí se necesita un `Encabezado.IdDoc.Folio` real, cubierto
+        por `caf_xml` (el SDK no asigna folios: eso lo decide quien
+        llama, típicamente porque lleva el correlativo). Requiere un CAF
+        real (XML tal como lo entrega el SII) y el certificado digital
+        del emisor. Para pruebas, ambos se pueden generar con
         `IdentifierComponent.caf_faker` y
         `TradingPartiesComponent.mandatario_manager`.
         """
@@ -80,4 +82,4 @@ class DocumentBuilderService:
         bag['certificate'] = certificate.to_payload()
 
         data = self._client.call(self._BUILD_OPERATION, bag=bag)
-        return Document.from_api(data)
+        return DocumentBag.from_api(data)

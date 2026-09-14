@@ -16,8 +16,10 @@ import base64
 import json
 
 import httpx
+import pytest
 import respx
 
+from libredte_lib_sdk.billing.document.models import DocumentBag
 from libredte_lib_sdk.billing.enums import SiiEnvironment
 from libredte_lib_sdk.billing.trading_parties import Certificate, Mandatario
 
@@ -28,17 +30,34 @@ _REAL_SIGNED_DOCUMENT_RESPONSE = {
         'timestamp': 1787810337.756542,
         'data_type': (
             'libredte\\lib\\Core\\Package\\Billing\\Component\\Document'
-            '\\Entity\\Document\\FacturaAfecta'
+            '\\Support\\DocumentBag'
         ),
     },
     'data': {
-        'id': '76192083-9_T033F000000001',
-        'datos': {
+        'document': {
             'Encabezado': {'IdDoc': {'TipoDTE': 33, 'Folio': 1}},
             'Detalle': [{'NroLinDet': 1, 'NmbItem': 'Producto A'}],
         },
-        'ted': {'DD': {'RE': '76192083-9'}},
-        'xml': base64.b64encode(b'<DTE><!-- timbrado --></DTE>').decode(),
+        'document_extra': None,
+        'document_stamp': base64.b64encode(
+            b'<TED><DD><RE>76192083-9</RE></DD></TED>',
+        ).decode(),
+        'document_auth': None,
+        'document_type': {'codigo': 33, 'nombre': 'Factura'},
+        'document_id': '76192083-9_T033F000000001',
+        'document_xml': base64.b64encode(
+            b'<DTE><!-- timbrado --></DTE>',
+        ).decode(),
+        'options': {},
+        'certificate': {'cert': 'cert-pem', 'pkey': 'key-pem'},
+        'emisor': {
+            'rut': '76192083-9',
+            'razon_social': 'SASCO SpA',
+            'autorizacion_dte': {'FchResol': '2014-08-22', 'NroResol': 80},
+        },
+        'receptor': {'rut': '12345678-5', 'razon_social': 'Cliente'},
+        'caf': None,
+        'timbre': {'TED': {'DD': {'RE': '76192083-9'}}},
     },
 }
 
@@ -54,29 +73,58 @@ _INPUT_DATA = {
 _CERTIFICATE = Certificate(certificate='cert-pem', private_key='key-pem')
 
 
+def _signed_bag(xml_base64: str) -> DocumentBag:
+    """Un `DocumentBag` firmado, listo para `dispatcher.create()`."""
+    return DocumentBag.from_api(
+        {
+            'document': {},
+            'document_type': {'codigo': 33},
+            'document_stamp': None,
+            'document_extra': None,
+            'document_auth': None,
+            'document_xml': xml_base64,
+            'certificate': {'cert': 'cert-pem', 'pkey': 'key-pem'},
+            'emisor': {
+                'rut': '76192083-9',
+                'razon_social': 'SASCO SpA',
+                'autorizacion_dte': {
+                    'FchResol': '2014-08-22',
+                    'NroResol': 80,
+                },
+            },
+        },
+    )
+
+
 @respx.mock
 def test_build_draft_omits_caf_and_certificate_from_the_payload(sdk):
     draft_response = {
         'meta': _REAL_SIGNED_DOCUMENT_RESPONSE['meta'],
-        'data': {**_REAL_SIGNED_DOCUMENT_RESPONSE['data'], 'ted': None},
+        'data': {
+            **_REAL_SIGNED_DOCUMENT_RESPONSE['data'],
+            'document_stamp': None,
+        },
     }
     route = respx.post(
         f'{TEST_BASE_URL}/billing/document/builder/build',
     ).mock(return_value=httpx.Response(200, json=draft_response))
 
-    document = sdk.billing.document.builder.build_draft(_INPUT_DATA)
+    draft = sdk.billing.document.builder.build_draft(_INPUT_DATA)
 
     sent = json.loads(route.calls.last.request.content)
     assert sent['parameters']['bag'].keys() == {'inputData'}
-    assert document.id == '76192083-9_T033F000000001'
-    assert document.is_timbrado is False
+    assert draft.document_id == '76192083-9_T033F000000001'
+    assert draft.is_timbrado is False
 
 
 @respx.mock
 def test_build_draft_sends_options_when_given(sdk):
     draft_response = {
         'meta': _REAL_SIGNED_DOCUMENT_RESPONSE['meta'],
-        'data': {**_REAL_SIGNED_DOCUMENT_RESPONSE['data'], 'ted': None},
+        'data': {
+            **_REAL_SIGNED_DOCUMENT_RESPONSE['data'],
+            'document_stamp': None,
+        },
     }
     route = respx.post(
         f'{TEST_BASE_URL}/billing/document/builder/build',
@@ -101,7 +149,7 @@ def test_build_signed_includes_caf_and_certificate(sdk):
         return_value=httpx.Response(200, json=_REAL_SIGNED_DOCUMENT_RESPONSE),
     )
 
-    document = sdk.billing.document.builder.build_signed(
+    signed = sdk.billing.document.builder.build_signed(
         _INPUT_DATA,
         caf_xml='<AUTORIZACION/>',
         certificate=_CERTIFICATE,
@@ -114,7 +162,7 @@ def test_build_signed_includes_caf_and_certificate(sdk):
         'certificate': 'cert-pem',
         'privateKey': 'key-pem',
     }
-    assert document.is_timbrado is True
+    assert signed.is_timbrado is True
 
 
 @respx.mock
@@ -127,9 +175,27 @@ def test_caf_faker_create_maps_parameters_and_response(sdk):
             json={
                 'meta': {},
                 'data': {
+                    'id': 'CAF33D1H100',
+                    'emisor': {
+                        'rut': '76192083-9',
+                        'razon_social': 'SASCO SpA',
+                    },
                     'tipoDocumento': 33,
                     'folioDesde': 1,
                     'folioHasta': 100,
+                    'cantidadFolios': 100,
+                    'fechaAutorizacion': '2026-01-01',
+                    'fechaVencimiento': '2026-06-30',
+                    'mesesAutorizacion': 0.0,
+                    'vigente': True,
+                    'vence': True,
+                    # `CafFaker::IDK` en libredte-lib-core — un CAF ficticio
+                    # nunca corresponde a un ambiente real del SII.
+                    'idk': 666,
+                    'ambiente': None,
+                    'certificacion': None,
+                    'publicKey': '-----BEGIN PUBLIC KEY-----',
+                    'privateKey': '-----BEGIN PRIVATE KEY-----',
                     'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
                 },
             },
@@ -148,6 +214,8 @@ def test_caf_faker_create_maps_parameters_and_response(sdk):
     assert sent['folioHasta'] == 100
     assert caf.folio_hasta == 100
     assert caf.xml == '<AUTORIZACION/>'
+    assert caf.idk == 666
+    assert caf.ambiente is None
 
 
 @respx.mock
@@ -160,9 +228,25 @@ def test_caf_loader_load_sends_xml_and_decodes_the_caf(sdk):
             json={
                 'meta': {},
                 'data': {
+                    'id': 'CAF33D1H50',
+                    'emisor': {
+                        'rut': '76192083-9',
+                        'razon_social': 'SASCO SpA',
+                    },
                     'tipoDocumento': 33,
                     'folioDesde': 1,
                     'folioHasta': 50,
+                    'cantidadFolios': 50,
+                    'fechaAutorizacion': '2026-01-01',
+                    'fechaVencimiento': '2026-06-30',
+                    'mesesAutorizacion': 2.17,
+                    'vigente': True,
+                    'vence': True,
+                    'idk': 300,
+                    'ambiente': 0,
+                    'certificacion': 0,
+                    'publicKey': '-----BEGIN PUBLIC KEY-----',
+                    'privateKey': '-----BEGIN PRIVATE KEY-----',
                     'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
                 },
             },
@@ -188,9 +272,25 @@ def test_caf_validator_validate_sends_caf_key_and_decodes_the_caf(sdk):
             json={
                 'meta': {},
                 'data': {
+                    'id': 'CAF33D1H50',
+                    'emisor': {
+                        'rut': '76192083-9',
+                        'razon_social': 'SASCO SpA',
+                    },
                     'tipoDocumento': 33,
                     'folioDesde': 1,
                     'folioHasta': 50,
+                    'cantidadFolios': 50,
+                    'fechaAutorizacion': '2026-01-01',
+                    'fechaVencimiento': '2026-06-30',
+                    'mesesAutorizacion': 2.17,
+                    'vigente': True,
+                    'vence': True,
+                    'idk': 300,
+                    'ambiente': 0,
+                    'certificacion': 0,
+                    'publicKey': '-----BEGIN PUBLIC KEY-----',
+                    'privateKey': '-----BEGIN PRIVATE KEY-----',
                     'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
                 },
             },
@@ -256,7 +356,7 @@ def test_mandatario_manager_create_fake_certificate(sdk):
 
 
 @respx.mock
-def test_envelope_create_sends_document_certificate_and_emisor(sdk):
+def test_envelope_create_sends_bag_certificate_and_emisor(sdk):
     envelope_xml = base64.b64encode(b'<EnvioDTE/>').decode()
     route = respx.post(
         f'{TEST_BASE_URL}/billing/document/dispatcher/create',
@@ -269,27 +369,81 @@ def test_envelope_create_sends_document_certificate_and_emisor(sdk):
             },
         ),
     )
-    emisor = {
-        'rut': '76192083-9',
-        'razon_social': 'SASCO SpA',
-        'autorizacion_dte': {
-            'fecha_resolucion': '2014-08-22',
-            'numero_resolucion': 80,
-        },
-    }
+    bag = _signed_bag('ZG9jdW1lbnRv')
 
-    envelope = sdk.billing.document.dispatcher.create(
-        'ZG9jdW1lbnRv',
-        certificate=_CERTIFICATE,
-        emisor=emisor,
-    )
+    envelope = sdk.billing.document.dispatcher.create(bag)
 
     sent = json.loads(route.calls.last.request.content)
-    bag = sent['parameters']['bag']
-    assert bag['xmlDocument'] == 'ZG9jdW1lbnRv'
-    assert bag['emisor']['autorizacion_dte']['numero_resolucion'] == 80
+    sent_bag = sent['parameters']['bag']
+    assert sent_bag['xmlDocument'] == 'ZG9jdW1lbnRv'
+    assert sent_bag['certificate'] == {
+        'certificate': 'cert-pem',
+        'privateKey': 'key-pem',
+    }
+    assert sent_bag['emisor']['autorizacion_dte']['NroResol'] == 80
     assert envelope.tag == 'EnvioDTE'
     assert envelope.xml == '<EnvioDTE/>'
+
+
+@respx.mock
+def test_envelope_create_many_sends_a_bag_per_document(sdk):
+    envelope_xml = base64.b64encode(b'<EnvioDTE/>').decode()
+    route = respx.post(
+        f'{TEST_BASE_URL}/billing/document/dispatcher/createMany',
+    ).mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                'meta': {},
+                'data': {'tag': 'EnvioDTE', 'xml': envelope_xml},
+            },
+        ),
+    )
+    bags = [_signed_bag('ZG9jdW1lbnRvMQ=='), _signed_bag('ZG9jdW1lbnRvMg==')]
+
+    envelope = sdk.billing.document.dispatcher.create_many(bags)
+
+    sent = json.loads(route.calls.last.request.content)
+    sent_bags = sent['parameters']['bags']
+    assert [b['xmlDocument'] for b in sent_bags] == [
+        'ZG9jdW1lbnRvMQ==',
+        'ZG9jdW1lbnRvMg==',
+    ]
+    assert envelope.tag == 'EnvioDTE'
+
+
+def test_dispatcher_create_raises_when_bag_has_no_certificate(sdk):
+    bag = DocumentBag.from_api(
+        {
+            'document': {},
+            'document_type': {'codigo': 33},
+            'document_stamp': None,
+            'document_extra': None,
+            'document_auth': None,
+            'document_xml': base64.b64encode(b'<DTE/>').decode(),
+            'emisor': {'rut': '76192083-9', 'razon_social': 'SASCO SpA'},
+        },
+    )
+
+    with pytest.raises(ValueError, match='certificado'):
+        sdk.billing.document.dispatcher.create(bag)
+
+
+def test_dispatcher_create_raises_when_bag_has_no_emisor(sdk):
+    bag = DocumentBag.from_api(
+        {
+            'document': {},
+            'document_type': {'codigo': 33},
+            'document_stamp': None,
+            'document_extra': None,
+            'document_auth': None,
+            'document_xml': base64.b64encode(b'<DTE/>').decode(),
+            'certificate': {'cert': 'cert-pem', 'pkey': 'key-pem'},
+        },
+    )
+
+    with pytest.raises(ValueError, match='emisor'):
+        sdk.billing.document.dispatcher.create(bag)
 
 
 @respx.mock
@@ -1195,6 +1349,8 @@ def test_aec_validate_signature_returns_a_list_of_raw_results(sdk):
 
 @respx.mock
 def test_document_loader_load_xml_decodes_the_full_bag(sdk):
+    stamp_base64 = base64.b64encode(b'<TED/>').decode()
+    xml_base64 = base64.b64encode(b'<DTE/>').decode()
     route = respx.post(
         f'{TEST_BASE_URL}/billing/document/loader/loadXml',
     ).mock(
@@ -1205,9 +1361,11 @@ def test_document_loader_load_xml_decodes_the_full_bag(sdk):
                 'data': {
                     'document': {'Encabezado': {}},
                     'document_extra': None,
-                    'document_stamp': '<TED/>',
+                    'document_stamp': stamp_base64,
                     'document_auth': None,
                     'document_type': {'codigo': 33, 'nombre': 'Factura'},
+                    'document_id': '76192083-9_T033F000000001',
+                    'document_xml': xml_base64,
                     'options': {},
                 },
             },
@@ -1220,9 +1378,12 @@ def test_document_loader_load_xml_decodes_the_full_bag(sdk):
     assert sent['xml'] == 'RFRFeG1s'
     assert result.document == {'Encabezado': {}}
     assert result.document_type == {'codigo': 33, 'nombre': 'Factura'}
-    assert result.document_stamp == '<TED/>'
+    assert result.document_stamp_base64 == stamp_base64
     assert result.document_extra is None
     assert result.document_auth is None
+    assert result.document_id == '76192083-9_T033F000000001'
+    assert result.xml_base64 == xml_base64
+    assert result.is_timbrado is True
 
 
 _BOOK_BAG = {
@@ -1258,14 +1419,27 @@ def test_book_builder_build_sends_bag_and_certificate(sdk):
             json={
                 'meta': {},
                 'data': {
-                    'LibroCompraVenta': {
-                        'EnvioLibro': {
-                            'Caratula': {'TipoOperacion': 'VENTA'},
+                    'book': {
+                        'LibroCompraVenta': {
+                            'EnvioLibro': {
+                                'Caratula': {'TipoOperacion': 'VENTA'},
+                            },
                         },
+                        'xml': (
+                            'PExpYnJvQ29tcHJhVmVudGE+PC9MaWJyb0NvbXByYVZlbnRhPg=='
+                        ),
                     },
-                    'xml': (
-                        'PExpYnJvQ29tcHJhVmVudGE+PC9MaWJyb0NvbXByYVZlbnRhPg=='
-                    ),
+                    'book_auth': None,
+                    'book_type': {
+                        'codigo': 'libro_ventas',
+                        'nombre': 'Libro de ventas',
+                    },
+                    'caratula': {
+                        'RutEmisorLibro': '76192083-9',
+                        'TipoOperacion': 'VENTA',
+                    },
+                    'detalle': [{'TpoDoc': 33, 'NroDoc': 1}],
+                    'options': {},
                 },
             },
         ),
@@ -1282,12 +1456,14 @@ def test_book_builder_build_sends_bag_and_certificate(sdk):
         'certificate': 'cert-pem',
         'privateKey': 'key-pem',
     }
+    assert result.is_construido
     assert (
-        result.datos['LibroCompraVenta']['EnvioLibro']['Caratula'][
+        result.book['LibroCompraVenta']['EnvioLibro']['Caratula'][
             'TipoOperacion'
         ]
         == 'VENTA'
     )
+    assert result.xml == '<LibroCompraVenta></LibroCompraVenta>'
     assert result.xml_base64 == (
         'PExpYnJvQ29tcHJhVmVudGE+PC9MaWJyb0NvbXByYVZlbnRhPg=='
     )
@@ -1327,6 +1503,7 @@ def test_book_loader_load_decodes_book_type_caratula_and_detalle(sdk):
 
     # `book`/`book_auth` siempre vienen `None` desde `load()` (no
     # construye el libro) — ver docstring de `BookBag`.
+    assert not result.is_construido
     assert result.book is None
     assert result.book_auth is None
     assert result.book_type == {

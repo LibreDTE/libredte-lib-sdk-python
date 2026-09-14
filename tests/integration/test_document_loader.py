@@ -4,12 +4,11 @@
 """
 Tests en vivo para `DocumentLoaderService` (`billing.document.loader`).
 
-`loadXml` no tenía su shape de respuesta confirmado por ningún fixture
-de `libredte-lib-core-dispatcher` (el fixture solo verificaba
-`document_type.codigo`). Confirmado en vivo: la respuesta es
-genuinamente distinta a `Document` — no trae `xml` ni `id`, solo la
-bolsa normalizada (`document`/`document_type`/`document_stamp`/
-`document_extra`/`document_auth`), de ahí el DTO propio (`DocumentBag`).
+`loadXml` devuelve la misma `DocumentBag` que `DocumentBuilderService`
+(`document`/`document_type`/`document_stamp_base64`/`document_extra`/
+`document_auth`/`document_id`/`xml_base64`) — acá se reconstruye a
+partir de un documento ya timbrado y firmado, así que además viene con
+`is_timbrado` en `True`.
 """
 
 from __future__ import annotations
@@ -24,7 +23,9 @@ def test_load_xml_normalizes_a_signed_document(signed_document, real_sdk):
         signed_document.xml_base64,
     )
 
-    assert loaded.datos['Encabezado']['IdDoc']['TipoDTE'] == 33
+    assert loaded.document['Encabezado']['IdDoc']['TipoDTE'] == 33
     assert loaded.document_type['codigo'] == 33
     assert loaded.document_type['es_boleta'] is False
-    assert loaded.stamp_xml.startswith('<TED')
+    assert loaded.document_stamp_base64 is not None
+    assert '<DTE' in loaded.xml
+    assert loaded.is_timbrado is True

@@ -12,6 +12,8 @@ son de integración real, sin mocks, y están excluidos por defecto (ver
 
 from __future__ import annotations
 
+import dataclasses
+
 import pytest
 
 from libredte_lib_sdk import LibreDTE
@@ -87,7 +89,7 @@ def draft_boleta(real_sdk):
 def fake_certificate(real_sdk):
     """Certificado ficticio real (autofirmado), generado en vivo."""
     mandatario = Mandatario(
-        rut='76192083-9',
+        run='76192083-9',
         nombre='SASCO SpA',
         email='sasco@example.com',
     )
@@ -118,18 +120,24 @@ def signed_document(real_sdk, fake_certificate):
 
 
 @pytest.fixture
-def signed_envelope(real_sdk, signed_document, fake_certificate):
-    """Un sobre `EnvioDTE` real, armado a partir de `signed_document`."""
-    emisor = {
-        'rut': '76192083-9',
-        'razon_social': 'SASCO SpA',
-        'autorizacion_dte': {
-            'fecha_resolucion': '2014-08-22',
-            'numero_resolucion': 80,
+def signed_envelope(real_sdk, signed_document):
+    """
+    Un sobre `EnvioDTE` real, armado a partir de `signed_document`.
+
+    La carátula del sobre necesita `autorizacion_dte` (`FchResol`/
+    `NroResol`) — un dato de la relación SII-emisor, no del DTE en sí,
+    así que nunca viene poblado en `signed_document.emisor` (`build_
+    signed()` no lo pide). Se agrega acá, sobre una copia de la bolsa,
+    justo antes de despachar — sin tocar el XML ya firmado del DTE.
+    """
+    bag = dataclasses.replace(
+        signed_document,
+        emisor={
+            **signed_document.emisor,
+            'autorizacion_dte': {
+                'fecha_resolucion': '2014-08-22',
+                'numero_resolucion': 80,
+            },
         },
-    }
-    return real_sdk.billing.document.dispatcher.create(
-        signed_document.xml_base64,
-        certificate=fake_certificate,
-        emisor=emisor,
     )
+    return real_sdk.billing.document.dispatcher.create(bag)

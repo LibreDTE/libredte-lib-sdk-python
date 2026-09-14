@@ -5,17 +5,18 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from typing import Any, cast
 
 from ...client import ApiClient
-from ..trading_parties.models import Certificate
-from .models import DocumentEnvelope
+from .models import DocumentBag, DocumentEnvelope
 
 
 class DocumentDispatcherService:
     """Arma y valida el sobre `EnvioDTE` (`billing.document.dispatcher`)."""
 
     _CREATE_OPERATION = 'billing.document.dispatcher::create'
+    _CREATE_MANY_OPERATION = 'billing.document.dispatcher::createMany'
     _LOAD_XML_OPERATION = 'billing.document.dispatcher::loadXml'
     _VALIDATE_OPERATION = 'billing.document.dispatcher::validate'
     _VALIDATE_SCHEMA_OPERATION = 'billing.document.dispatcher::validateSchema'
@@ -27,42 +28,64 @@ class DocumentDispatcherService:
         """Guarda el `ApiClient` compartido usado para llamar a la API."""
         self._client = client
 
-    def create(
-        self,
-        document_xml_base64: str,
-        *,
-        certificate: Certificate,
-        emisor: dict[str, Any],
-    ) -> DocumentEnvelope:
+    def create(self, bag: DocumentBag) -> DocumentEnvelope:
         """
         Envuelve y firma un documento ya timbrado en un sobre `EnvioDTE`.
 
-        `document_xml_base64` es el XML en base64 del documento a
-        envolver — típicamente `Document.xml_base64` de un documento ya
-        timbrado y firmado (`DocumentBuilderService.build_signed`). El
-        sobre resultante es lo que se envía al SII (`SiiDteService.send`).
-
-        `emisor` es un `dict` con `rut`/`razon_social`/
-        `autorizacion_dte` (esta última con `fecha_resolucion`/
-        `numero_resolucion`), tal como lo espera la API.
+        `bag` es el `DocumentBag` ya timbrado y firmado que devuelve
+        `DocumentBuilderService.build_signed()` — trae `certificate`/
+        `emisor` incluidos, no hace falta pasarlos aparte. El sobre
+        resultante es lo que se envía al SII (`SiiDteService.send`).
         """
         data = self._client.call(
             self._CREATE_OPERATION,
-            bag={
-                'xmlDocument': document_xml_base64,
-                'certificate': certificate.to_payload(),
-                'emisor': emisor,
-            },
+            bag=self._bag_payload(bag),
         )
         return DocumentEnvelope.from_api(data)
+
+    def create_many(self, bags: Sequence[DocumentBag]) -> DocumentEnvelope:
+        """
+        Envuelve y firma 2+ documentos ya timbrados en un sobre `EnvioDTE`.
+
+        Igual que `create()`, pero para un sobre que agrupa más de un
+        documento — cada `DocumentBag` trae su propio `certificate`/
+        `emisor`. El sobre resultante queda firmado con el certificado
+        del PRIMER `DocumentBag` (el sobre en sí también se firma, no
+        solo cada documento).
+        """
+        data = self._client.call(
+            self._CREATE_MANY_OPERATION,
+            bags=[self._bag_payload(bag) for bag in bags],
+        )
+        return DocumentEnvelope.from_api(data)
+
+    @staticmethod
+    def _bag_payload(bag: DocumentBag) -> dict[str, Any]:
+        if bag.certificate is None:
+            raise ValueError(
+                'Este DocumentBag no tiene certificado — ¿se firmó con '
+                '`builder.build_signed()`?',
+            )
+        if bag.emisor is None:
+            raise ValueError(
+                'Este DocumentBag no tiene emisor — ¿se construyó con '
+                '`builder.build_draft/build_signed()` o se cargó con '
+                '`loader.load_xml()`?',
+            )
+        return {
+            'xmlDocument': bag.xml_base64,
+            'certificate': bag.certificate.to_payload(),
+            'emisor': bag.emisor,
+        }
 
     def load_xml(self, xml_base64: str) -> DocumentEnvelope:
         """
         Carga un sobre `EnvioDTE` ya existente desde su XML (base64).
 
-        Caso de uso típico: reprocesar un sobre ya guardado, o normalizar
-        un DTE suelto recibido de un tercero (la API arma un sobre nuevo
-        a partir de él).
+        El `DocumentEnvelope` resultante trae en `documents` una bolsa
+        por cada documento tributario que el sobre agrupaba — uno o
+        más — y en `caratula` los datos de la carátula ya presente en
+        ese XML.
         """
         data = self._client.call(self._LOAD_XML_OPERATION, xml=xml_base64)
         return DocumentEnvelope.from_api(data)

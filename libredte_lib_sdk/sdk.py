@@ -43,9 +43,7 @@ class LibreDTE:
         documento = doc.builder.build_signed(
             input_data, caf_xml=caf.xml_base64, certificate=certificate,
         )
-        sobre = doc.dispatcher.create(
-            documento.xml_base64, certificate=certificate, emisor=emisor_dto,
-        )
+        sobre = doc.dispatcher.create(documento)
         envio = sii.sii_dte.send(
             sobre.xml_base64, certificate=certificate, company_rut=rut,
         )

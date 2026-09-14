@@ -8,11 +8,10 @@ from __future__ import annotations
 from ...client import ApiClient
 from .builder import BookBuilderService
 from .loader import BookLoaderService
-from .models import Book, BookBag
+from .models import BookBag
 from .validator import BookValidatorService
 
 __all__ = [
-    'Book',
     'BookBag',
     'BookBuilderService',
     'BookComponent',

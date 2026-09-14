@@ -39,7 +39,7 @@ class DocumentRendererService:
 
         Sirve tanto para un borrador como para un documento ya timbrado y
         firmado: el resultado depende solo del XML que se le pase (ej.
-        `Document.xml_base64`).
+        `DocumentBag.xml_base64`).
 
         Sin `renderings`, la API genera una única copia `'tributaria'`
         (comportamiento por defecto). `renderings` pide presentaciones y

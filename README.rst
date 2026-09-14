@@ -89,16 +89,9 @@ Uso
     )
 
     # 3. Envío al SII (arma el sobre EnvioDTE y luego lo envía).
-    emisor = {
-        'rut': '76192083-9',
-        'razon_social': 'SASCO SpA',
-        'autorizacion_dte': {
-            'fecha_resolucion': '2014-08-22', 'numero_resolucion': 80,
-        },
-    }
-    sobre = b.document.dispatcher.create(
-        documento.xml_base64, certificate=certificate, emisor=emisor,
-    )
+    # `documento` ya trae certificate/emisor incluidos — no hace falta
+    # pasarlos aparte.
+    sobre = b.document.dispatcher.create(documento)
     envio = b.integration.sii_dte.send(
         sobre.xml_base64, certificate=certificate, company_rut='76192083-9',
     )

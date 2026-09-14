@@ -7,11 +7,14 @@ from __future__ import annotations
 
 import base64
 
+import pytest
+
 from libredte_lib_sdk.billing.document.models import (
-    Document,
+    DocumentBag,
     DocumentEnvelope,
     RenderResult,
 )
+from libredte_lib_sdk.billing.enums import SiiEnvironment
 from libredte_lib_sdk.billing.identifier.models import Caf
 from libredte_lib_sdk.billing.integration.models import (
     CheckXmlDocumentSentStatusResponse,
@@ -64,33 +67,57 @@ def test_mandatario_to_payload_includes_email_when_present():
     }
 
 
-def test_document_from_api_decodes_xml_and_exposes_timbrado_state():
+def test_document_bag_from_api_decodes_xml_and_exposes_timbrado_state():
     xml_base64 = base64.b64encode(b'<DTE/>').decode()
-    document = Document.from_api(
+    bag = DocumentBag.from_api(
         {
-            'id': '76192083-9_T033F000000001',
-            'datos': {'Encabezado': {}},
-            'ted': None,
-            'xml': xml_base64,
+            'document': {'Encabezado': {}},
+            'document_type': {'codigo': 33},
+            'document_stamp': None,
+            'document_extra': None,
+            'document_auth': None,
+            'document_id': '76192083-9_T033F000000001',
+            'document_xml': xml_base64,
         },
     )
 
-    assert document.xml_bytes == b'<DTE/>'
-    assert document.xml == '<DTE/>'
-    assert document.is_timbrado is False
+    assert bag.xml_bytes == b'<DTE/>'
+    assert bag.xml == '<DTE/>'
+    assert bag.is_timbrado is False
 
 
-def test_document_is_timbrado_when_ted_is_present():
-    document = Document.from_api(
+def test_document_bag_is_timbrado_when_document_stamp_is_present():
+    stamp_base64 = base64.b64encode(b'<TED><DD/></TED>').decode()
+    bag = DocumentBag.from_api(
         {
-            'id': 'doc-1',
-            'datos': {},
-            'ted': {'DD': {}},
-            'xml': base64.b64encode(b'<DTE/>').decode(),
+            'document': {},
+            'document_type': {'codigo': 33},
+            'document_stamp': stamp_base64,
+            'document_extra': None,
+            'document_auth': None,
+            'document_id': 'doc-1',
+            'document_xml': base64.b64encode(b'<DTE/>').decode(),
         },
     )
 
-    assert document.is_timbrado is True
+    assert bag.is_timbrado is True
+    assert bag.document_stamp_base64 == stamp_base64
+
+
+def test_document_bag_xml_base64_raises_when_nothing_was_built():
+    bag = DocumentBag.from_api(
+        {
+            'document': {},
+            'document_type': {'codigo': 33},
+            'document_stamp': None,
+            'document_extra': None,
+            'document_auth': None,
+        },
+    )
+
+    assert bag.document_id is None
+    with pytest.raises(ValueError, match='no tiene un documento construido'):
+        _ = bag.xml_base64
 
 
 def test_envelope_from_api_exposes_tag_and_decoded_xml():
@@ -100,6 +127,32 @@ def test_envelope_from_api_exposes_tag_and_decoded_xml():
 
     assert envelope.tag == 'EnvioDTE'
     assert envelope.xml == '<EnvioDTE/>'
+    assert envelope.documents == ()
+    assert envelope.caratula is None
+
+
+def test_envelope_from_api_exposes_documents_and_caratula():
+    caratula = {'RutEmisor': '76192083-9', 'NroResol': '0'}
+    envelope = DocumentEnvelope.from_api(
+        {
+            'tag': 'EnvioDTE',
+            'xml': base64.b64encode(b'<EnvioDTE/>').decode(),
+            'documents': [
+                {
+                    'document': {'Encabezado': {}},
+                    'document_type': {'codigo': 33},
+                    'document_stamp': None,
+                    'document_extra': None,
+                    'document_auth': None,
+                },
+            ],
+            'caratula': caratula,
+        },
+    )
+
+    assert len(envelope.documents) == 1
+    assert envelope.documents[0].document_type == {'codigo': 33}
+    assert envelope.caratula == caratula
 
 
 def _rendering_payload(content: bytes, *, label, copies=1, copy_number=1):
@@ -161,19 +214,72 @@ def test_render_result_by_label_filters_multiple_copies():
 def test_caf_from_api_exposes_the_common_fields():
     caf = Caf.from_api(
         {
+            'id': 'CAF33D1H100',
+            'emisor': {'rut': '76192083-9', 'razon_social': 'SASCO SpA'},
             'tipoDocumento': 33,
             'folioDesde': 1,
             'folioHasta': 100,
-            'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
+            'cantidadFolios': 100,
+            'fechaAutorizacion': '2026-01-01',
+            'fechaVencimiento': '2026-06-30',
+            'mesesAutorizacion': 2.17,
             'vigente': True,
+            'vence': True,
+            'idk': 300,
+            'ambiente': 0,
+            'certificacion': 0,
+            'publicKey': '-----BEGIN PUBLIC KEY-----',
+            'privateKey': '-----BEGIN PRIVATE KEY-----',
+            'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
         },
     )
 
+    assert caf.id == 'CAF33D1H100'
+    assert caf.emisor == {'rut': '76192083-9', 'razon_social': 'SASCO SpA'}
     assert caf.tipo_documento == 33
     assert caf.folio_desde == 1
     assert caf.folio_hasta == 100
+    assert caf.cantidad_folios == 100
+    assert caf.fecha_autorizacion == '2026-01-01'
+    assert caf.fecha_vencimiento == '2026-06-30'
+    assert caf.meses_autorizacion == 2.17
+    assert caf.vigente is True
+    assert caf.vence is True
+    assert caf.idk == 300
+    assert caf.ambiente is SiiEnvironment.PRODUCTION
+    assert caf.certificacion == 0
+    assert caf.public_key == '-----BEGIN PUBLIC KEY-----'
+    assert caf.private_key == '-----BEGIN PRIVATE KEY-----'
     assert caf.xml == '<AUTORIZACION/>'
     assert caf.raw['vigente'] is True
+
+
+def test_caf_from_api_ambiente_is_none_for_a_fake_caf():
+    """`CafFaker` emite IDK 666 — no corresponde a ningún ambiente real."""
+    caf = Caf.from_api(
+        {
+            'id': 'CAF33D1H1',
+            'emisor': {'rut': '76192083-9', 'razon_social': 'SASCO SpA'},
+            'tipoDocumento': 33,
+            'folioDesde': 1,
+            'folioHasta': 1,
+            'cantidadFolios': 1,
+            'fechaAutorizacion': '2026-01-01',
+            'fechaVencimiento': '2026-06-30',
+            'mesesAutorizacion': 2.17,
+            'vigente': True,
+            'vence': True,
+            'idk': 666,
+            'ambiente': None,
+            'certificacion': None,
+            'publicKey': '-----BEGIN PUBLIC KEY-----',
+            'privateKey': '-----BEGIN PRIVATE KEY-----',
+            'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
+        },
+    )
+
+    assert caf.ambiente is None
+    assert caf.certificacion is None
 
 
 def test_send_result_reads_track_id():

@@ -5,49 +5,33 @@
 
 from __future__ import annotations
 
+import base64
 from dataclasses import dataclass
-from typing import Any
-
-from ..common import XmlPayloadMixin
-
-
-@dataclass(frozen=True, slots=True)
-class Book(XmlPayloadMixin):
-    """
-    Libro tributario construido (`book.builder::build`).
-
-    Genérico entre los 5 tipos de libro (`tipo` del `bag` de entrada) —
-    la clave raíz de `datos` varía según cuál se haya construido (ej.
-    `libro_ventas`/`libro_compras` traen `{'LibroCompraVenta': {...}}`),
-    por eso no se tipa más allá de `dict`. `xml_base64` es el XML
-    completo, listo para encadenar a `BookValidatorService`.
-    """
-
-    datos: dict[str, Any]
-    xml_base64: str
-
-    @classmethod
-    def from_api(cls, data: dict[str, Any]) -> Book:
-        """Construye un `Book` desde el `data` que devuelve la API."""
-        return cls(
-            datos={k: v for k, v in data.items() if k != 'xml'},
-            xml_base64=data['xml'],
-        )
+from typing import Any, cast
 
 
 @dataclass(frozen=True, slots=True)
 class BookBag:
     """
-    Datos de un libro tributario normalizados por `book.loader::load`.
+    Bolsa de un libro tributario (`book.builder::build`/`book.loader::load`).
 
-    Esta operación solo normaliza `caratula`/`detalle` a partir de los
-    datos de entrada — no construye el libro ni genera su documento
-    firmado (eso lo hace `BookBuilderService.build`), por lo que
-    `book` (el libro ya construido) siempre viene `None` acá, sin
-    importar los datos de entrada recibidos. `book_auth` (la
-    autorización del emisor del libro) solo viene poblada si esa
-    autorización se incluyó junto con los datos del emisor en la
-    solicitud; si no, viene `None`.
+    Ambas operaciones devuelven esta misma forma — la diferencia es qué
+    tan lejos llegó el procesamiento: `loader.load()` solo normaliza
+    `caratula`/`detalle` a partir de los datos de entrada (`book`
+    siempre viene `None`, sin importar el input); `builder.build()` sí
+    construye y firma el libro, por lo que `book` viene poblado (el
+    libro completo — genérico entre los 5 tipos, ej.
+    `libro_ventas`/`libro_compras` traen `{'LibroCompraVenta': {...}}`
+    junto a su `xml` en base64 — no se tipa más allá de `dict` porque
+    la clave raíz varía según el tipo). `book_auth` (la autorización
+    del emisor) solo viene poblada si esa autorización se incluyó junto
+    con los datos del emisor en la solicitud; si no, viene `None`.
+
+    `xml_base64`/`xml`/`xml_bytes` dan acceso directo al XML del libro
+    construido — solo válidos cuando `book` no es `None` (ver
+    `is_construido`); listos para encadenar a `BookValidatorService`.
+    No usa `XmlPayloadMixin`: acá `xml_base64` es una `@property` (el
+    libro puede no estar construido), no un campo simple.
     """
 
     book: dict[str, Any] | None
@@ -56,6 +40,31 @@ class BookBag:
     caratula: dict[str, Any]
     detalle: list[dict[str, Any]]
     raw: dict[str, Any]
+
+    @property
+    def is_construido(self) -> bool:
+        """Si `book` viene poblado (`builder.build()`, no `loader.load()`)."""
+        return self.book is not None
+
+    @property
+    def xml_base64(self) -> str:
+        """XML del libro construido, en base64 — ver `BookValidatorService`."""
+        if self.book is None:
+            raise ValueError(
+                'Este BookBag no tiene un libro construido — viene de '
+                '`loader.load()`, no de `builder.build()`.',
+            )
+        return cast('str', self.book['xml'])
+
+    @property
+    def xml_bytes(self) -> bytes:
+        """XML del libro construido, decodificado desde base64."""
+        return base64.b64decode(self.xml_base64)
+
+    @property
+    def xml(self) -> str:
+        """XML del libro construido, como texto (ISO-8859-1)."""
+        return self.xml_bytes.decode('iso-8859-1')
 
     @classmethod
     def from_api(cls, data: dict[str, Any]) -> BookBag:
