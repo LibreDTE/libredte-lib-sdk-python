@@ -108,6 +108,16 @@ infraestructura sin tener que parsear <cite>detail</cite>.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteApiError.full_message">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">full_message</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteApiError.full_message" title="Link to this definition"></a></dt>
+<dd><p><cite>title</cite> + <cite>detail</cite> + dónde ocurrió, listo para loguear o mostrar.</p>
+<p>Agrega el archivo y línea (<cite>extensions.throwable.file</cite>/<cite>.line</cite>)
+cuando la API los informó, sin necesidad de ir a inspeccionar
+<cite>extensions</cite> a mano cada vez. Si <cite>detail</cite> está vacío o repite
+<cite>title</cite>, no lo duplica; si no hay <cite>file</cite>/<cite>line</cite>, los omite.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteApiError.php_class">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">php_class</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteApiError.php_class" title="Link to this definition"></a></dt>
 <dd><p>Clase PHP real detrás del error, si la API la informó.</p>
