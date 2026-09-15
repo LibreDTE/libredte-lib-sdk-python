@@ -60,6 +60,27 @@ class LibreDteApiError(LibreDteSdkError):
             return throwable.get('class')
         return None
 
+    @property
+    def full_message(self) -> str:
+        """
+        `title` + `detail` + dónde ocurrió, listo para loguear o mostrar.
+
+        Agrega el archivo y línea (`extensions.throwable.file`/`.line`)
+        cuando la API los informó, sin necesidad de ir a inspeccionar
+        `extensions` a mano cada vez. Si `detail` está vacío o repite
+        `title`, no lo duplica; si no hay `file`/`line`, los omite.
+        """
+        message = self.title
+        if self.detail and self.detail != self.title:
+            message = f'{message}: {self.detail}'
+        throwable = self.extensions.get('throwable')
+        if isinstance(throwable, dict):
+            file = throwable.get('file')
+            line = throwable.get('line')
+            if file and line:
+                message = f'{message} ({file}:{line})'
+        return message
+
     @classmethod
     def from_problem_details(
         cls,
