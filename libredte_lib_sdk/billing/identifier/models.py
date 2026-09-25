@@ -47,6 +47,14 @@ class Caf(XmlPayloadMixin):
     def from_api(cls, data: dict[str, Any]) -> Caf:
         """Construye un `Caf` desde el `data` que devuelve la API."""
         ambiente = data.get('ambiente')
+        if isinstance(ambiente, dict):
+            # La API serializa el enum de PHP (`SiiEnvironment: int`,
+            # caso `STAGING = 1` allá) como `{"name": ..., "value":
+            # ...}` — el nombre no calza con el de acá (`CERTIFICATION`
+            # en vez de `STAGING`, mismo ambiente de certificación del
+            # SII), pero el `value` entero sí es el mismo en ambos
+            # lados, así que se arma el enum desde ahí.
+            ambiente = ambiente.get('value')
         return cls(
             id=data['id'],
             emisor=data['emisor'],

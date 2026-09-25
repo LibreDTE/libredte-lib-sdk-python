@@ -282,6 +282,33 @@ def test_caf_from_api_ambiente_is_none_for_a_fake_caf():
     assert caf.certificacion is None
 
 
+def test_caf_from_api_ambiente_as_object_uses_its_value():
+    """La API a veces serializa el enum de PHP como `{name, value}`."""
+    caf = Caf.from_api(
+        {
+            'id': 'CAF33D1H100',
+            'emisor': {'rut': '76192083-9', 'razon_social': 'SASCO SpA'},
+            'tipoDocumento': 33,
+            'folioDesde': 1,
+            'folioHasta': 100,
+            'cantidadFolios': 100,
+            'fechaAutorizacion': '2026-01-01',
+            'fechaVencimiento': '2026-06-30',
+            'mesesAutorizacion': 2.17,
+            'vigente': True,
+            'vence': True,
+            'idk': 100,
+            'ambiente': {'name': 'STAGING', 'value': 1},
+            'certificacion': 1,
+            'publicKey': '-----BEGIN PUBLIC KEY-----',
+            'privateKey': '-----BEGIN PRIVATE KEY-----',
+            'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
+        },
+    )
+
+    assert caf.ambiente is SiiEnvironment.CERTIFICATION
+
+
 def test_send_result_reads_track_id():
     assert SendXmlDocumentResponse.from_api({'track_id': 456}).track_id == 456
     assert SendXmlDocumentResponse.from_api({}).track_id is None
