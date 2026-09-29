@@ -143,14 +143,26 @@ entorno ``LIBREDTE_LIB_SDK_BASE_URL``:
 ``core.libredte.cl`` y ``pro.libredte.cl`` exponen el mismo contrato con
 límites de solicitudes distintos; ambos aceptan la variante ``LibreDTE
 (base_url=..., ...)`` con el resto de los parámetros de configuración
-(``api_token``, ``timeout``, ``http_client``).
+(``api_token``, ``auth_scheme``, ``timeout``, ``http_client``).
 
 Autenticación
 ~~~~~~~~~~~~~
 
 ``LibreDTE(api_token=...)`` o la variable de entorno
 ``LIBREDTE_LIB_SDK_TOKEN`` — si está presente, se manda como header
-``Authorization: Bearer <token>``.
+``Authorization: <esquema> <token>``. El esquema es ``Bearer`` por
+defecto (lo que espera ``core.libredte.cl``/``pro.libredte.cl``);
+configurable con ``LibreDTE(auth_scheme=...)`` o la variable de entorno
+``LIBREDTE_LIB_SDK_AUTH_SCHEME`` para hablar con otra API que use un
+esquema distinto (ej. ``'Token'``):
+
+.. code-block:: python
+
+    sdk = LibreDTE(
+        base_url='https://app.apigateway.cl/api/v2/libredte',
+        api_token='...',
+        auth_scheme='Token',
+    )
 
 Recursos de ``system``
 -----------------------

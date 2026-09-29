@@ -39,6 +39,21 @@ def test_api_token_falls_back_to_the_env_var(monkeypatch):
     assert client._headers()['Authorization'] == 'Bearer secret-token'
 
 
+def test_auth_scheme_param_overrides_the_default():
+    client = ApiClient(api_token='secret-token', auth_scheme='Token')
+
+    assert client._headers()['Authorization'] == 'Token secret-token'
+
+
+def test_auth_scheme_falls_back_to_the_env_var(monkeypatch):
+    monkeypatch.setenv('LIBREDTE_LIB_SDK_TOKEN', 'secret-token')
+    monkeypatch.setenv('LIBREDTE_LIB_SDK_AUTH_SCHEME', 'Token')
+
+    client = ApiClient()
+
+    assert client._headers()['Authorization'] == 'Token secret-token'
+
+
 def test_operation_path_translates_dotted_operation_to_a_rest_path():
     path = ApiClient._operation_path('billing.document.builder::build')
 

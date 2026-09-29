@@ -60,6 +60,7 @@ class LibreDTE:
         base_url: str | None = None,
         *,
         api_token: str | None = None,
+        auth_scheme: str | None = None,
         timeout: float = DEFAULT_TIMEOUT,
         http_client: httpx.Client | None = None,
     ) -> None:
@@ -67,12 +68,18 @@ class LibreDTE:
         self._client = ApiClient(
             base_url,
             api_token=api_token,
+            auth_scheme=auth_scheme,
             timeout=timeout,
             http_client=http_client,
         )
         self.billing = BillingPackage(self._client)
         self.system = SystemPackage(self._client)
         self.human_resources = HumanResourcesPackage(self._client)
+
+    @property
+    def base_url(self) -> str:
+        """URL base configurada del `ApiClient` compartido."""
+        return self._client.base_url
 
     def close(self) -> None:
         """Cierra la conexión HTTP subyacente."""

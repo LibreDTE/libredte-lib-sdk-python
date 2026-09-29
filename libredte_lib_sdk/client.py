@@ -18,6 +18,7 @@ from .exceptions import (
 )
 
 DEFAULT_BASE_URL = 'https://core.libredte.cl/api'
+DEFAULT_AUTH_SCHEME = 'Bearer'
 DEFAULT_TIMEOUT = 30.0
 _HTTP_TOO_MANY_REQUESTS = 429
 _OPERATION_NOT_FOUND_PHP_CLASS = (
@@ -50,6 +51,7 @@ class ApiClient:
         base_url: str | None = None,
         *,
         api_token: str | None = None,
+        auth_scheme: str | None = None,
         timeout: float = DEFAULT_TIMEOUT,
         http_client: httpx.Client | None = None,
     ) -> None:
@@ -62,8 +64,18 @@ class ApiClient:
         self._api_token = api_token or os.environ.get(
             'LIBREDTE_LIB_SDK_TOKEN',
         )
+        self._auth_scheme = (
+            auth_scheme
+            or os.environ.get('LIBREDTE_LIB_SDK_AUTH_SCHEME')
+            or DEFAULT_AUTH_SCHEME
+        )
         self._client = http_client or httpx.Client(timeout=timeout)
         self._owns_client = http_client is None
+
+    @property
+    def base_url(self) -> str:
+        """URL base configurada (`core.libredte.cl`, `pro.libredte.cl`)."""
+        return self._base_url
 
     def close(self) -> None:
         """Cierra la conexión HTTP, si este cliente es dueño de ella."""
@@ -105,7 +117,7 @@ class ApiClient:
     def _headers(self) -> dict[str, str]:
         headers = {'Accept': 'application/json'}
         if self._api_token:
-            headers['Authorization'] = f'Bearer {self._api_token}'
+            headers['Authorization'] = f'{self._auth_scheme} {self._api_token}'
         return headers
 
     @staticmethod
