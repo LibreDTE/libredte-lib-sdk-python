@@ -204,13 +204,24 @@ entorno <code class="docutils literal notranslate"><span class="pre">LIBREDTE_LI
 <p><code class="docutils literal notranslate"><span class="pre">core.libredte.cl</span></code> y <code class="docutils literal notranslate"><span class="pre">pro.libredte.cl</span></code> exponen el mismo contrato con
 límites de solicitudes distintos; ambos aceptan la variante <code class="docutils literal notranslate"><span class="pre">LibreDTE</span>
 <span class="pre">(base_url=...,</span> <span class="pre">...)</span></code> con el resto de los parámetros de configuración
-(<code class="docutils literal notranslate"><span class="pre">api_token</span></code>, <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">http_client</span></code>).</p>
+(<code class="docutils literal notranslate"><span class="pre">api_token</span></code>, <code class="docutils literal notranslate"><span class="pre">auth_scheme</span></code>, <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">http_client</span></code>).</p>
 </section>
 <section id="autenticacion">
 <h3>Autenticación<a class="headerlink" href="#autenticacion" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">LibreDTE(api_token=...)</span></code> o la variable de entorno
 <code class="docutils literal notranslate"><span class="pre">LIBREDTE_LIB_SDK_TOKEN</span></code> — si está presente, se manda como header
-<code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;token&gt;</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">&lt;esquema&gt;</span> <span class="pre">&lt;token&gt;</span></code>. El esquema es <code class="docutils literal notranslate"><span class="pre">Bearer</span></code> por
+defecto (lo que espera <code class="docutils literal notranslate"><span class="pre">core.libredte.cl</span></code>/<code class="docutils literal notranslate"><span class="pre">pro.libredte.cl</span></code>);
+configurable con <code class="docutils literal notranslate"><span class="pre">LibreDTE(auth_scheme=...)</span></code> o la variable de entorno
+<code class="docutils literal notranslate"><span class="pre">LIBREDTE_LIB_SDK_AUTH_SCHEME</span></code> para hablar con otra API que use un
+esquema distinto (ej. <code class="docutils literal notranslate"><span class="pre">'Token'</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span> <span class="o">=</span> <span class="n">LibreDTE</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s1">'https://app.apigateway.cl/api/v2/libredte'</span><span class="p">,</span>
+    <span class="n">api_token</span><span class="o">=</span><span class="s1">'...'</span><span class="p">,</span>
+    <span class="n">auth_scheme</span><span class="o">=</span><span class="s1">'Token'</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="recursos-de-system">
