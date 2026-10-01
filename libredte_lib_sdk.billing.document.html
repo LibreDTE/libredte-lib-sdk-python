@@ -155,6 +155,7 @@
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag.options"><code class="docutils literal notranslate"><span class="pre">DocumentBag.options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag.raw"><code class="docutils literal notranslate"><span class="pre">DocumentBag.raw</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag.receptor"><code class="docutils literal notranslate"><span class="pre">DocumentBag.receptor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag.require_document"><code class="docutils literal notranslate"><span class="pre">DocumentBag.require_document()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag.timbre"><code class="docutils literal notranslate"><span class="pre">DocumentBag.timbre</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag.xml"><code class="docutils literal notranslate"><span class="pre">DocumentBag.xml</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag.xml_base64"><code class="docutils literal notranslate"><span class="pre">DocumentBag.xml_base64</span></code></a></li>
@@ -373,6 +374,21 @@ documento puede no estar construido), no un campo simple.</p>
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.DocumentBag.receptor">
 <span class="sig-name descname"><span class="pre">receptor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.DocumentBag.receptor" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.DocumentBag.require_document">
+<span class="sig-name descname"><span class="pre">require_document</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.DocumentBag.require_document" title="Link to this definition"></a></dt>
+<dd><p>Entrega <cite>document</cite>, o falla si la bolsa no tiene el documento.</p>
+<p>Para quien sabe que la bolsa viene de construir o cargar un documento
+(<cite>builder</cite>, <cite>loader</cite>, <cite>dispatcher</cite>): <cite>document</cite> es opcional solo
+porque una bolsa que se parseó (<cite>parser</cite>, <cite>batch_processor</cite>) no lo
+trae, y esto evita revisar el <cite>None</cite> en cada acceso.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Muestra<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Si <cite>document</cite> es <cite>None</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.DocumentBag.timbre">
