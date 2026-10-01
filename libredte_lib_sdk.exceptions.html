@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="libredte_lib_sdk.sdk module" href="libredte_lib_sdk.sdk.html" />
+    <link rel="next" title="libredte_lib_sdk.response_registry module" href="libredte_lib_sdk.response_registry.html" />
     <link rel="prev" title="libredte_lib_sdk.client module" href="libredte_lib_sdk.client.html" /> 
 </head>
 
@@ -51,6 +51,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="libredte_lib_sdk.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.client.html">libredte_lib_sdk.client module</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">libredte_lib_sdk.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.response_registry.html">libredte_lib_sdk.response_registry module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.sdk.html">libredte_lib_sdk.sdk module</a></li>
 </ul>
 </li>
@@ -165,6 +166,16 @@ reintentar, y cuándo, con esta información.</p>
 <p>Cualquier error propio de <cite>libredte_lib_sdk</cite>.</p>
 </dd></dl>
 
+<dl class="py exception">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteUnmappedResponseError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteUnmappedResponseError</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteUnmappedResponseError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#libredte_lib_sdk.exceptions.LibreDteSdkError" title="libredte_lib_sdk.exceptions.LibreDteSdkError"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibreDteSdkError</span></code></a></p>
+<p>La clase de respuesta de la API no tiene DTO o no es la esperada.</p>
+<p>Ocurre si la API devolvió una clase sin DTO registrado, o distinta de la
+que esperaba el servicio. Una clase PHP nueva en la API obliga a crear
+su DTO y registrarlo con <cite>response_registry.api_response()</cite>.</p>
+</dd></dl>
+
 </section>
 
 
@@ -172,7 +183,7 @@ reintentar, y cuándo, con esta información.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
         <a href="libredte_lib_sdk.client.html" class="btn btn-neutral float-left" title="libredte_lib_sdk.client module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
-        <a href="libredte_lib_sdk.sdk.html" class="btn btn-neutral float-right" title="libredte_lib_sdk.sdk module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="libredte_lib_sdk.response_registry.html" class="btn btn-neutral float-right" title="libredte_lib_sdk.response_registry module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

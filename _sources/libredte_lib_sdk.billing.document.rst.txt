@@ -7,11 +7,13 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   libredte_lib_sdk.billing.document.batch_processor
    libredte_lib_sdk.billing.document.builder
    libredte_lib_sdk.billing.document.dispatcher
    libredte_lib_sdk.billing.document.examples
    libredte_lib_sdk.billing.document.loader
    libredte_lib_sdk.billing.document.models
+   libredte_lib_sdk.billing.document.parser
    libredte_lib_sdk.billing.document.renderer
    libredte_lib_sdk.billing.document.validator
 

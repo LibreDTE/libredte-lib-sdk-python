@@ -19,6 +19,7 @@ Submodules
 
    libredte_lib_sdk.client
    libredte_lib_sdk.exceptions
+   libredte_lib_sdk.response_registry
    libredte_lib_sdk.sdk
 
 Module contents

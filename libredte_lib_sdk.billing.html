@@ -148,6 +148,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libredte_lib_sdk.billing.document.html">libredte_lib_sdk.billing.document package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.batch_processor.html">libredte_lib_sdk.billing.document.batch_processor module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.batch_processor.html#libredte_lib_sdk.billing.document.batch_processor.DocumentBatchProcessorService"><code class="docutils literal notranslate"><span class="pre">DocumentBatchProcessorService</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.builder.html">libredte_lib_sdk.billing.document.builder module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.builder.html#libredte_lib_sdk.billing.document.builder.DocumentBuilderService"><code class="docutils literal notranslate"><span class="pre">DocumentBuilderService</span></code></a></li>
 </ul>
@@ -166,11 +170,16 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html">libredte_lib_sdk.billing.document.models module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag"><code class="docutils literal notranslate"><span class="pre">DocumentBag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBatch"><code class="docutils literal notranslate"><span class="pre">DocumentBatch</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope"><code class="docutils literal notranslate"><span class="pre">DocumentEnvelope</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.Example"><code class="docutils literal notranslate"><span class="pre">Example</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.ExampleSummary"><code class="docutils literal notranslate"><span class="pre">ExampleSummary</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.RenderResult"><code class="docutils literal notranslate"><span class="pre">RenderResult</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.RenderedDocument"><code class="docutils literal notranslate"><span class="pre">RenderedDocument</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.parser.html">libredte_lib_sdk.billing.document.parser module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.parser.html#libredte_lib_sdk.billing.document.parser.DocumentParserService"><code class="docutils literal notranslate"><span class="pre">DocumentParserService</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.renderer.html">libredte_lib_sdk.billing.document.renderer module</a><ul>
@@ -192,6 +201,7 @@
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.document_extra"><code class="docutils literal notranslate"><span class="pre">DocumentBag.document_extra</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.document_id"><code class="docutils literal notranslate"><span class="pre">DocumentBag.document_id</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.document_normalized"><code class="docutils literal notranslate"><span class="pre">DocumentBag.document_normalized</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.document_parsed"><code class="docutils literal notranslate"><span class="pre">DocumentBag.document_parsed</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.document_stamp_base64"><code class="docutils literal notranslate"><span class="pre">DocumentBag.document_stamp_base64</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.document_type"><code class="docutils literal notranslate"><span class="pre">DocumentBag.document_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.document_xml_base64"><code class="docutils literal notranslate"><span class="pre">DocumentBag.document_xml_base64</span></code></a></li>
@@ -205,6 +215,16 @@
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.xml"><code class="docutils literal notranslate"><span class="pre">DocumentBag.xml</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.xml_base64"><code class="docutils literal notranslate"><span class="pre">DocumentBag.xml_base64</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBag.xml_bytes"><code class="docutils literal notranslate"><span class="pre">DocumentBag.xml_bytes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBatch"><code class="docutils literal notranslate"><span class="pre">DocumentBatch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBatch.document_bags"><code class="docutils literal notranslate"><span class="pre">DocumentBatch.document_bags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBatch.from_api"><code class="docutils literal notranslate"><span class="pre">DocumentBatch.from_api()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBatch.raw"><code class="docutils literal notranslate"><span class="pre">DocumentBatch.raw</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBatchProcessorService"><code class="docutils literal notranslate"><span class="pre">DocumentBatchProcessorService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBatchProcessorService.parse"><code class="docutils literal notranslate"><span class="pre">DocumentBatchProcessorService.parse()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentBuilderService"><code class="docutils literal notranslate"><span class="pre">DocumentBuilderService</span></code></a><ul>
@@ -237,6 +257,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentLoaderService"><code class="docutils literal notranslate"><span class="pre">DocumentLoaderService</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentLoaderService.load_xml"><code class="docutils literal notranslate"><span class="pre">DocumentLoaderService.load_xml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentParserService"><code class="docutils literal notranslate"><span class="pre">DocumentParserService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentParserService.parse"><code class="docutils literal notranslate"><span class="pre">DocumentParserService.parse()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.document.html#libredte_lib_sdk.billing.document.DocumentRendererService"><code class="docutils literal notranslate"><span class="pre">DocumentRendererService</span></code></a><ul>
@@ -610,6 +634,8 @@
 <li class="toctree-l3"><a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.XmlPayloadMixin.xml_bytes"><code class="docutils literal notranslate"><span class="pre">XmlPayloadMixin.xml_bytes</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.encode_content"><code class="docutils literal notranslate"><span class="pre">encode_content()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.encode_input_data"><code class="docutils literal notranslate"><span class="pre">encode_input_data()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libredte_lib_sdk.billing.enums.html">libredte_lib_sdk.billing.enums module</a><ul>
