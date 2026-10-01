@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import Any
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from ..trading_parties.models import Certificate
 from .models import BookBag
 
@@ -37,8 +38,8 @@ class BookBuilderService:
         .load()`, acá `BookBag.book` viene poblado (el libro construido
         y firmado, con su `xml`).
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._BUILD_OPERATION,
             bag={**bag, 'certificate': certificate.to_payload()},
         )
-        return BookBag.from_api(data)
+        return build_response(BookBag, response)

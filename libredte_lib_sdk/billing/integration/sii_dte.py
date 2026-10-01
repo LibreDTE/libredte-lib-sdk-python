@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from ..enums import SiiEnvironment
 from ..trading_parties.models import Certificate
 from .models import (
@@ -63,7 +64,7 @@ class SiiDteService:
         `envelope_xml_base64` es el XML en base64 del sobre ya armado
         (`DocumentEnvelope.xml_base64` de `DocumentDispatcherService.create`).
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._SEND_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -74,7 +75,7 @@ class SiiDteService:
             compress=compress,
             retries=retries,
         )
-        return SendXmlDocumentResponse.from_api(data)
+        return build_response(SendXmlDocumentResponse, response)
 
     def check_status(
         self,
@@ -85,7 +86,7 @@ class SiiDteService:
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
     ) -> CheckXmlDocumentSentStatusResponse:
         """Consulta el estado de un envío al SII mediante su Track ID."""
-        data = self._client.call(
+        response = self._client.call_response(
             self._STATUS_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -94,7 +95,7 @@ class SiiDteService:
             trackId=track_id,
             company=company_rut,
         )
-        return CheckXmlDocumentSentStatusResponse.from_api(data)
+        return build_response(CheckXmlDocumentSentStatusResponse, response)
 
     def validate_document(
         self,
@@ -115,7 +116,7 @@ class SiiDteService:
         fecha, total, receptor) coincidan con lo que el SII tiene
         registrado. `date` en formato `AAAA-MM-DD`.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._VALIDATE_DOCUMENT_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -128,7 +129,7 @@ class SiiDteService:
             total=total,
             recipient=recipient_rut,
         )
-        return ValidateDocumentResponse.from_api(data)
+        return build_response(ValidateDocumentResponse, response)
 
     def validate_document_signature(
         self,
@@ -149,7 +150,7 @@ class SiiDteService:
         `signature` es el tag `DTE/Signature/SignatureValue` del XML del
         documento (no el XML completo).
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._VALIDATE_DOCUMENT_SIGNATURE_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -163,7 +164,7 @@ class SiiDteService:
             recipient=recipient_rut,
             signature=signature,
         )
-        return ValidateDocumentSignatureResponse.from_api(data)
+        return build_response(ValidateDocumentSignatureResponse, response)
 
     def request_status_by_email(
         self,
@@ -180,7 +181,7 @@ class SiiDteService:
         empresa — no se puede indicar acá. El correo del SII incluye
         el detalle de los rechazos.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._REQUEST_STATUS_BY_EMAIL_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -189,4 +190,6 @@ class SiiDteService:
             trackId=track_id,
             company=company_rut,
         )
-        return RequestXmlDocumentSentStatusByEmailResponse.from_api(data)
+        return build_response(
+            RequestXmlDocumentSentStatusByEmailResponse, response
+        )

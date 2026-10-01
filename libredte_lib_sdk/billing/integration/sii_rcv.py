@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from ..enums import SiiEnvironment
 from ..trading_parties.models import Certificate
 from .models import (
@@ -50,7 +51,7 @@ class SiiRcvService:
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
     ) -> CheckDocumentAssignabilityResponse:
         """Consulta si un documento es cedible (apto para factoring)."""
-        data = self._client.call(
+        response = self._client.call_response(
             self._CHECK_ASSIGNABILITY_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -60,7 +61,7 @@ class SiiRcvService:
             document=document_type,
             number=number,
         )
-        return CheckDocumentAssignabilityResponse.from_api(data)
+        return build_response(CheckDocumentAssignabilityResponse, response)
 
     def get_document_sii_reception_date(
         self,
@@ -72,7 +73,7 @@ class SiiRcvService:
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
     ) -> GetDocumentSiiReceptionDateResponse:
         """Consulta la fecha de recepción de un documento en el SII."""
-        data = self._client.call(
+        response = self._client.call_response(
             self._GET_RECEPTION_DATE_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -82,7 +83,7 @@ class SiiRcvService:
             document=document_type,
             number=number,
         )
-        return GetDocumentSiiReceptionDateResponse.from_api(data)
+        return build_response(GetDocumentSiiReceptionDateResponse, response)
 
     def list_document_events(
         self,
@@ -94,7 +95,7 @@ class SiiRcvService:
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
     ) -> ListDocumentEventsResponse:
         """Lista los eventos (acuses, reclamos, etc.) de un documento."""
-        data = self._client.call(
+        response = self._client.call_response(
             self._LIST_EVENTS_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -104,7 +105,7 @@ class SiiRcvService:
             document=document_type,
             number=number,
         )
-        return ListDocumentEventsResponse.from_api(data)
+        return build_response(ListDocumentEventsResponse, response)
 
     def submit_document_acceptance(
         self,
@@ -123,7 +124,7 @@ class SiiRcvService:
         contenido, `'RCD'` reclama contenido) — la propia API valida
         los valores conocidos.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._SUBMIT_ACCEPTANCE_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -134,4 +135,4 @@ class SiiRcvService:
             number=number,
             action=action,
         )
-        return SubmitDocumentAcceptanceResponse.from_api(data)
+        return build_response(SubmitDocumentAcceptanceResponse, response)

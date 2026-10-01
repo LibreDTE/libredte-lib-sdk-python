@@ -8,9 +8,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+from ...response_registry import api_response
 from ..common import XmlPayloadMixin
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Exchange\\Entity\\EnvioRecibos',
+)
 @dataclass(frozen=True, slots=True)
 class EnvioRecibos(XmlPayloadMixin):
     """
@@ -33,6 +37,9 @@ class EnvioRecibos(XmlPayloadMixin):
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Exchange\\Entity\\RespuestaEnvio',
+)
 @dataclass(frozen=True, slots=True)
 class RespuestaEnvio(XmlPayloadMixin):
     """

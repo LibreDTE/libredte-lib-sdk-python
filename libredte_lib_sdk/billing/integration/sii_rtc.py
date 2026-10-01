@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from ..enums import SiiEnvironment
 from ..trading_parties.models import Certificate
 from .models import SendAecResponse
@@ -42,7 +43,7 @@ class SiiRtcService:
         al que el SII notificará el resultado del procesamiento del AEC
         (obligatorio para la API, no configurable desde otro lugar).
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._SEND_AEC_OPERATION,
             request={
                 'certificate': certificate.to_payload(),
@@ -53,4 +54,4 @@ class SiiRtcService:
             emailNotif=email_notif,
             retries=retries,
         )
-        return SendAecResponse.from_api(data)
+        return build_response(SendAecResponse, response)

@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import os
+from dataclasses import dataclass
 from typing import Any, Self
 
 import httpx
@@ -24,6 +25,21 @@ _HTTP_TOO_MANY_REQUESTS = 429
 _OPERATION_NOT_FOUND_PHP_CLASS = (
     'Derafu\\BackboneDispatcher\\Exception\\OperationNotFoundException'
 )
+
+
+@dataclass(frozen=True, slots=True)
+class ApiResponse:
+    """
+    Respuesta exitosa de una operación.
+
+    `data_type` es la clase PHP del resultado, tal como la informa la API en
+    `meta.data_type` (`'array'` para listas); `None` si no la informó o si la
+    respuesta no es JSON. `data` es el `data` del sobre JSON, o los bytes
+    crudos si la respuesta no es JSON.
+    """
+
+    data_type: str | None
+    data: Any
 
 
 class ApiClient:
@@ -96,6 +112,19 @@ class ApiClient:
 
         `parameters` se manda tal cual como el objeto `parameters` del
         body JSON que espera la API (ej. `bag=...`, `request=...`).
+        """
+        return self.call_response(operation_id, **parameters).data
+
+    def call_response(
+        self,
+        operation_id: str,
+        **parameters: Any,
+    ) -> ApiResponse:
+        """
+        Igual que `call()`, pero entrega también la clase PHP del resultado.
+
+        Es lo que usan los servicios que construyen el DTO a partir de la
+        clase que informa la API (ver `response_registry`).
         """
         url = f'{self._base_url}/{self._operation_path(operation_id)}'
 
@@ -178,7 +207,10 @@ class ApiClient:
         )
 
     @staticmethod
-    def _parse_response(operation_id: str, response: httpx.Response) -> Any:
+    def _parse_response(
+        operation_id: str,
+        response: httpx.Response,
+    ) -> ApiResponse:
         content_type = response.headers.get('content-type', '')
 
         if 'application/json' not in content_type:
@@ -189,12 +221,16 @@ class ApiClient:
                     title='Respuesta de error inesperada (no-JSON).',
                     detail=response.text,
                 )
-            return response.content
+            return ApiResponse(data_type=None, data=response.content)
 
         body = response.json()
 
         if response.is_success and isinstance(body, dict) and 'data' in body:
-            return body['data']
+            meta = body.get('meta')
+            data_type = (
+                meta.get('data_type') if isinstance(meta, dict) else None
+            )
+            return ApiResponse(data_type=data_type, data=body['data'])
 
         error_body = body if isinstance(body, dict) else {}
         error_cls = ApiClient._error_class_for(error_body)

@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from .models import DocumentBag
 
 
@@ -34,5 +35,7 @@ class DocumentLoaderService:
         acá, `document`/`document_type`/`document_stamp_base64`/etc.
         son el valor agregado real: los datos ya normalizados.
         """
-        data = self._client.call(self._LOAD_XML_OPERATION, xml=xml_base64)
-        return DocumentBag.from_api(data)
+        response = self._client.call_response(
+            self._LOAD_XML_OPERATION, xml=xml_base64
+        )
+        return build_response(DocumentBag, response)

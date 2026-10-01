@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from .models import Caf
 
 
@@ -31,5 +32,7 @@ class CafValidatorService:
         el mismo dato). Devuelve el `Caf` ya validado si es válido;
         levanta `LibreDteApiError` si no lo es.
         """
-        data = self._client.call(self._VALIDATE_OPERATION, caf=caf_xml_base64)
-        return Caf.from_api(data)
+        response = self._client.call_response(
+            self._VALIDATE_OPERATION, caf=caf_xml_base64
+        )
+        return build_response(Caf, response)

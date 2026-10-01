@@ -8,10 +8,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+from ...response_registry import api_response
 from ..common import XmlPayloadMixin
 from ..enums import SiiEnvironment
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Identifier\\Entity\\Caf',
+)
 @dataclass(frozen=True, slots=True)
 class Caf(XmlPayloadMixin):
     """

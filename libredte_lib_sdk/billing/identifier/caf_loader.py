@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from .models import Caf
 
 
@@ -25,5 +26,7 @@ class CafLoaderService:
 
     def load(self, xml_base64: str) -> Caf:
         """Carga el CAF cuyo XML (en base64) es `xml_base64`."""
-        data = self._client.call(self._LOAD_OPERATION, xml=xml_base64)
-        return Caf.from_api(data)
+        response = self._client.call_response(
+            self._LOAD_OPERATION, xml=xml_base64
+        )
+        return build_response(Caf, response)

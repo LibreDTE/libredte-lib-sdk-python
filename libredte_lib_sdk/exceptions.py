@@ -16,6 +16,16 @@ class LibreDteConnectionError(LibreDteSdkError):
     """No fue posible completar la conexión HTTP con la API."""
 
 
+class LibreDteUnmappedResponseError(LibreDteSdkError):
+    """
+    La clase de respuesta de la API no tiene DTO o no es la esperada.
+
+    Ocurre si la API devolvió una clase sin DTO registrado, o distinta de la
+    que esperaba el servicio. Una clase PHP nueva en la API obliga a crear
+    su DTO y registrarlo con `response_registry.api_response()`.
+    """
+
+
 class LibreDteApiError(LibreDteSdkError):
     """
     La API de LibreDTE Lib respondió un error para una operación.

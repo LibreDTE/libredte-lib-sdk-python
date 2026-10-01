@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import Any
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from ..trading_parties.models import Certificate
 from .models import BookBag
 
@@ -35,8 +36,8 @@ class BookLoaderService:
         el libro); `BookBag.book_auth` viene poblado solo si
         `bag['emisor']` incluye `autorizacion_dte`.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._LOAD_OPERATION,
             bag={**bag, 'certificate': certificate.to_payload()},
         )
-        return BookBag.from_api(data)
+        return build_response(BookBag, response)

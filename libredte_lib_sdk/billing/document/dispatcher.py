@@ -9,6 +9,7 @@ from collections.abc import Sequence
 from typing import Any, cast
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from .models import DocumentBag, DocumentEnvelope
 
 
@@ -37,11 +38,11 @@ class DocumentDispatcherService:
         `emisor` incluidos, no hace falta pasarlos aparte. El sobre
         resultante es lo que se envía al SII (`SiiDteService.send`).
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._CREATE_OPERATION,
             bag=self._bag_payload(bag),
         )
-        return DocumentEnvelope.from_api(data)
+        return build_response(DocumentEnvelope, response)
 
     def create_many(self, bags: Sequence[DocumentBag]) -> DocumentEnvelope:
         """
@@ -53,11 +54,11 @@ class DocumentDispatcherService:
         del PRIMER `DocumentBag` (el sobre en sí también se firma, no
         solo cada documento).
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._CREATE_MANY_OPERATION,
             bags=[self._bag_payload(bag) for bag in bags],
         )
-        return DocumentEnvelope.from_api(data)
+        return build_response(DocumentEnvelope, response)
 
     @staticmethod
     def _bag_payload(bag: DocumentBag) -> dict[str, Any]:
@@ -87,8 +88,10 @@ class DocumentDispatcherService:
         más — y en `caratula` los datos de la carátula ya presente en
         ese XML.
         """
-        data = self._client.call(self._LOAD_XML_OPERATION, xml=xml_base64)
-        return DocumentEnvelope.from_api(data)
+        response = self._client.call_response(
+            self._LOAD_XML_OPERATION, xml=xml_base64
+        )
+        return build_response(DocumentEnvelope, response)
 
     def validate(self, source: str) -> dict[str, Any]:
         """

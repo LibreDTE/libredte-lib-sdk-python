@@ -9,7 +9,12 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
+from ...response_registry import api_response
 
+
+@api_response(
+    'Derafu\\Certificate\\Certificate',
+)
 @dataclass(frozen=True, slots=True)
 class Certificate:
     """
@@ -85,6 +90,9 @@ class Certificate:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\TradingParties\\Entity\\Mandatario',
+)
 @dataclass(frozen=True, slots=True)
 class Mandatario:
     """Mandatario (representante) dueño de un certificado digital."""

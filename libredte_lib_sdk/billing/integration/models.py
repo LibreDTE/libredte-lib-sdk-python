@@ -9,7 +9,12 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
+from ...response_registry import api_response
 
+
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiDte\\SendXmlDocumentResponse',
+)
 @dataclass(frozen=True, slots=True)
 class SendXmlDocumentResponse:
     """Resultado del envío de un DTE al SII (`sendXmlDocument`)."""
@@ -26,6 +31,9 @@ class SendXmlDocumentResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiRtc\\SendAecResponse',
+)
 @dataclass(frozen=True, slots=True)
 class SendAecResponse:
     """Resultado del envío de un AEC al SII (`sii_rtc::sendAec`)."""
@@ -42,6 +50,9 @@ class SendAecResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiDte\\CheckXmlDocumentSentStatusResponse',
+)
 @dataclass(frozen=True, slots=True)
 class CheckXmlDocumentSentStatusResponse:
     """
@@ -73,6 +84,9 @@ class CheckXmlDocumentSentStatusResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiDte\\ValidateDocumentResponse',
+)
 @dataclass(frozen=True, slots=True)
 class ValidateDocumentResponse:
     """Resultado de confirmar un documento en el SII (`validateDocument`)."""
@@ -93,6 +107,9 @@ class ValidateDocumentResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiDte\\ValidateDocumentSignatureResponse',
+)
 @dataclass(frozen=True, slots=True)
 class ValidateDocumentSignatureResponse:
     """
@@ -120,6 +137,9 @@ class ValidateDocumentSignatureResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiDte\\RequestXmlDocumentSentStatusByEmailResponse',
+)
 @dataclass(frozen=True, slots=True)
 class RequestXmlDocumentSentStatusByEmailResponse:
     """
@@ -145,6 +165,9 @@ class RequestXmlDocumentSentStatusByEmailResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiRcv\\CheckDocumentAssignabilityResponse',
+)
 @dataclass(frozen=True, slots=True)
 class CheckDocumentAssignabilityResponse:
     """Resultado `{codigo, glosa}` de `checkDocumentAssignability`."""
@@ -166,6 +189,9 @@ class CheckDocumentAssignabilityResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiRcv\\SubmitDocumentAcceptanceResponse',
+)
 @dataclass(frozen=True, slots=True)
 class SubmitDocumentAcceptanceResponse:
     """Resultado `{codigo, glosa}` de `submitDocumentAcceptance`."""
@@ -187,6 +213,9 @@ class SubmitDocumentAcceptanceResponse:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiRcv\\GetDocumentSiiReceptionDateResponse',
+)
 @dataclass(frozen=True, slots=True)
 class GetDocumentSiiReceptionDateResponse:
     """
@@ -234,6 +263,9 @@ class DocumentEvent:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Integration\\Support\\Response\\SiiRcv\\ListDocumentEventsResponse',
+)
 @dataclass(frozen=True, slots=True)
 class ListDocumentEventsResponse:
     """

@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import Any, cast
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from ..trading_parties.models import Certificate
 from .models import Aec
 
@@ -53,7 +54,7 @@ class AecService:
         `Direccion`/`eMail`; `cesion` trae `MontoCesion`/
         `UltimoVencimiento` — todos tal como los espera la API.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._BUILD_OPERATION,
             bag={
                 'source': source,
@@ -63,7 +64,7 @@ class AecService:
                 'certificate': certificate.to_payload(),
             },
         )
-        return Aec.from_api(data)
+        return build_response(Aec, response)
 
     def validate_schema(self, source: str) -> dict[str, Any]:
         """Valida `source` (XML del AEC, en base64) contra su esquema XSD."""

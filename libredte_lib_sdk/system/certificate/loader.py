@@ -9,6 +9,7 @@ import base64
 
 from ...billing.trading_parties.models import Certificate
 from ...client import ApiClient
+from ...response_registry import build_response
 
 
 class CertificateLoaderService:
@@ -28,11 +29,11 @@ class CertificateLoaderService:
 
     def load(self, data: bytes, password: str) -> Certificate:
         """Carga el certificado de `data`, protegido con `password`."""
-        result = self._client.call(
+        response = self._client.call_response(
             self._LOAD_OPERATION,
             certificate={
                 'data': base64.b64encode(data).decode(),
                 'password': password,
             },
         )
-        return Certificate.from_api(result)
+        return build_response(Certificate, response)

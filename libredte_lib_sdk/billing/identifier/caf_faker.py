@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import Any
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from .models import Caf
 
 
@@ -41,11 +42,11 @@ class CafFakerService:
         espera la API. `folio_hasta` por defecto cubre solo
         `folio_desde` (un único folio), igual que hace la API.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._CREATE_OPERATION,
             emisor=emisor,
             codigoDocumento=codigo_documento,
             folioDesde=folio_desde,
             folioHasta=folio_hasta,
         )
-        return Caf.from_api(data)
+        return build_response(Caf, response)

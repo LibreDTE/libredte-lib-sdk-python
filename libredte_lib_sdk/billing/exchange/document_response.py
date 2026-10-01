@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import Any, cast
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from ..trading_parties.models import Certificate
 from .models import EnvioRecibos, RespuestaEnvio
 
@@ -53,7 +54,7 @@ class DocumentResponseService:
         `MntTotal`/`Recinto`, y opcionalmente `RutFirma`/`Declaracion`).
         `caratula` trae `RutResponde`/`RutRecibe`.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._BUILD_ENVIO_RECIBOS_OPERATION,
             bag={
                 'tipo': 'envio_recibos',
@@ -62,7 +63,7 @@ class DocumentResponseService:
                 'certificate': certificate.to_payload(),
             },
         )
-        return EnvioRecibos.from_api(data)
+        return build_response(EnvioRecibos, response)
 
     def build_respuesta_envio(
         self,
@@ -78,7 +79,7 @@ class DocumentResponseService:
         cual el formato SII. `caratula` trae `RutResponde`/`RutRecibe`/
         `IdRespuesta`.
         """
-        result = self._client.call(
+        response = self._client.call_response(
             self._BUILD_RESPUESTA_ENVIO_OPERATION,
             bag={
                 'tipo': 'respuesta_envio',
@@ -87,7 +88,7 @@ class DocumentResponseService:
                 'certificate': certificate.to_payload(),
             },
         )
-        return RespuestaEnvio.from_api(result)
+        return build_response(RespuestaEnvio, response)
 
     def validate_schema(self, source: str) -> dict[str, Any]:
         """

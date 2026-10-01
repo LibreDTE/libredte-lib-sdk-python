@@ -25,6 +25,89 @@ from libredte_lib_sdk.billing.trading_parties import Certificate, Mandatario
 
 from .conftest import TEST_BASE_URL
 
+# Clase PHP que informa la API en `meta.data_type`, por operación.
+_PHP_CLASS = {
+    'billing/book/builder/build': (
+        r'libredte\lib\Core\Package\Billing\Component\Book\Support\BookBag'
+    ),
+    'billing/book/loader/load': (
+        r'libredte\lib\Core\Package\Billing\Component\Book\Support\BookBag'
+    ),
+    'billing/document/dispatcher/create': (
+        r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentEnvelope'
+    ),
+    'billing/document/dispatcher/createMany': (
+        r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentEnvelope'
+    ),
+    'billing/document/dispatcher/loadXml': (
+        r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentEnvelope'
+    ),
+    'billing/document/loader/loadXml': (
+        r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentBag'
+    ),
+    'billing/document/renderer/render': (
+        r'libredte\lib\Core\Package\System\Component\Rendering\Support\RenderResult'
+    ),
+    'billing/exchange/document_response/buildEnvioRecibos': (
+        r'libredte\lib\Core\Package\Billing\Component\Exchange\Entity\EnvioRecibos'
+    ),
+    'billing/exchange/document_response/buildRespuestaEnvio': (
+        r'libredte\lib\Core\Package\Billing\Component\Exchange\Entity\RespuestaEnvio'
+    ),
+    'billing/identifier/caf_faker/create': (
+        r'libredte\lib\Core\Package\Billing\Component\Identifier\Entity\Caf'
+    ),
+    'billing/identifier/caf_loader/load': (
+        r'libredte\lib\Core\Package\Billing\Component\Identifier\Entity\Caf'
+    ),
+    'billing/identifier/caf_validator/validate': (
+        r'libredte\lib\Core\Package\Billing\Component\Identifier\Entity\Caf'
+    ),
+    'billing/integration/sii_dte/checkXmlDocumentSentStatus': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\CheckXmlDocumentSentStatusResponse'
+    ),
+    'billing/integration/sii_dte/requestXmlDocumentSentStatusByEmail': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\RequestXmlDocumentSentStatusByEmailResponse'
+    ),
+    'billing/integration/sii_dte/sendXmlDocument': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\SendXmlDocumentResponse'
+    ),
+    'billing/integration/sii_dte/validateDocument': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\ValidateDocumentResponse'
+    ),
+    'billing/integration/sii_dte/validateDocumentSignature': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\ValidateDocumentSignatureResponse'
+    ),
+    'billing/integration/sii_rcv/checkDocumentAssignability': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\CheckDocumentAssignabilityResponse'
+    ),
+    'billing/integration/sii_rcv/getDocumentSiiReceptionDate': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\GetDocumentSiiReceptionDateResponse'
+    ),
+    'billing/integration/sii_rcv/listDocumentEvents': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\ListDocumentEventsResponse'
+    ),
+    'billing/integration/sii_rcv/submitDocumentAcceptance': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\SubmitDocumentAcceptanceResponse'
+    ),
+    'billing/integration/sii_rtc/sendAec': (
+        r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRtc\SendAecResponse'
+    ),
+    'billing/ownership_transfer/aec/build': (
+        r'libredte\lib\Core\Package\Billing\Component\OwnershipTransfer\Entity\Aec'
+    ),
+    'billing/trading_parties/mandatario_manager/createFakeCertificate': (
+        r'Derafu\Certificate\Certificate'
+    ),
+    'billing/trading_parties/mandatario_manager/createFromCertificate': (
+        r'libredte\lib\Core\Package\Billing\Component\TradingParties\Entity\Mandatario'
+    ),
+    'human_resources/payroll/renderer/render': (
+        r'libredte\lib\Core\Package\System\Component\Rendering\Support\RenderResult'
+    ),
+    'system/certificate/loader/load': (r'Derafu\Certificate\Certificate'),
+}
+
 _REAL_SIGNED_DOCUMENT_RESPONSE = {
     'meta': {
         'timestamp': 1787810337.756542,
@@ -137,8 +220,38 @@ def test_build_draft_sends_options_when_given(sdk):
 
     sent = json.loads(route.calls.last.request.content)
     bag = sent['parameters']['bag']
-    assert bag['inputData'] == '<DTE>...</DTE>'
+    assert base64.b64decode(bag['inputData']) == b'<DTE>...</DTE>'
     assert bag['options'] == {'parser': {'strategy': 'default.xml'}}
+
+
+@respx.mock
+def test_build_draft_sends_bytes_as_they_are_in_base64(sdk):
+    route = respx.post(
+        f'{TEST_BASE_URL}/billing/document/builder/build',
+    ).mock(
+        return_value=httpx.Response(200, json=_REAL_SIGNED_DOCUMENT_RESPONSE),
+    )
+    xml = '<DTE>Tecnología</DTE>'.encode('iso-8859-1')
+
+    sdk.billing.document.builder.build_draft(xml)
+
+    sent = json.loads(route.calls.last.request.content)
+    assert base64.b64decode(sent['parameters']['bag']['inputData']) == xml
+
+
+@respx.mock
+def test_build_draft_encodes_a_text_input_in_utf8(sdk):
+    route = respx.post(
+        f'{TEST_BASE_URL}/billing/document/builder/build',
+    ).mock(
+        return_value=httpx.Response(200, json=_REAL_SIGNED_DOCUMENT_RESPONSE),
+    )
+
+    sdk.billing.document.builder.build_draft('Tecnología')
+
+    sent = json.loads(route.calls.last.request.content)
+    raw = base64.b64decode(sent['parameters']['bag']['inputData'])
+    assert raw == 'Tecnología'.encode()
 
 
 @respx.mock
@@ -173,7 +286,11 @@ def test_caf_faker_create_maps_parameters_and_response(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/identifier/caf_faker/create'
+                    ]
+                },
                 'data': {
                     'id': 'CAF33D1H100',
                     'emisor': {
@@ -226,7 +343,11 @@ def test_caf_loader_load_sends_xml_and_decodes_the_caf(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/identifier/caf_loader/load'
+                    ]
+                },
                 'data': {
                     'id': 'CAF33D1H50',
                     'emisor': {
@@ -270,7 +391,11 @@ def test_caf_validator_validate_sends_caf_key_and_decodes_the_caf(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/identifier/caf_validator/validate'
+                    ]
+                },
                 'data': {
                     'id': 'CAF33D1H50',
                     'emisor': {
@@ -318,7 +443,11 @@ def test_mandatario_manager_create_fake_certificate(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/trading_parties/mandatario_manager/createFakeCertificate'
+                    ]
+                },
                 'data': {
                     'id': '76192083-9',
                     'name': 'SASCO SpA',
@@ -364,7 +493,11 @@ def test_envelope_create_sends_bag_certificate_and_emisor(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/document/dispatcher/create'
+                    ]
+                },
                 'data': {'tag': 'EnvioDTE', 'xml': envelope_xml},
             },
         ),
@@ -394,7 +527,11 @@ def test_envelope_create_many_sends_a_bag_per_document(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/document/dispatcher/createMany'
+                    ]
+                },
                 'data': {'tag': 'EnvioDTE', 'xml': envelope_xml},
             },
         ),
@@ -454,7 +591,14 @@ def test_sii_send_defaults_to_the_production_environment(sdk):
     ).mock(
         return_value=httpx.Response(
             200,
-            json={'meta': {}, 'data': {'track_id': 123}},
+            json={
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_dte/sendXmlDocument'
+                    ]
+                },
+                'data': {'track_id': 123},
+            },
         ),
     )
 
@@ -478,7 +622,14 @@ def test_sii_send_honors_an_explicit_production_environment(sdk):
     ).mock(
         return_value=httpx.Response(
             200,
-            json={'meta': {}, 'data': {'track_id': 1}},
+            json={
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_dte/sendXmlDocument'
+                    ]
+                },
+                'data': {'track_id': 1},
+            },
         ),
     )
 
@@ -501,7 +652,14 @@ def test_sii_check_status_sends_the_track_id_and_company(sdk):
     ).mock(
         return_value=httpx.Response(
             200,
-            json={'meta': {}, 'data': {'status': 'OK'}},
+            json={
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_dte/checkXmlDocumentSentStatus'
+                    ]
+                },
+                'data': {'status': 'OK'},
+            },
         ),
     )
 
@@ -542,7 +700,9 @@ def test_renderer_render_sends_base64_xml_and_decodes_the_rendering(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS['billing/document/renderer/render']
+                },
                 'data': {
                     'renderings': [_rendering_response(b'%PDF-1.4 ...')],
                 },
@@ -569,7 +729,9 @@ def test_renderer_render_sends_renderings_when_given(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS['billing/document/renderer/render']
+                },
                 'data': {
                     'renderings': [
                         _rendering_response(
@@ -616,7 +778,9 @@ def test_renderer_render_omits_renderings_key_by_default(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS['billing/document/renderer/render']
+                },
                 'data': {'renderings': [_rendering_response(b'ok')]},
             },
         ),
@@ -638,7 +802,9 @@ def test_renderer_render_sends_libredte_data_when_given(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS['billing/document/renderer/render']
+                },
                 'data': {'renderings': [_rendering_response(b'ok')]},
             },
         ),
@@ -722,7 +888,11 @@ def test_mandatario_manager_create_from_certificate(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/trading_parties/mandatario_manager/createFromCertificate'
+                    ]
+                },
                 'data': {
                     'run': '76192083-9',
                     'nombre': 'SASCO SpA',
@@ -868,7 +1038,9 @@ def test_certificate_loader_load_sends_base64_and_decodes_metadata(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS['system/certificate/loader/load']
+                },
                 'data': {
                     'id': '76192083-9',
                     'name': 'SASCO SpA',
@@ -961,7 +1133,11 @@ def test_dispatcher_load_xml_returns_an_envelope(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/document/dispatcher/loadXml'
+                    ]
+                },
                 'data': {
                     'tag': 'EnvioDTE',
                     'xml': base64.b64encode(b'<EnvioDTE/>').decode(),
@@ -1036,7 +1212,11 @@ def test_sii_dte_validate_document_sends_parameters_and_decodes_result(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_dte/validateDocument'
+                    ]
+                },
                 'data': {
                     'received': False,
                     'status': 'FNA',
@@ -1074,7 +1254,11 @@ def test_sii_dte_validate_document_signature_sends_signature(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_dte/validateDocumentSignature'
+                    ]
+                },
                 'data': {'received': False, 'status': 'FNA'},
             },
         ),
@@ -1104,7 +1288,11 @@ def test_sii_dte_request_status_by_email_sends_track_id(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_dte/requestXmlDocumentSentStatusByEmail'
+                    ]
+                },
                 'data': {'status': 'ERR', 'description': 'No autorizado'},
             },
         ),
@@ -1129,7 +1317,14 @@ def test_sii_rtc_send_aec_returns_a_send_result(sdk):
     ).mock(
         return_value=httpx.Response(
             200,
-            json={'meta': {}, 'data': {'track_id': 456}},
+            json={
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_rtc/sendAec'
+                    ]
+                },
+                'data': {'track_id': 456},
+            },
         ),
     )
 
@@ -1155,7 +1350,14 @@ def test_sii_rcv_check_document_assignability_returns_codigo_and_glosa(sdk):
     ).mock(
         return_value=httpx.Response(
             200,
-            json={'meta': {}, 'data': {'codigo': '0', 'glosa': 'OK'}},
+            json={
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_rcv/checkDocumentAssignability'
+                    ]
+                },
+                'data': {'codigo': '0', 'glosa': 'OK'},
+            },
         ),
     )
 
@@ -1179,7 +1381,11 @@ def test_sii_rcv_get_document_sii_reception_date_parses_the_datetime(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_rcv/getDocumentSiiReceptionDate'
+                    ]
+                },
                 'data': {'fecha_recepcion_sii': '2025-01-02 10:30:00'},
             },
         ),
@@ -1204,7 +1410,11 @@ def test_sii_rcv_list_document_events_returns_typed_events(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_rcv/listDocumentEvents'
+                    ]
+                },
                 'data': [
                     {
                         'codigo': '0',
@@ -1238,7 +1448,14 @@ def test_sii_rcv_submit_document_acceptance_sends_action(sdk):
     ).mock(
         return_value=httpx.Response(
             200,
-            json={'meta': {}, 'data': {'codigo': '0', 'glosa': 'OK'}},
+            json={
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/integration/sii_rcv/submitDocumentAcceptance'
+                    ]
+                },
+                'data': {'codigo': '0', 'glosa': 'OK'},
+            },
         ),
     )
 
@@ -1263,7 +1480,11 @@ def test_aec_build_sends_cedente_cesionario_cesion(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/ownership_transfer/aec/build'
+                    ]
+                },
                 'data': {
                     'AEC': {
                         'DocumentoAEC': {
@@ -1357,7 +1578,9 @@ def test_document_loader_load_xml_decodes_the_full_bag(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS['billing/document/loader/loadXml']
+                },
                 'data': {
                     'document': {'Encabezado': {}},
                     'document_extra': None,
@@ -1417,7 +1640,9 @@ def test_book_builder_build_sends_bag_and_certificate(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS['billing/book/builder/build']
+                },
                 'data': {
                     'book': {
                         'LibroCompraVenta': {
@@ -1477,7 +1702,7 @@ def test_book_loader_load_decodes_book_type_caratula_and_detalle(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {'data_type': _PHP_CLASS['billing/book/loader/load']},
                 'data': {
                     'book': None,
                     'book_auth': None,
@@ -1556,7 +1781,11 @@ def test_document_response_build_envio_recibos_sends_caratula_and_recibos(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/exchange/document_response/buildEnvioRecibos'
+                    ]
+                },
                 'data': {
                     'EnvioRecibos': {
                         'SetRecibos': {
@@ -1609,7 +1838,11 @@ def test_document_response_build_respuesta_envio_sends_caratula_and_data(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'billing/exchange/document_response/buildRespuestaEnvio'
+                    ]
+                },
                 'data': {
                     'RespuestaDTE': {'Resultado': {}},
                     'xml': 'PFJlc3B1ZXN0YURURS8+',
@@ -1771,7 +2004,11 @@ def test_payroll_renderer_render_sends_liquidacion_and_options(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'human_resources/payroll/renderer/render'
+                    ]
+                },
                 'data': {
                     'renderings': [
                         _rendering_response(
@@ -1805,7 +2042,11 @@ def test_payroll_renderer_render_defaults_options_to_empty_dict(sdk):
         return_value=httpx.Response(
             200,
             json={
-                'meta': {},
+                'meta': {
+                    'data_type': _PHP_CLASS[
+                        'human_resources/payroll/renderer/render'
+                    ]
+                },
                 'data': {
                     'renderings': [
                         _rendering_response(
@@ -1824,3 +2065,142 @@ def test_payroll_renderer_render_defaults_options_to_empty_dict(sdk):
 
     sent = json.loads(route.calls.last.request.content)['parameters']
     assert sent['options'] == {}
+
+
+_DOCUMENT_BAG_CLASS = (
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Document'
+    '\\Support\\DocumentBag'
+)
+_DOCUMENT_BATCH_CLASS = (
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Document'
+    '\\Support\\DocumentBatch'
+)
+
+
+def _parsed_bag_data(folio: int) -> dict:
+    """`data` de una bolsa solo parseada, como la devuelve la API."""
+    return {
+        'document': None,
+        'document_parsed': {
+            'Encabezado': {'IdDoc': {'TipoDTE': 33, 'Folio': folio}},
+        },
+        'document_normalized': None,
+        'document_extra': None,
+        'document_stamp': None,
+        'document_auth': None,
+        'document_type': None,
+        'document_id': None,
+        'document_xml': None,
+        'options': {'parser': []},
+        'certificate': None,
+        'emisor': None,
+        'receptor': None,
+        'caf': None,
+        'timbre': None,
+    }
+
+
+@respx.mock
+def test_parser_parse_sends_a_dict_as_json_and_returns_a_parsed_bag(sdk):
+    route = respx.post(f'{TEST_BASE_URL}/billing/document/parser/parse').mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                'meta': {'data_type': _DOCUMENT_BAG_CLASS},
+                'data': _parsed_bag_data(1),
+            },
+        ),
+    )
+    data = {'Encabezado': {'IdDoc': {'TipoDTE': 33, 'Folio': 1}}}
+
+    bag = sdk.billing.document.parser.parse(data)
+
+    sent = json.loads(route.calls.last.request.content)
+    assert sent['parameters']['bag'] == {'inputData': data}
+    assert isinstance(bag, DocumentBag)
+    assert bag.document_parsed['Encabezado']['IdDoc']['Folio'] == 1
+    assert bag.document is None
+    assert bag.document_type is None
+    assert bag.is_timbrado is False
+
+
+@respx.mock
+def test_parser_parse_sends_bytes_in_base64_with_the_strategy(sdk):
+    route = respx.post(f'{TEST_BASE_URL}/billing/document/parser/parse').mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                'meta': {'data_type': _DOCUMENT_BAG_CLASS},
+                'data': _parsed_bag_data(1),
+            },
+        ),
+    )
+    xml = '<DTE>Tecnología</DTE>'.encode('iso-8859-1')
+
+    sdk.billing.document.parser.parse(xml, strategy='default.xml')
+
+    bag = json.loads(route.calls.last.request.content)['parameters']['bag']
+    assert base64.b64decode(bag['inputData']) == xml
+    assert bag['options'] == {'parser': {'strategy': 'default.xml'}}
+
+
+@respx.mock
+def test_batch_processor_parse_returns_the_bags_of_the_batch(sdk):
+    route = respx.post(
+        f'{TEST_BASE_URL}/billing/document/batch_processor/parse',
+    ).mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                'meta': {'data_type': _DOCUMENT_BATCH_CLASS},
+                'data': {
+                    'document_bags': [
+                        _parsed_bag_data(1),
+                        _parsed_bag_data(2),
+                    ],
+                },
+            },
+        ),
+    )
+    csv = 'TipoDTE;Folio\n33;1\n33;2\n'.encode('iso-8859-1')
+
+    batch = sdk.billing.document.batch_processor.parse(
+        csv,
+        emisor={'rut': '76192083-9', 'razon_social': 'SASCO SpA'},
+        strategy='spreadsheet.csv',
+        complete=False,
+    )
+
+    sent = json.loads(route.calls.last.request.content)['parameters']['batch']
+    assert base64.b64decode(sent['inputData']) == csv
+    assert sent['emisor'] == {'rut': '76192083-9', 'razon_social': 'SASCO SpA'}
+    assert sent['options'] == {
+        'batch_processor': {'strategy': 'spreadsheet.csv', 'complete': False},
+    }
+    assert len(batch.document_bags) == 2
+    assert all(isinstance(b, DocumentBag) for b in batch.document_bags)
+    assert [
+        b.document_parsed['Encabezado']['IdDoc']['Folio']
+        for b in batch.document_bags
+    ] == [1, 2]
+
+
+@respx.mock
+def test_batch_processor_parse_omits_what_was_not_given(sdk):
+    route = respx.post(
+        f'{TEST_BASE_URL}/billing/document/batch_processor/parse',
+    ).mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                'meta': {'data_type': _DOCUMENT_BATCH_CLASS},
+                'data': {'document_bags': []},
+            },
+        ),
+    )
+
+    batch = sdk.billing.document.batch_processor.parse('TipoDTE;Folio\n')
+
+    sent = json.loads(route.calls.last.request.content)['parameters']['batch']
+    assert sent.keys() == {'inputData'}
+    assert batch.document_bags == ()

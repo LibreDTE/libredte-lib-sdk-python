@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from .models import Certificate, Mandatario
 
 
@@ -39,16 +40,16 @@ class MandatarioManagerService:
         autenticar de verdad ante el SII. El `Certificate` resultante ya
         viene con el RUT/nombre/correo/vigencia poblados.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._CREATE_FAKE_OPERATION,
             mandatario=mandatario.to_payload(),
         )
-        return Certificate.from_api(data)
+        return build_response(Certificate, response)
 
     def create_from_certificate(self, certificate: Certificate) -> Mandatario:
         """Extrae el mandatario dueño de `certificate` (RUT/nombre/correo)."""
-        data = self._client.call(
+        response = self._client.call_response(
             self._CREATE_FROM_CERTIFICATE_OPERATION,
             certificate=certificate.to_payload(),
         )
-        return Mandatario.from_api(data)
+        return build_response(Mandatario, response)

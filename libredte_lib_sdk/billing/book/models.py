@@ -9,7 +9,12 @@ import base64
 from dataclasses import dataclass
 from typing import Any, cast
 
+from ...response_registry import api_response
 
+
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Book\\Support\\BookBag',
+)
 @dataclass(frozen=True, slots=True)
 class BookBag:
     """

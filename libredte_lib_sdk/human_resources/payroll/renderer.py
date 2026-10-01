@@ -9,6 +9,7 @@ from typing import Any
 
 from ...billing.document.models import RenderResult
 from ...client import ApiClient
+from ...response_registry import build_response
 
 
 class PayrollRendererService:
@@ -42,9 +43,9 @@ class PayrollRendererService:
         `liquidacion` es el mismo `dict` que devuelve
         `PayrollCalculatorService.calculate()`.
         """
-        data = self._client.call(
+        response = self._client.call_response(
             self._RENDER_OPERATION,
             liquidacion=liquidacion,
             options=options or {},
         )
-        return RenderResult.from_api(data)
+        return build_response(RenderResult, response)

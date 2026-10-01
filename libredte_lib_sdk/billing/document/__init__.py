@@ -6,29 +6,35 @@
 from __future__ import annotations
 
 from ...client import ApiClient
+from .batch_processor import DocumentBatchProcessorService
 from .builder import DocumentBuilderService
 from .dispatcher import DocumentDispatcherService
 from .examples import DocumentExamplesService
 from .loader import DocumentLoaderService
 from .models import (
     DocumentBag,
+    DocumentBatch,
     DocumentEnvelope,
     Example,
     ExampleSummary,
     RenderedDocument,
     RenderResult,
 )
+from .parser import DocumentParserService
 from .renderer import DocumentRendererService
 from .validator import DocumentValidatorService
 
 __all__ = [
     'DocumentBag',
+    'DocumentBatch',
+    'DocumentBatchProcessorService',
     'DocumentBuilderService',
     'DocumentComponent',
     'DocumentDispatcherService',
     'DocumentEnvelope',
     'DocumentExamplesService',
     'DocumentLoaderService',
+    'DocumentParserService',
     'DocumentRendererService',
     'DocumentValidatorService',
     'Example',
@@ -49,3 +55,5 @@ class DocumentComponent:
         self.examples = DocumentExamplesService(client)
         self.validator = DocumentValidatorService(client)
         self.loader = DocumentLoaderService(client)
+        self.parser = DocumentParserService(client)
+        self.batch_processor = DocumentBatchProcessorService(client)

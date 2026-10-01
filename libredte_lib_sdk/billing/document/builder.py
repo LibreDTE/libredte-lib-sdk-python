@@ -8,6 +8,8 @@ from __future__ import annotations
 from typing import Any
 
 from ...client import ApiClient
+from ...response_registry import build_response
+from ..common import encode_input_data
 from ..trading_parties.models import Certificate
 from .models import DocumentBag
 
@@ -30,7 +32,7 @@ class DocumentBuilderService:
 
     def build_draft(
         self,
-        input_data: str | dict[str, Any],
+        input_data: str | bytes | dict[str, Any],
         *,
         options: dict[str, Any] | None = None,
     ) -> DocumentBag:
@@ -39,25 +41,28 @@ class DocumentBuilderService:
 
         `input_data` es el `Encabezado`/`Detalle` (y demás nodos) del
         formato DTE del SII como `dict` — o datos en otro formato
-        (XML/YAML, un formulario, etc.) junto con
+        (XML/YAML, un formulario, etc.), como `bytes` o `str`, junto con
         `options={'parser': {'strategy': '<estrategia>'}}` para indicar
-        cómo parsearlos. Sin `options`, la API asume que `input_data` ya
+        cómo parsearlos. El contenido de un archivo se debe pasar como
+        `bytes` (leído en modo `rb`): se envía sin alterar su
+        codificación. Un `str` ya es texto decodificado y se envía en
+        UTF-8. Sin `options`, la API asume que `input_data` ya
         viene en el formato DTE del SII (estrategia `default.json`).
         `Encabezado.IdDoc.Folio` es opcional acá — un borrador sin folio
         no falla (queda con folio `0` en `DocumentBag.document_id`, sin
         nodo `Folio` en el XML). Sin CAF ni certificado, el resultado no
         queda timbrado (`DocumentBag.is_timbrado` es `False`).
         """
-        bag: dict[str, Any] = {'inputData': input_data}
+        bag: dict[str, Any] = {'inputData': encode_input_data(input_data)}
         if options is not None:
             bag['options'] = options
 
-        data = self._client.call(self._BUILD_OPERATION, bag=bag)
-        return DocumentBag.from_api(data)
+        response = self._client.call_response(self._BUILD_OPERATION, bag=bag)
+        return build_response(DocumentBag, response)
 
     def build_signed(
         self,
-        input_data: str | dict[str, Any],
+        input_data: str | bytes | dict[str, Any],
         *,
         options: dict[str, Any] | None = None,
         caf_xml: str,
@@ -75,11 +80,11 @@ class DocumentBuilderService:
         `IdentifierComponent.caf_faker` y
         `TradingPartiesComponent.mandatario_manager`.
         """
-        bag: dict[str, Any] = {'inputData': input_data}
+        bag: dict[str, Any] = {'inputData': encode_input_data(input_data)}
         if options is not None:
             bag['options'] = options
         bag['caf'] = caf_xml
         bag['certificate'] = certificate.to_payload()
 
-        data = self._client.call(self._BUILD_OPERATION, bag=bag)
-        return DocumentBag.from_api(data)
+        response = self._client.call_response(self._BUILD_OPERATION, bag=bag)
+        return build_response(DocumentBag, response)

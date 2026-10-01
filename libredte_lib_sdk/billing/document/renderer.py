@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import Any
 
 from ...client import ApiClient
+from ...response_registry import build_response
 from .models import RenderResult
 
 
@@ -68,5 +69,5 @@ class DocumentRendererService:
         if libredte_data is not None:
             bag['libredteData'] = libredte_data
 
-        data = self._client.call(self._RENDER_OPERATION, bag=bag)
-        return RenderResult.from_api(data)
+        response = self._client.call_response(self._RENDER_OPERATION, bag=bag)
+        return build_response(RenderResult, response)

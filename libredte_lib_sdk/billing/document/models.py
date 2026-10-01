@@ -15,18 +15,25 @@ import base64
 from dataclasses import dataclass
 from typing import Any
 
+from ...response_registry import api_response
 from ..common import XmlPayloadMixin
 from ..identifier.models import Caf
 from ..trading_parties.models import Certificate
 
+_PHP_SUPPORT = (
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Document\\Support'
+)
 
+
+@api_response(f'{_PHP_SUPPORT}\\DocumentBag')
 @dataclass(frozen=True, slots=True)
 class DocumentBag:
     """
     Bolsa de un documento tributario.
 
-    Devuelta por `document.builder::build`/`document.loader::loadXml`
-    — ambas en esta misma forma. `document`
+    Devuelta por `document.builder::build`/`document.loader::loadXml`/
+    `document.parser::parse` — todas en esta misma forma, con los campos
+    que correspondan a cuánto se hizo con el documento. `document`
     (`Encabezado`/`Detalle`, con el merge de `libredte_data.extra.dte`
     si se pasó al renderizar) es la vista "de datos" limpia del
     documento — SIN los campos opcionales no usados (se omiten, no
@@ -66,13 +73,20 @@ class DocumentBag:
     (`document_stamp_base64` es el mismo dato, pero como XML) — `None`
     si el documento aún no está timbrado.
 
+    Una bolsa que solo se parseó (`DocumentParserService`, o cada bolsa de
+    un `DocumentBatch`) trae `document_parsed` (los datos en el formato
+    DTE del SII, tal como los entregó el parser) y deja en `None` lo que
+    requiere construir el documento: `document`, `document_type`, el XML,
+    etc.
+
     No usa `XmlPayloadMixin`: acá `xml_base64` es una `@property` (el
     documento puede no estar construido), no un campo simple.
     """
 
-    document: dict[str, Any]
+    document: dict[str, Any] | None
+    document_parsed: dict[str, Any] | None
     document_normalized: dict[str, Any] | None
-    document_type: dict[str, Any]
+    document_type: dict[str, Any] | None
     document_stamp_base64: str | None
     document_extra: dict[str, Any] | None
     document_auth: dict[str, Any] | None
@@ -116,9 +130,10 @@ class DocumentBag:
     def from_api(cls, data: dict[str, Any]) -> DocumentBag:
         """Construye un `DocumentBag` desde el `data` de la API."""
         return cls(
-            document=data['document'],
+            document=data.get('document'),
+            document_parsed=data.get('document_parsed'),
             document_normalized=data.get('document_normalized'),
-            document_type=data['document_type'],
+            document_type=data.get('document_type'),
             document_stamp_base64=data.get('document_stamp'),
             document_extra=data.get('document_extra'),
             document_auth=data.get('document_auth'),
@@ -136,6 +151,36 @@ class DocumentBag:
         )
 
 
+@api_response(f'{_PHP_SUPPORT}\\DocumentBatch')
+@dataclass(frozen=True, slots=True)
+class DocumentBatch:
+    """
+    Lote de documentos de una emisión masiva, ya parseado.
+
+    Devuelto por `batch_processor::parse`. `document_bags` trae una bolsa
+    (`DocumentBag`) por cada documento del archivo, en el orden del archivo,
+    con los datos parseados en `document_parsed` — todavía no se construyó
+    ningún documento. No incluye el contenido enviado ni el certificado.
+    """
+
+    document_bags: tuple[DocumentBag, ...]
+    raw: dict[str, Any]
+
+    @classmethod
+    def from_api(cls, data: dict[str, Any]) -> DocumentBatch:
+        """Construye un `DocumentBatch` desde el `data` de la API."""
+        return cls(
+            document_bags=tuple(
+                DocumentBag.from_api(item)
+                for item in data.get('document_bags') or []
+            ),
+            raw=data,
+        )
+
+
+@api_response(
+    'libredte\\lib\\Core\\Package\\Billing\\Component\\Document\\Support\\DocumentEnvelope',
+)
 @dataclass(frozen=True, slots=True)
 class DocumentEnvelope(XmlPayloadMixin):
     """
@@ -258,6 +303,9 @@ class Example:
         )
 
 
+@api_response(
+    'libredte\\lib\\Core\\Package\\System\\Component\\Rendering\\Support\\RenderResult',
+)
 @dataclass(frozen=True, slots=True)
 class RenderResult:
     """

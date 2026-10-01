@@ -6,6 +6,36 @@
 from __future__ import annotations
 
 import base64
+from typing import Any
+
+
+def encode_content(content: str | bytes) -> str:
+    """
+    Codifica en base64 un contenido para enviarlo a la API.
+
+    Un `bytes` se envía tal cual, sin alterar su codificación (lo correcto
+    para el contenido de un archivo). Un `str` ya es texto decodificado, así
+    que se codifica en UTF-8.
+    """
+    raw = content if isinstance(content, bytes) else content.encode('utf-8')
+
+    return base64.b64encode(raw).decode()
+
+
+def encode_input_data(
+    input_data: str | bytes | dict[str, Any],
+) -> str | dict[str, Any]:
+    """
+    Prepara el `inputData` de una bolsa para enviarlo a la API.
+
+    Un `dict` son los datos en JSON y viaja tal cual. Todo lo demás es el
+    contenido original en otro formato (XML, YAML, texto, etc.) y viaja en
+    base64 (ver `encode_content()`).
+    """
+    if isinstance(input_data, dict):
+        return input_data
+
+    return encode_content(input_data)
 
 
 class XmlPayloadMixin:
