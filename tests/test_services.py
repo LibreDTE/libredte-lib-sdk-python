@@ -2204,3 +2204,23 @@ def test_batch_processor_parse_omits_what_was_not_given(sdk):
     sent = json.loads(route.calls.last.request.content)['parameters']['batch']
     assert sent.keys() == {'inputData'}
     assert batch.document_bags == ()
+
+
+def test_require_document_returns_the_document_of_a_built_bag():
+    bag = DocumentBag.from_api(
+        {
+            **_REAL_SIGNED_DOCUMENT_RESPONSE['data'],
+            'document_stamp': None,
+        },
+    )
+
+    document = bag.require_document()
+
+    assert document['Encabezado']['IdDoc']['TipoDTE'] == 33
+
+
+def test_require_document_fails_on_a_bag_that_was_only_parsed():
+    bag = DocumentBag.from_api(_parsed_bag_data(1))
+
+    with pytest.raises(ValueError, match='no tiene un documento construido'):
+        bag.require_document()

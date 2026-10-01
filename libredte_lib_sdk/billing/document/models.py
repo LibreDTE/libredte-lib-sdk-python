@@ -100,6 +100,27 @@ class DocumentBag:
     timbre: dict[str, Any] | None
     raw: dict[str, Any]
 
+    def require_document(self) -> dict[str, Any]:
+        """
+        Entrega `document`, o falla si la bolsa no tiene el documento.
+
+        Para quien sabe que la bolsa viene de construir o cargar un documento
+        (`builder`, `loader`, `dispatcher`): `document` es opcional solo
+        porque una bolsa que se parseó (`parser`, `batch_processor`) no lo
+        trae, y esto evita revisar el `None` en cada acceso.
+
+        :raises ValueError: Si `document` es `None`.
+        """
+        if self.document is None:
+            raise ValueError(
+                'Esta DocumentBag no tiene un documento construido — '
+                '¿se llamó a `parser.parse()` o a `batch_processor.parse()` '
+                'en vez de `builder.build_draft/build_signed()` o '
+                '`loader.load_xml()`?',
+            )
+
+        return self.document
+
     @property
     def is_timbrado(self) -> bool:
         """Si el documento ya tiene Timbre Electrónico (TED)."""
