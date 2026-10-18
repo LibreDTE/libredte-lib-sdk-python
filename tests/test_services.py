@@ -1932,7 +1932,7 @@ def test_previred_provider_get_indicadores_sends_periodo(sdk):
                     'periodo': 202412,
                     'periodo_anterior': 202411,
                     'periodo_siguiente': 202501,
-                    'indicadores': {'moneda': {'CLF': 38416.69}},
+                    'indicadores': {'moneda': {'CLF': {'valor': 38416.69}}},
                 },
             },
         ),
@@ -1945,7 +1945,7 @@ def test_previred_provider_get_indicadores_sends_periodo(sdk):
     sent = json.loads(route.calls.last.request.content)['parameters']
     assert sent == {'periodo': 202412}
     assert result['periodo'] == 202412
-    assert result['indicadores']['moneda']['CLF'] == 38416.69
+    assert result['indicadores']['moneda']['CLF']['valor'] == 38416.69
 
 
 @respx.mock

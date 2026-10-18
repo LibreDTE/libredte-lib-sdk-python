@@ -63,7 +63,7 @@ def test_previred_provider_get_indicadores_returns_real_indicadores(real_sdk):
     assert indicadores['periodo_anterior'] == 202411
     assert indicadores['periodo_siguiente'] == 202501
     assert 'moneda' in indicadores['indicadores']
-    assert indicadores['indicadores']['moneda']['CLF'] > 0
+    assert indicadores['indicadores']['moneda']['CLF']['valor'] > 0
 
 
 def test_payroll_calculator_calculate_computes_a_real_liquidacion(real_sdk):
