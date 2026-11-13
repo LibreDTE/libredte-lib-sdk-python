@@ -36,22 +36,22 @@ _PHP_CLASS = {
     'billing/document/dispatcher/create': (
         r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentEnvelope'
     ),
-    'billing/document/dispatcher/createMany': (
+    'billing/document/dispatcher/create_many': (
         r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentEnvelope'
     ),
-    'billing/document/dispatcher/loadXml': (
+    'billing/document/dispatcher/load_xml': (
         r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentEnvelope'
     ),
-    'billing/document/loader/loadXml': (
+    'billing/document/loader/load_xml': (
         r'libredte\lib\Core\Package\Billing\Component\Document\Support\DocumentBag'
     ),
     'billing/document/renderer/render': (
         r'libredte\lib\Core\Package\System\Component\Rendering\Support\RenderResult'
     ),
-    'billing/exchange/document_response/buildEnvioRecibos': (
+    'billing/exchange/document_response/build_envio_recibos': (
         r'libredte\lib\Core\Package\Billing\Component\Exchange\Entity\EnvioRecibos'
     ),
-    'billing/exchange/document_response/buildRespuestaEnvio': (
+    'billing/exchange/document_response/build_respuesta_envio': (
         r'libredte\lib\Core\Package\Billing\Component\Exchange\Entity\RespuestaEnvio'
     ),
     'billing/identifier/caf_faker/create': (
@@ -63,43 +63,43 @@ _PHP_CLASS = {
     'billing/identifier/caf_validator/validate': (
         r'libredte\lib\Core\Package\Billing\Component\Identifier\Entity\Caf'
     ),
-    'billing/integration/sii_dte/checkXmlDocumentSentStatus': (
+    'billing/integration/sii_dte/check_xml_document_sent_status': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\CheckXmlDocumentSentStatusResponse'
     ),
-    'billing/integration/sii_dte/requestXmlDocumentSentStatusByEmail': (
+    'billing/integration/sii_dte/request_xml_document_sent_status_by_email': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\RequestXmlDocumentSentStatusByEmailResponse'
     ),
-    'billing/integration/sii_dte/sendXmlDocument': (
+    'billing/integration/sii_dte/send_xml_document': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\SendXmlDocumentResponse'
     ),
-    'billing/integration/sii_dte/validateDocument': (
+    'billing/integration/sii_dte/validate_document': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\ValidateDocumentResponse'
     ),
-    'billing/integration/sii_dte/validateDocumentSignature': (
+    'billing/integration/sii_dte/validate_document_signature': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiDte\ValidateDocumentSignatureResponse'
     ),
-    'billing/integration/sii_rcv/checkDocumentAssignability': (
+    'billing/integration/sii_rcv/check_document_assignability': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\CheckDocumentAssignabilityResponse'
     ),
-    'billing/integration/sii_rcv/getDocumentSiiReceptionDate': (
+    'billing/integration/sii_rcv/get_document_sii_reception_date': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\GetDocumentSiiReceptionDateResponse'
     ),
-    'billing/integration/sii_rcv/listDocumentEvents': (
+    'billing/integration/sii_rcv/list_document_events': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\ListDocumentEventsResponse'
     ),
-    'billing/integration/sii_rcv/submitDocumentAcceptance': (
+    'billing/integration/sii_rcv/submit_document_acceptance': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRcv\SubmitDocumentAcceptanceResponse'
     ),
-    'billing/integration/sii_rtc/sendAec': (
+    'billing/integration/sii_rtc/send_aec': (
         r'libredte\lib\Core\Package\Billing\Component\Integration\Support\Response\SiiRtc\SendAecResponse'
     ),
     'billing/ownership_transfer/aec/build': (
         r'libredte\lib\Core\Package\Billing\Component\OwnershipTransfer\Entity\Aec'
     ),
-    'billing/trading_parties/mandatario_manager/createFakeCertificate': (
+    'billing/trading_parties/mandatario_manager/create_fake_certificate': (
         r'Derafu\Certificate\Certificate'
     ),
-    'billing/trading_parties/mandatario_manager/createFromCertificate': (
+    'billing/trading_parties/mandatario_manager/create_from_certificate': (
         r'libredte\lib\Core\Package\Billing\Component\TradingParties\Entity\Mandatario'
     ),
     'human_resources/payroll/renderer/render': (
@@ -297,22 +297,22 @@ def test_caf_faker_create_maps_parameters_and_response(sdk):
                         'rut': '76192083-9',
                         'razon_social': 'SASCO SpA',
                     },
-                    'tipoDocumento': 33,
-                    'folioDesde': 1,
-                    'folioHasta': 100,
-                    'cantidadFolios': 100,
-                    'fechaAutorizacion': '2026-01-01',
-                    'fechaVencimiento': '2026-06-30',
-                    'mesesAutorizacion': 0.0,
+                    'tipo_documento': 33,
+                    'folio_desde': 1,
+                    'folio_hasta': 100,
+                    'cantidad_folios': 100,
+                    'fecha_autorizacion': '2026-01-01',
+                    'fecha_vencimiento': '2026-06-30',
+                    'meses_autorizacion': 0.0,
                     'vigente': True,
                     'vence': True,
-                    # `CafFaker::IDK` en libredte-lib-core — un CAF ficticio
+                    # IDK 666 de los CAF ficticios — un CAF ficticio
                     # nunca corresponde a un ambiente real del SII.
                     'idk': 666,
                     'ambiente': None,
                     'certificacion': None,
-                    'publicKey': '-----BEGIN PUBLIC KEY-----',
-                    'privateKey': '-----BEGIN PRIVATE KEY-----',
+                    'public_key': '-----BEGIN PUBLIC KEY-----',
+                    'private_key': '-----BEGIN PRIVATE KEY-----',
                     'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
                 },
             },
@@ -354,20 +354,20 @@ def test_caf_loader_load_sends_xml_and_decodes_the_caf(sdk):
                         'rut': '76192083-9',
                         'razon_social': 'SASCO SpA',
                     },
-                    'tipoDocumento': 33,
-                    'folioDesde': 1,
-                    'folioHasta': 50,
-                    'cantidadFolios': 50,
-                    'fechaAutorizacion': '2026-01-01',
-                    'fechaVencimiento': '2026-06-30',
-                    'mesesAutorizacion': 2.17,
+                    'tipo_documento': 33,
+                    'folio_desde': 1,
+                    'folio_hasta': 50,
+                    'cantidad_folios': 50,
+                    'fecha_autorizacion': '2026-01-01',
+                    'fecha_vencimiento': '2026-06-30',
+                    'meses_autorizacion': 2.17,
                     'vigente': True,
                     'vence': True,
                     'idk': 300,
                     'ambiente': 0,
                     'certificacion': 0,
-                    'publicKey': '-----BEGIN PUBLIC KEY-----',
-                    'privateKey': '-----BEGIN PRIVATE KEY-----',
+                    'public_key': '-----BEGIN PUBLIC KEY-----',
+                    'private_key': '-----BEGIN PRIVATE KEY-----',
                     'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
                 },
             },
@@ -402,20 +402,20 @@ def test_caf_validator_validate_sends_caf_key_and_decodes_the_caf(sdk):
                         'rut': '76192083-9',
                         'razon_social': 'SASCO SpA',
                     },
-                    'tipoDocumento': 33,
-                    'folioDesde': 1,
-                    'folioHasta': 50,
-                    'cantidadFolios': 50,
-                    'fechaAutorizacion': '2026-01-01',
-                    'fechaVencimiento': '2026-06-30',
-                    'mesesAutorizacion': 2.17,
+                    'tipo_documento': 33,
+                    'folio_desde': 1,
+                    'folio_hasta': 50,
+                    'cantidad_folios': 50,
+                    'fecha_autorizacion': '2026-01-01',
+                    'fecha_vencimiento': '2026-06-30',
+                    'meses_autorizacion': 2.17,
                     'vigente': True,
                     'vence': True,
                     'idk': 300,
                     'ambiente': 0,
                     'certificacion': 0,
-                    'publicKey': '-----BEGIN PUBLIC KEY-----',
-                    'privateKey': '-----BEGIN PRIVATE KEY-----',
+                    'public_key': '-----BEGIN PUBLIC KEY-----',
+                    'private_key': '-----BEGIN PRIVATE KEY-----',
                     'xml': base64.b64encode(b'<AUTORIZACION/>').decode(),
                 },
             },
@@ -438,14 +438,14 @@ def test_mandatario_manager_create_fake_certificate(sdk):
     """
     route = respx.post(
         f'{TEST_BASE_URL}/billing/trading_parties/mandatario_manager'
-        '/createFakeCertificate',
+        '/create_fake_certificate',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/trading_parties/mandatario_manager/createFakeCertificate'
+                        'billing/trading_parties/mandatario_manager/create_fake_certificate'
                     ]
                 },
                 'data': {
@@ -454,9 +454,9 @@ def test_mandatario_manager_create_fake_certificate(sdk):
                     'email': 'sasco@example.com',
                     'from': '2026-09-05T12:00:00',
                     'to': '2027-09-05T12:00:00',
-                    'totalDays': 365,
-                    'expirationDays': 365,
-                    'isActive': True,
+                    'total_days': 365,
+                    'expiration_days': 365,
+                    'is_active': True,
                     'issuer': 'Derafu Test Certificate Authority',
                     'modulus': 'MODULUS',
                     'exponent': 'AQAB',
@@ -522,14 +522,14 @@ def test_envelope_create_sends_bag_certificate_and_emisor(sdk):
 def test_envelope_create_many_sends_a_bag_per_document(sdk):
     envelope_xml = base64.b64encode(b'<EnvioDTE/>').decode()
     route = respx.post(
-        f'{TEST_BASE_URL}/billing/document/dispatcher/createMany',
+        f'{TEST_BASE_URL}/billing/document/dispatcher/create_many',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/document/dispatcher/createMany'
+                        'billing/document/dispatcher/create_many'
                     ]
                 },
                 'data': {'tag': 'EnvioDTE', 'xml': envelope_xml},
@@ -587,14 +587,14 @@ def test_dispatcher_create_raises_when_bag_has_no_emisor(sdk):
 def test_sii_send_defaults_to_the_production_environment(sdk):
     """El default debe ser el mismo que el de la propia API (`PRODUCTION`)."""
     route = respx.post(
-        f'{TEST_BASE_URL}/billing/integration/sii_dte/sendXmlDocument',
+        f'{TEST_BASE_URL}/billing/integration/sii_dte/send_xml_document',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_dte/sendXmlDocument'
+                        'billing/integration/sii_dte/send_xml_document'
                     ]
                 },
                 'data': {'track_id': 123},
@@ -618,14 +618,14 @@ def test_sii_send_defaults_to_the_production_environment(sdk):
 @respx.mock
 def test_sii_send_honors_an_explicit_production_environment(sdk):
     route = respx.post(
-        f'{TEST_BASE_URL}/billing/integration/sii_dte/sendXmlDocument',
+        f'{TEST_BASE_URL}/billing/integration/sii_dte/send_xml_document',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_dte/sendXmlDocument'
+                        'billing/integration/sii_dte/send_xml_document'
                     ]
                 },
                 'data': {'track_id': 1},
@@ -648,14 +648,14 @@ def test_sii_send_honors_an_explicit_production_environment(sdk):
 def test_sii_check_status_sends_the_track_id_and_company(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/billing/integration/sii_dte'
-        '/checkXmlDocumentSentStatus',
+        '/check_xml_document_sent_status',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_dte/checkXmlDocumentSentStatus'
+                        'billing/integration/sii_dte/check_xml_document_sent_status'
                     ]
                 },
                 'data': {'status': 'OK'},
@@ -678,11 +678,11 @@ def test_sii_check_status_sends_the_track_id_and_company(sdk):
 def _rendering_response(content: bytes, *, label='tributaria', **extra):
     payload = {
         'content': base64.b64encode(content).decode(),
-        'mimeType': 'application/pdf',
+        'mime_type': 'application/pdf',
         'filename': f'documento_{label}.pdf',
         'label': label,
         'copies': 1,
-        'copyNumber': 1,
+        'copy_number': 1,
     }
     payload.update(extra)
     return payload
@@ -738,13 +738,13 @@ def test_renderer_render_sends_renderings_when_given(sdk):
                             b'tributaria copy 1',
                             label='tributaria',
                             copies=2,
-                            copyNumber=1,
+                            copy_number=1,
                         ),
                         _rendering_response(
                             b'tributaria copy 2',
                             label='tributaria',
                             copies=2,
-                            copyNumber=2,
+                            copy_number=2,
                         ),
                         _rendering_response(b'cedible', label='cedible'),
                     ],
@@ -883,14 +883,14 @@ def test_document_examples_get_sends_id_and_splits_expected(sdk):
 def test_mandatario_manager_create_from_certificate(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/billing/trading_parties/mandatario_manager'
-        '/createFromCertificate',
+        '/create_from_certificate',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/trading_parties/mandatario_manager/createFromCertificate'
+                        'billing/trading_parties/mandatario_manager/create_from_certificate'
                     ]
                 },
                 'data': {
@@ -944,7 +944,7 @@ def test_repository_catalog_find_sends_repository_and_id(sdk):
 @respx.mock
 def test_repository_catalog_find_one_by_sends_criteria_and_order(sdk):
     route = respx.post(
-        f'{TEST_BASE_URL}/system/repository/catalog/findOneBy',
+        f'{TEST_BASE_URL}/system/repository/catalog/find_one_by',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -975,7 +975,7 @@ def test_repository_catalog_find_one_by_sends_criteria_and_order(sdk):
 @respx.mock
 def test_repository_catalog_find_by_sends_criteria_and_order(sdk):
     route = respx.post(
-        f'{TEST_BASE_URL}/system/repository/catalog/findBy',
+        f'{TEST_BASE_URL}/system/repository/catalog/find_by',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -1047,9 +1047,9 @@ def test_certificate_loader_load_sends_base64_and_decodes_metadata(sdk):
                     'email': 'demo@sasco.example',
                     'from': '2026-09-04T23:55:14',
                     'to': '2027-09-04T23:55:14',
-                    'totalDays': 365,
-                    'expirationDays': 365,
-                    'isActive': True,
+                    'total_days': 365,
+                    'expiration_days': 365,
+                    'is_active': True,
                     'issuer': 'Derafu Test Certificate Authority',
                     'modulus': 'MODULUS',
                     'exponent': 'AQAB',
@@ -1098,7 +1098,7 @@ def test_document_validator_validate_sends_source_and_returns_none(sdk):
 @respx.mock
 def test_document_validator_validate_schema_returns_the_parsed_xml(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/document/validator/validateSchema',
+        f'{TEST_BASE_URL}/billing/document/validator/validate_schema',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -1117,7 +1117,7 @@ def test_document_validator_validate_schema_returns_the_parsed_xml(sdk):
 @respx.mock
 def test_document_validator_validate_signature_returns_the_raw_result(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/document/validator/validateSignature',
+        f'{TEST_BASE_URL}/billing/document/validator/validate_signature',
     ).mock(return_value=httpx.Response(200, json={'meta': {}, 'data': {}}))
 
     result = sdk.billing.document.validator.validate_signature('ZG9jdW1lbnRv')
@@ -1128,14 +1128,14 @@ def test_document_validator_validate_signature_returns_the_raw_result(sdk):
 @respx.mock
 def test_dispatcher_load_xml_returns_an_envelope(sdk):
     route = respx.post(
-        f'{TEST_BASE_URL}/billing/document/dispatcher/loadXml',
+        f'{TEST_BASE_URL}/billing/document/dispatcher/load_xml',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/document/dispatcher/loadXml'
+                        'billing/document/dispatcher/load_xml'
                     ]
                 },
                 'data': {
@@ -1175,7 +1175,7 @@ def test_dispatcher_validate_returns_the_parsed_envelope(sdk):
 @respx.mock
 def test_dispatcher_validate_schema_returns_the_parsed_envelope(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/document/dispatcher/validateSchema',
+        f'{TEST_BASE_URL}/billing/document/dispatcher/validate_schema',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -1194,7 +1194,7 @@ def test_dispatcher_validate_schema_returns_the_parsed_envelope(sdk):
 @respx.mock
 def test_dispatcher_validate_signature_returns_a_list_of_raw_results(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/document/dispatcher/validateSignature',
+        f'{TEST_BASE_URL}/billing/document/dispatcher/validate_signature',
     ).mock(
         return_value=httpx.Response(200, json={'meta': {}, 'data': [{}, {}]}),
     )
@@ -1207,14 +1207,14 @@ def test_dispatcher_validate_signature_returns_a_list_of_raw_results(sdk):
 @respx.mock
 def test_sii_dte_validate_document_sends_parameters_and_decodes_result(sdk):
     route = respx.post(
-        f'{TEST_BASE_URL}/billing/integration/sii_dte/validateDocument',
+        f'{TEST_BASE_URL}/billing/integration/sii_dte/validate_document',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_dte/validateDocument'
+                        'billing/integration/sii_dte/validate_document'
                     ]
                 },
                 'data': {
@@ -1249,14 +1249,14 @@ def test_sii_dte_validate_document_sends_parameters_and_decodes_result(sdk):
 def test_sii_dte_validate_document_signature_sends_signature(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/billing/integration/sii_dte'
-        '/validateDocumentSignature',
+        '/validate_document_signature',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_dte/validateDocumentSignature'
+                        'billing/integration/sii_dte/validate_document_signature'
                     ]
                 },
                 'data': {'received': False, 'status': 'FNA'},
@@ -1283,14 +1283,14 @@ def test_sii_dte_validate_document_signature_sends_signature(sdk):
 def test_sii_dte_request_status_by_email_sends_track_id(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/billing/integration/sii_dte'
-        '/requestXmlDocumentSentStatusByEmail',
+        '/request_xml_document_sent_status_by_email',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_dte/requestXmlDocumentSentStatusByEmail'
+                        'billing/integration/sii_dte/request_xml_document_sent_status_by_email'
                     ]
                 },
                 'data': {'status': 'ERR', 'description': 'No autorizado'},
@@ -1313,14 +1313,14 @@ def test_sii_dte_request_status_by_email_sends_track_id(sdk):
 @respx.mock
 def test_sii_rtc_send_aec_returns_a_send_result(sdk):
     route = respx.post(
-        f'{TEST_BASE_URL}/billing/integration/sii_rtc/sendAec',
+        f'{TEST_BASE_URL}/billing/integration/sii_rtc/send_aec',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_rtc/sendAec'
+                        'billing/integration/sii_rtc/send_aec'
                     ]
                 },
                 'data': {'track_id': 456},
@@ -1346,14 +1346,14 @@ def test_sii_rtc_send_aec_returns_a_send_result(sdk):
 def test_sii_rcv_check_document_assignability_returns_codigo_and_glosa(sdk):
     respx.post(
         f'{TEST_BASE_URL}/billing/integration/sii_rcv'
-        '/checkDocumentAssignability',
+        '/check_document_assignability',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_rcv/checkDocumentAssignability'
+                        'billing/integration/sii_rcv/check_document_assignability'
                     ]
                 },
                 'data': {'codigo': '0', 'glosa': 'OK'},
@@ -1376,14 +1376,14 @@ def test_sii_rcv_check_document_assignability_returns_codigo_and_glosa(sdk):
 def test_sii_rcv_get_document_sii_reception_date_parses_the_datetime(sdk):
     respx.post(
         f'{TEST_BASE_URL}/billing/integration/sii_rcv'
-        '/getDocumentSiiReceptionDate',
+        '/get_document_sii_reception_date',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_rcv/getDocumentSiiReceptionDate'
+                        'billing/integration/sii_rcv/get_document_sii_reception_date'
                     ]
                 },
                 'data': {'fecha_recepcion_sii': '2025-01-02 10:30:00'},
@@ -1405,14 +1405,14 @@ def test_sii_rcv_get_document_sii_reception_date_parses_the_datetime(sdk):
 @respx.mock
 def test_sii_rcv_list_document_events_returns_typed_events(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/integration/sii_rcv/listDocumentEvents',
+        f'{TEST_BASE_URL}/billing/integration/sii_rcv/list_document_events',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_rcv/listDocumentEvents'
+                        'billing/integration/sii_rcv/list_document_events'
                     ]
                 },
                 'data': [
@@ -1444,14 +1444,14 @@ def test_sii_rcv_list_document_events_returns_typed_events(sdk):
 def test_sii_rcv_submit_document_acceptance_sends_action(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/billing/integration/sii_rcv'
-        '/submitDocumentAcceptance',
+        '/submit_document_acceptance',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/integration/sii_rcv/submitDocumentAcceptance'
+                        'billing/integration/sii_rcv/submit_document_acceptance'
                     ]
                 },
                 'data': {'codigo': '0', 'glosa': 'OK'},
@@ -1539,7 +1539,7 @@ def test_aec_build_sends_cedente_cesionario_cesion(sdk):
 @respx.mock
 def test_aec_validate_schema_returns_the_parsed_xml(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/ownership_transfer/aec/validateSchema',
+        f'{TEST_BASE_URL}/billing/ownership_transfer/aec/validate_schema',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -1555,7 +1555,7 @@ def test_aec_validate_schema_returns_the_parsed_xml(sdk):
 @respx.mock
 def test_aec_validate_signature_returns_a_list_of_raw_results(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/ownership_transfer/aec/validateSignature',
+        f'{TEST_BASE_URL}/billing/ownership_transfer/aec/validate_signature',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -1573,13 +1573,13 @@ def test_document_loader_load_xml_decodes_the_full_bag(sdk):
     stamp_base64 = base64.b64encode(b'<TED/>').decode()
     xml_base64 = base64.b64encode(b'<DTE/>').decode()
     route = respx.post(
-        f'{TEST_BASE_URL}/billing/document/loader/loadXml',
+        f'{TEST_BASE_URL}/billing/document/loader/load_xml',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
-                    'data_type': _PHP_CLASS['billing/document/loader/loadXml']
+                    'data_type': _PHP_CLASS['billing/document/loader/load_xml']
                 },
                 'data': {
                     'document': {'Encabezado': {}},
@@ -1745,7 +1745,7 @@ def test_book_loader_load_decodes_book_type_caratula_and_detalle(sdk):
 @respx.mock
 def test_book_validator_validate_schema_returns_the_parsed_xml(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/book/validator/validateSchema',
+        f'{TEST_BASE_URL}/billing/book/validator/validate_schema',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -1764,7 +1764,7 @@ def test_book_validator_validate_schema_returns_the_parsed_xml(sdk):
 @respx.mock
 def test_book_validator_validate_signature_returns_a_raw_result(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/book/validator/validateSignature',
+        f'{TEST_BASE_URL}/billing/book/validator/validate_signature',
     ).mock(return_value=httpx.Response(200, json={'meta': {}, 'data': {}}))
 
     result = sdk.billing.book.validator.validate_signature('TGlicm8=')
@@ -1776,14 +1776,14 @@ def test_book_validator_validate_signature_returns_a_raw_result(sdk):
 def test_document_response_build_envio_recibos_sends_caratula_and_recibos(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/billing/exchange/document_response'
-        '/buildEnvioRecibos',
+        '/build_envio_recibos',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/exchange/document_response/buildEnvioRecibos'
+                        'billing/exchange/document_response/build_envio_recibos'
                     ]
                 },
                 'data': {
@@ -1833,14 +1833,14 @@ def test_document_response_build_envio_recibos_sends_caratula_and_recibos(sdk):
 def test_document_response_build_respuesta_envio_sends_caratula_and_data(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/billing/exchange/document_response'
-        '/buildRespuestaEnvio',
+        '/build_respuesta_envio',
     ).mock(
         return_value=httpx.Response(
             200,
             json={
                 'meta': {
                     'data_type': _PHP_CLASS[
-                        'billing/exchange/document_response/buildRespuestaEnvio'
+                        'billing/exchange/document_response/build_respuesta_envio'
                     ]
                 },
                 'data': {
@@ -1889,7 +1889,7 @@ def test_document_response_build_respuesta_envio_sends_caratula_and_data(sdk):
 @respx.mock
 def test_document_response_validate_schema_returns_the_parsed_xml(sdk):
     respx.post(
-        f'{TEST_BASE_URL}/billing/exchange/document_response/validateSchema',
+        f'{TEST_BASE_URL}/billing/exchange/document_response/validate_schema',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -1908,7 +1908,7 @@ def test_document_response_validate_schema_returns_the_parsed_xml(sdk):
 def test_document_response_validate_signature_returns_a_list(sdk):
     respx.post(
         f'{TEST_BASE_URL}/billing/exchange/document_response'
-        '/validateSignature',
+        '/validate_signature',
     ).mock(return_value=httpx.Response(200, json={'meta': {}, 'data': [{}]}))
 
     result = sdk.billing.exchange.document_response.validate_signature(
@@ -1922,7 +1922,7 @@ def test_document_response_validate_signature_returns_a_list(sdk):
 def test_previred_provider_get_indicadores_sends_periodo(sdk):
     route = respx.post(
         f'{TEST_BASE_URL}/human_resources/integration/previred_provider'
-        '/getIndicadores',
+        '/get_indicadores',
     ).mock(
         return_value=httpx.Response(
             200,
@@ -2052,7 +2052,7 @@ def test_payroll_renderer_render_defaults_options_to_empty_dict(sdk):
                         _rendering_response(
                             b'<html></html>',
                             label=None,
-                            mimeType='text/html',
+                            mime_type='text/html',
                             filename='liquidacion.html',
                         ),
                     ],

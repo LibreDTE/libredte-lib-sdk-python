@@ -8,6 +8,16 @@ from __future__ import annotations
 import base64
 from typing import Any
 
+SII_RUT = '60803000-K'
+"""
+RUT del SII, receptor de la carátula de todo sobre que se envía al SII.
+
+Un sobre para el SII (`SiiDteService.send`, `SiiBoletaService.send`) se
+arma con `receptor_rut=SII_RUT`. Un sobre para el receptor real del
+documento (el cliente) se arma sin `receptor_rut`: la carátula toma el
+receptor del primer documento.
+"""
+
 
 def encode_content(content: str | bytes) -> str:
     """

@@ -33,7 +33,7 @@ class PreviredProviderService:
     """
 
     _GET_INDICADORES_OPERATION = (
-        'human_resources.integration.previred_provider::getIndicadores'
+        'human_resources.integration.previred_provider::get_indicadores'
     )
 
     def __init__(self, client: ApiClient) -> None:

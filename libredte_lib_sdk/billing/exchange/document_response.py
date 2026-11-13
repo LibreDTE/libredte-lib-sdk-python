@@ -23,16 +23,16 @@ class DocumentResponseService:
     """
 
     _BUILD_ENVIO_RECIBOS_OPERATION = (
-        'billing.exchange.document_response::buildEnvioRecibos'
+        'billing.exchange.document_response::build_envio_recibos'
     )
     _BUILD_RESPUESTA_ENVIO_OPERATION = (
-        'billing.exchange.document_response::buildRespuestaEnvio'
+        'billing.exchange.document_response::build_respuesta_envio'
     )
     _VALIDATE_SCHEMA_OPERATION = (
-        'billing.exchange.document_response::validateSchema'
+        'billing.exchange.document_response::validate_schema'
     )
     _VALIDATE_SIGNATURE_OPERATION = (
-        'billing.exchange.document_response::validateSignature'
+        'billing.exchange.document_response::validate_signature'
     )
 
     def __init__(self, client: ApiClient) -> None:
@@ -111,7 +111,9 @@ class DocumentResponseService:
         `EnvioRecibos` trae múltiples firmas (una por recibo, más la
         del `SetRecibos`); `RespuestaDTE` trae solo la del nodo
         `Resultado`. En ambos casos se devuelve una lista, un ítem por
-        firma.
+        firma, cada uno con `{'valid': bool, 'error': str | None,
+        'signature': {...}}`. Una firma inválida no levanta error, hay
+        que revisar `valid`.
         """
         return cast(
             'list[dict[str, Any]]',

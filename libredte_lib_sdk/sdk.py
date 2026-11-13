@@ -26,6 +26,8 @@ class LibreDTE:
 
     .. code-block:: python
 
+        from libredte_lib_sdk.billing.common import SII_RUT
+
         sdk = LibreDTE()
         doc, ident, tp, sii = (
             sdk.billing.document,
@@ -43,7 +45,7 @@ class LibreDTE:
         documento = doc.builder.build_signed(
             input_data, caf_xml=caf.xml_base64, certificate=certificate,
         )
-        sobre = doc.dispatcher.create(documento)
+        sobre = doc.dispatcher.create(documento, receptor_rut=SII_RUT)
         envio = sii.sii_dte.send(
             sobre.xml_base64, certificate=certificate, company_rut=rut,
         )

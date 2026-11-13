@@ -14,13 +14,13 @@ class DocumentLoaderService:
     """
     Carga un documento tributario completo desde su XML.
 
-    Solo cubre `loadXml` — pensado para reconstruir los datos
+    Solo cubre `load_xml` — pensado para reconstruir los datos
     normalizados de un DTE ya emitido (timbrado y firmado) a partir de
     su XML, ej. un documento recibido de un tercero o recuperado de un
     respaldo.
     """
 
-    _LOAD_XML_OPERATION = 'billing.document.loader::loadXml'
+    _LOAD_XML_OPERATION = 'billing.document.loader::load_xml'
 
     def __init__(self, client: ApiClient) -> None:
         """Guarda el `ApiClient` compartido usado para llamar a la API."""

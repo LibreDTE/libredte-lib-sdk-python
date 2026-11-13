@@ -45,10 +45,10 @@ def test_full_message_skips_detail_when_it_repeats_the_title():
 
 def test_full_message_appends_file_and_line_when_the_api_reports_them():
     """
-    Caso real: `ParserWorker::parse()` envuelve cualquier excepción en
-    una `ParserException` — la API informa `title` como la clase PHP
-    completa, `detail` como el mensaje real, y `extensions.throwable`
-    con dónde se lanzó.
+    Caso real: el parseo envuelve cualquier excepción en una excepción
+    de parser — la API informa `title` como el nombre completo de la
+    clase de la excepción, `detail` como el mensaje real, y
+    `extensions.throwable` con dónde se lanzó.
     """
     error = LibreDteApiError(
         operation_id='billing.document.builder::build',

@@ -69,7 +69,7 @@ def test_builder_build_result_chains_into_validator(
 
     validator = real_sdk.billing.book.validator
     validator.validate_schema(built.xml_base64)
-    validator.validate_signature(built.xml_base64)
+    assert validator.validate_signature(built.xml_base64)['valid'] is True
 
 
 def test_loader_load_normalizes_caratula_and_detalle(
@@ -108,4 +108,7 @@ def test_loader_load_resolves_auth_when_emisor_has_autorizacion(
         bag, certificate=fake_certificate
     )
 
-    assert loaded.book_auth == {'FchResol': '2014-08-22', 'NroResol': 80}
+    assert loaded.book_auth == {
+        'fecha_resolucion': '2014-08-22',
+        'numero_resolucion': 80,
+    }

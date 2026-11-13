@@ -16,11 +16,16 @@ from .exceptions import (
     LibreDteConnectionError,
     LibreDteOperationNotFoundError,
     LibreDteRateLimitError,
+    RateLimit,
+    RateLimitInfo,
 )
 
 DEFAULT_BASE_URL = 'https://core.libredte.cl/api'
 DEFAULT_AUTH_SCHEME = 'Bearer'
-DEFAULT_TIMEOUT = 30.0
+# Segundos de espera de la respuesta HTTP. Supera en 60 s la duración máxima
+# que admite una llamada al SII (`max_duration`, hasta 300 s) para que el SDK
+# no se rinda antes que la API.
+DEFAULT_TIMEOUT = 360.0
 _HTTP_TOO_MANY_REQUESTS = 429
 _OPERATION_NOT_FOUND_PHP_CLASS = (
     'Derafu\\BackboneDispatcher\\Exception\\OperationNotFoundException'
@@ -169,10 +174,13 @@ class ApiClient:
         """
         Levanta `LibreDteRateLimitError` si la API frenó la solicitud.
 
-        La API expone `X-RateLimit-Limit`/`X-RateLimit-Remaining` en
-        toda respuesta. Se confía solo en el status code (`429`) más los
-        headers estándar de HTTP (`Retry-After`, `X-RateLimit-*`), no en
-        un shape de body particular.
+        La API expone el límite por IP (`X-RateLimit-IP-Limit`/
+        `X-RateLimit-IP-Remaining`) en toda respuesta, y el cupo del
+        usuario (`X-RateLimit-Limit`/`X-RateLimit-Remaining`) solo en
+        las autenticadas. En un 429 informa además cuál límite se agotó
+        (`X-RateLimit-Policy`) y cuándo se libera (`Retry-After`,
+        `X-RateLimit-Reset`). Se confía solo en el status code (`429`)
+        más los headers, no en un shape de body particular.
         """
         if response.status_code != _HTTP_TOO_MANY_REQUESTS:
             return
@@ -181,8 +189,15 @@ class ApiClient:
             value = response.headers.get(name)
             return int(value) if value and value.isdigit() else None
 
-        def _retry_after() -> float | None:
-            value = response.headers.get('retry-after')
+        def _rate_limit(prefix: str) -> RateLimit | None:
+            limit = _int_header(f'{prefix}-limit')
+            remaining = _int_header(f'{prefix}-remaining')
+            if limit is None and remaining is None:
+                return None
+            return RateLimit(limit=limit, remaining=remaining)
+
+        def _number_header(name: str) -> float | None:
+            value = response.headers.get(name)
             if value is None:
                 return None
             try:
@@ -201,9 +216,13 @@ class ApiClient:
         raise LibreDteRateLimitError(
             operation_id=operation_id,
             detail=detail,
-            retry_after=_retry_after(),
-            limit=_int_header('x-ratelimit-limit'),
-            remaining=_int_header('x-ratelimit-remaining'),
+            rate_limit=RateLimitInfo(
+                retry_after=_number_header('retry-after'),
+                reset_at=_number_header('x-ratelimit-reset'),
+                policy=response.headers.get('x-ratelimit-policy') or None,
+                quota=_rate_limit('x-ratelimit'),
+                ip=_rate_limit('x-ratelimit-ip'),
+            ),
         )
 
     @staticmethod

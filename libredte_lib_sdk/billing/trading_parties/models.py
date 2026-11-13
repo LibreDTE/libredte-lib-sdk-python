@@ -61,7 +61,7 @@ class Certificate:
         """
         Construye un `Certificate` desde el `data` que devuelve la API.
 
-        Cubre tanto `createFakeCertificate` como `system.certificate
+        Cubre tanto `create_fake_certificate` como `system.certificate
         .loader::load` — ambas entregan el mismo shape completo (`cert`/
         `pkey` + metadatos). Los campos ausentes quedan en `None`.
         """
@@ -79,9 +79,9 @@ class Certificate:
             valid_until=(
                 datetime.fromisoformat(data['to']) if data.get('to') else None
             ),
-            total_days=data.get('totalDays'),
-            expiration_days=data.get('expirationDays'),
-            is_active=data.get('isActive'),
+            total_days=data.get('total_days'),
+            expiration_days=data.get('expiration_days'),
+            is_active=data.get('is_active'),
             issuer=data.get('issuer'),
             modulus=data.get('modulus'),
             exponent=data.get('exponent'),

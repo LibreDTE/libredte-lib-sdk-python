@@ -17,34 +17,53 @@ class DocumentDispatcherService:
     """Arma y valida el sobre `EnvioDTE` (`billing.document.dispatcher`)."""
 
     _CREATE_OPERATION = 'billing.document.dispatcher::create'
-    _CREATE_MANY_OPERATION = 'billing.document.dispatcher::createMany'
-    _LOAD_XML_OPERATION = 'billing.document.dispatcher::loadXml'
+    _CREATE_MANY_OPERATION = 'billing.document.dispatcher::create_many'
+    _LOAD_XML_OPERATION = 'billing.document.dispatcher::load_xml'
     _VALIDATE_OPERATION = 'billing.document.dispatcher::validate'
-    _VALIDATE_SCHEMA_OPERATION = 'billing.document.dispatcher::validateSchema'
+    _VALIDATE_SCHEMA_OPERATION = 'billing.document.dispatcher::validate_schema'
     _VALIDATE_SIGNATURE_OPERATION = (
-        'billing.document.dispatcher::validateSignature'
+        'billing.document.dispatcher::validate_signature'
     )
 
     def __init__(self, client: ApiClient) -> None:
         """Guarda el `ApiClient` compartido usado para llamar a la API."""
         self._client = client
 
-    def create(self, bag: DocumentBag) -> DocumentEnvelope:
+    def create(
+        self,
+        bag: DocumentBag,
+        *,
+        receptor_rut: str | None = None,
+    ) -> DocumentEnvelope:
         """
-        Envuelve y firma un documento ya timbrado en un sobre `EnvioDTE`.
+        Envuelve y firma un documento ya timbrado en un sobre.
 
         `bag` es el `DocumentBag` ya timbrado y firmado que devuelve
         `DocumentBuilderService.build_signed()` — trae `certificate`/
         `emisor` incluidos, no hace falta pasarlos aparte. El sobre
         resultante es lo que se envía al SII (`SiiDteService.send`).
+
+        `receptor_rut` es el RUT del receptor de la carátula del sobre.
+        Sin indicarlo es el receptor del documento, que es el sobre para
+        enviar al cliente. El sobre que va al SII se arma con
+        `receptor_rut=SII_RUT` (`60803000-K`): el SII lo exige y rechaza
+        el envío con otro receptor. El envío normal usa dos sobres, uno
+        para el SII y otro para el cliente. Para enviar el sobre al SII
+        el emisor debe traer `autorizacion_dte`, con `fecha_resolucion` y
+        `numero_resolucion` de su autorización.
         """
         response = self._client.call_response(
             self._CREATE_OPERATION,
-            bag=self._bag_payload(bag),
+            bag=self._bag_payload(bag, receptor_rut),
         )
         return build_response(DocumentEnvelope, response)
 
-    def create_many(self, bags: Sequence[DocumentBag]) -> DocumentEnvelope:
+    def create_many(
+        self,
+        bags: Sequence[DocumentBag],
+        *,
+        receptor_rut: str | None = None,
+    ) -> DocumentEnvelope:
         """
         Envuelve y firma 2+ documentos ya timbrados en un sobre `EnvioDTE`.
 
@@ -53,15 +72,24 @@ class DocumentDispatcherService:
         `emisor`. El sobre resultante queda firmado con el certificado
         del PRIMER `DocumentBag` (el sobre en sí también se firma, no
         solo cada documento).
+
+        `receptor_rut` funciona igual que en `create()`: es el receptor
+        de la carátula del sobre, y para el SII debe ser `SII_RUT`.
         """
         response = self._client.call_response(
             self._CREATE_MANY_OPERATION,
-            bags=[self._bag_payload(bag) for bag in bags],
+            bags=[
+                self._bag_payload(bag, receptor_rut if index == 0 else None)
+                for index, bag in enumerate(bags)
+            ],
         )
         return build_response(DocumentEnvelope, response)
 
     @staticmethod
-    def _bag_payload(bag: DocumentBag) -> dict[str, Any]:
+    def _bag_payload(
+        bag: DocumentBag,
+        receptor_rut: str | None = None,
+    ) -> dict[str, Any]:
         if bag.certificate is None:
             raise ValueError(
                 'Este DocumentBag no tiene certificado — ¿se firmó con '
@@ -73,11 +101,15 @@ class DocumentDispatcherService:
                 '`builder.build_draft/build_signed()` o se cargó con '
                 '`loader.load_xml()`?',
             )
-        return {
+        payload: dict[str, Any] = {
             'xmlDocument': bag.xml_base64,
             'certificate': bag.certificate.to_payload(),
             'emisor': bag.emisor,
         }
+        if receptor_rut is not None:
+            payload['receptor'] = {'rut': receptor_rut}
+
+        return payload
 
     def load_xml(self, xml_base64: str) -> DocumentEnvelope:
         """
@@ -121,7 +153,9 @@ class DocumentDispatcherService:
 
         Un sobre trae más de una firma (la del DTE y la del propio
         `EnvioDTE`) — devuelve una lista, un ítem por firma. Cada ítem
-        es un `dict` vacío en caso de éxito.
+        es `{'valid': bool, 'error': str | None, 'signature': {...}}`,
+        igual que en `DocumentValidatorService.validate_signature()`: una
+        firma inválida no levanta error, hay que revisar `valid`.
         """
         return cast(
             'list[dict[str, Any]]',

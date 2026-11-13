@@ -4,7 +4,7 @@
 """
 Tests en vivo para `DocumentLoaderService` (`billing.document.loader`).
 
-`loadXml` devuelve la misma `DocumentBag` que `DocumentBuilderService`
+`load_xml` devuelve la misma `DocumentBag` que `DocumentBuilderService`
 (`document`/`document_type`/`document_stamp_base64`/`document_extra`/
 `document_auth`/`document_id`/`xml_base64`) — acá se reconstruye a
 partir de un documento ya timbrado y firmado, así que además viene con

@@ -11,6 +11,8 @@ archivo, ya parseada (todavía sin construir).
 
 from __future__ import annotations
 
+import re
+
 import pytest
 
 from libredte_lib_sdk.exceptions import LibreDteApiError
@@ -81,7 +83,7 @@ def test_parse_without_complete_leaves_the_emisor_data_out(real_sdk):
     )
 
     emisor = batch.document_bags[0].document_parsed['Encabezado']['Emisor']
-    assert emisor['RznSoc'] is False
+    assert emisor['RznSoc'] is None
 
 
 def test_parse_reports_the_row_of_the_error(real_sdk):
@@ -93,4 +95,4 @@ def test_parse_reports_the_row_of_the_error(real_sdk):
     with pytest.raises(LibreDteApiError) as error:
         real_sdk.billing.document.batch_processor.parse(csv.encode())
 
-    assert 'Fila 3' in error.value.detail
+    assert re.search(r'(Fila|Row) 3', error.value.detail)

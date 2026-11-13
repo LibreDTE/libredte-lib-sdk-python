@@ -18,8 +18,10 @@ class BookValidatorService:
     vacío en caso de éxito.
     """
 
-    _VALIDATE_SCHEMA_OPERATION = 'billing.book.validator::validateSchema'
-    _VALIDATE_SIGNATURE_OPERATION = 'billing.book.validator::validateSignature'
+    _VALIDATE_SCHEMA_OPERATION = 'billing.book.validator::validate_schema'
+    _VALIDATE_SIGNATURE_OPERATION = (
+        'billing.book.validator::validate_signature'
+    )
 
     def __init__(self, client: ApiClient) -> None:
         """Guarda el `ApiClient` compartido usado para llamar a la API."""
@@ -40,7 +42,9 @@ class BookValidatorService:
         Valida la firma electrónica del libro.
 
         El libro tiene una sola firma — devuelve un único `dict`, no
-        una lista.
+        una lista, con `{'valid': bool, 'error': str | None,
+        'signature': {...}}`. Una firma inválida no levanta error, hay
+        que revisar `valid`.
         """
         return cast(
             'dict[str, Any]',

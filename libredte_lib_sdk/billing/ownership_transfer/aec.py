@@ -25,10 +25,10 @@ class AecService:
 
     _BUILD_OPERATION = 'billing.ownership_transfer.aec::build'
     _VALIDATE_SCHEMA_OPERATION = (
-        'billing.ownership_transfer.aec::validateSchema'
+        'billing.ownership_transfer.aec::validate_schema'
     )
     _VALIDATE_SIGNATURE_OPERATION = (
-        'billing.ownership_transfer.aec::validateSignature'
+        'billing.ownership_transfer.aec::validate_signature'
     )
 
     def __init__(self, client: ApiClient) -> None:
@@ -81,7 +81,9 @@ class AecService:
         Valida cada firma electrónica del AEC.
 
         El AEC trae múltiples firmas (`DTECedido`, `Cesion`, `AEC`) —
-        devuelve una lista, un ítem por firma.
+        devuelve una lista, un ítem por firma, cada uno con
+        `{'valid': bool, 'error': str | None, 'signature': {...}}`. Una
+        firma inválida no levanta error, hay que revisar `valid`.
         """
         return cast(
             'list[dict[str, Any]]',

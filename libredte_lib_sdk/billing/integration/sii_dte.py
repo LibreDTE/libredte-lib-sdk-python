@@ -16,6 +16,7 @@ from .models import (
     ValidateDocumentResponse,
     ValidateDocumentSignatureResponse,
 )
+from .request import SiiRequestOptions, build_request
 
 
 class SiiDteService:
@@ -28,20 +29,24 @@ class SiiDteService:
     .mandatario_manager.create_fake_certificate`) resulta en un
     `LibreDteApiError` (la propia excepción de autenticación del SII,
     accesible vía `.php_class`), no en una excepción distinta.
+
+    Cada método acepta `options` (`SiiRequestOptions`) para ajustar los
+    reintentos y los tiempos de la llamada al SII.
     """
 
-    _SEND_OPERATION = 'billing.integration.sii_dte::sendXmlDocument'
+    _SEND_OPERATION = 'billing.integration.sii_dte::send_xml_document'
     _STATUS_OPERATION = (
-        'billing.integration.sii_dte::checkXmlDocumentSentStatus'
+        'billing.integration.sii_dte::check_xml_document_sent_status'
     )
     _VALIDATE_DOCUMENT_OPERATION = (
-        'billing.integration.sii_dte::validateDocument'
+        'billing.integration.sii_dte::validate_document'
     )
     _VALIDATE_DOCUMENT_SIGNATURE_OPERATION = (
-        'billing.integration.sii_dte::validateDocumentSignature'
+        'billing.integration.sii_dte::validate_document_signature'
     )
     _REQUEST_STATUS_BY_EMAIL_OPERATION = (
-        'billing.integration.sii_dte::requestXmlDocumentSentStatusByEmail'
+        'billing.integration.sii_dte::'
+        'request_xml_document_sent_status_by_email'
     )
 
     def __init__(self, client: ApiClient) -> None:
@@ -55,6 +60,7 @@ class SiiDteService:
         certificate: Certificate,
         company_rut: str,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
         compress: bool = False,
         retries: int | None = None,
     ) -> SendXmlDocumentResponse:
@@ -66,10 +72,7 @@ class SiiDteService:
         """
         response = self._client.call_response(
             self._SEND_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             doc=envelope_xml_base64,
             company=company_rut,
             compress=compress,
@@ -84,14 +87,12 @@ class SiiDteService:
         certificate: Certificate,
         company_rut: str,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> CheckXmlDocumentSentStatusResponse:
         """Consulta el estado de un envío al SII mediante su Track ID."""
         response = self._client.call_response(
             self._STATUS_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             trackId=track_id,
             company=company_rut,
         )
@@ -108,6 +109,7 @@ class SiiDteService:
         recipient_rut: str,
         certificate: Certificate,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> ValidateDocumentResponse:
         """
         Confirma si un documento existe en el SII (aceptado o con reparos).
@@ -118,10 +120,7 @@ class SiiDteService:
         """
         response = self._client.call_response(
             self._VALIDATE_DOCUMENT_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             company=company_rut,
             document=document_type,
             number=number,
@@ -143,6 +142,7 @@ class SiiDteService:
         signature: str,
         certificate: Certificate,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> ValidateDocumentSignatureResponse:
         """
         Igual que `validate_document()`, verificando además la firma.
@@ -152,10 +152,7 @@ class SiiDteService:
         """
         response = self._client.call_response(
             self._VALIDATE_DOCUMENT_SIGNATURE_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             company=company_rut,
             document=document_type,
             number=number,
@@ -173,6 +170,7 @@ class SiiDteService:
         certificate: Certificate,
         company_rut: str,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> RequestXmlDocumentSentStatusByEmailResponse:
         """
         Pide al SII que envíe el estado de un envío por correo.
@@ -183,10 +181,7 @@ class SiiDteService:
         """
         response = self._client.call_response(
             self._REQUEST_STATUS_BY_EMAIL_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             trackId=track_id,
             company=company_rut,
         )

@@ -26,9 +26,9 @@ class CatalogService:
 
     _LIST_OPERATION = 'system.repository.catalog::list'
     _FIND_OPERATION = 'system.repository.catalog::find'
-    _FIND_ALL_OPERATION = 'system.repository.catalog::findAll'
-    _FIND_BY_OPERATION = 'system.repository.catalog::findBy'
-    _FIND_ONE_BY_OPERATION = 'system.repository.catalog::findOneBy'
+    _FIND_ALL_OPERATION = 'system.repository.catalog::find_all'
+    _FIND_BY_OPERATION = 'system.repository.catalog::find_by'
+    _FIND_ONE_BY_OPERATION = 'system.repository.catalog::find_one_by'
     _COUNT_OPERATION = 'system.repository.catalog::count'
 
     def __init__(self, client: ApiClient) -> None:

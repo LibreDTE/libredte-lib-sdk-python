@@ -15,6 +15,7 @@ from .models import (
     ListDocumentEventsResponse,
     SubmitDocumentAcceptanceResponse,
 )
+from .request import SiiRequestOptions, build_request
 
 
 class SiiRcvService:
@@ -24,17 +25,22 @@ class SiiRcvService:
     Cubre las 4 operaciones del worker — todo el lado "recibo un
     documento de un tercero" (cesión, recepción, reclamos), no el de
     emitir un DTE propio (eso es `SiiDteService`).
+
+    Cada método acepta `options` (`SiiRequestOptions`) para ajustar los
+    reintentos y los tiempos de la llamada al SII.
     """
 
     _CHECK_ASSIGNABILITY_OPERATION = (
-        'billing.integration.sii_rcv::checkDocumentAssignability'
+        'billing.integration.sii_rcv::check_document_assignability'
     )
     _GET_RECEPTION_DATE_OPERATION = (
-        'billing.integration.sii_rcv::getDocumentSiiReceptionDate'
+        'billing.integration.sii_rcv::get_document_sii_reception_date'
     )
-    _LIST_EVENTS_OPERATION = 'billing.integration.sii_rcv::listDocumentEvents'
+    _LIST_EVENTS_OPERATION = (
+        'billing.integration.sii_rcv::list_document_events'
+    )
     _SUBMIT_ACCEPTANCE_OPERATION = (
-        'billing.integration.sii_rcv::submitDocumentAcceptance'
+        'billing.integration.sii_rcv::submit_document_acceptance'
     )
 
     def __init__(self, client: ApiClient) -> None:
@@ -49,14 +55,12 @@ class SiiRcvService:
         number: int,
         certificate: Certificate,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> CheckDocumentAssignabilityResponse:
         """Consulta si un documento es cedible (apto para factoring)."""
         response = self._client.call_response(
             self._CHECK_ASSIGNABILITY_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             company=company_rut,
             document=document_type,
             number=number,
@@ -71,14 +75,12 @@ class SiiRcvService:
         number: int,
         certificate: Certificate,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> GetDocumentSiiReceptionDateResponse:
         """Consulta la fecha de recepción de un documento en el SII."""
         response = self._client.call_response(
             self._GET_RECEPTION_DATE_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             company=company_rut,
             document=document_type,
             number=number,
@@ -93,14 +95,12 @@ class SiiRcvService:
         number: int,
         certificate: Certificate,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> ListDocumentEventsResponse:
         """Lista los eventos (acuses, reclamos, etc.) de un documento."""
         response = self._client.call_response(
             self._LIST_EVENTS_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             company=company_rut,
             document=document_type,
             number=number,
@@ -116,6 +116,7 @@ class SiiRcvService:
         action: str,
         certificate: Certificate,
         environment: SiiEnvironment = SiiEnvironment.PRODUCTION,
+        options: SiiRequestOptions | None = None,
     ) -> SubmitDocumentAcceptanceResponse:
         """
         Informa al SII la aceptación/reclamo de un documento recibido.
@@ -126,10 +127,7 @@ class SiiRcvService:
         """
         response = self._client.call_response(
             self._SUBMIT_ACCEPTANCE_OPERATION,
-            request={
-                'certificate': certificate.to_payload(),
-                'options': {'environment': int(environment)},
-            },
+            request=build_request(certificate, environment, options),
             company=company_rut,
             document=document_type,
             number=number,

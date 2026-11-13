@@ -62,13 +62,13 @@ class Caf(XmlPayloadMixin):
         return cls(
             id=data['id'],
             emisor=data['emisor'],
-            tipo_documento=data['tipoDocumento'],
-            folio_desde=data['folioDesde'],
-            folio_hasta=data['folioHasta'],
-            cantidad_folios=data['cantidadFolios'],
-            fecha_autorizacion=data['fechaAutorizacion'],
-            fecha_vencimiento=data.get('fechaVencimiento'),
-            meses_autorizacion=data['mesesAutorizacion'],
+            tipo_documento=data['tipo_documento'],
+            folio_desde=data['folio_desde'],
+            folio_hasta=data['folio_hasta'],
+            cantidad_folios=data['cantidad_folios'],
+            fecha_autorizacion=data['fecha_autorizacion'],
+            fecha_vencimiento=data.get('fecha_vencimiento'),
+            meses_autorizacion=data['meses_autorizacion'],
             vigente=data['vigente'],
             vence=data['vence'],
             idk=data['idk'],
@@ -76,12 +76,12 @@ class Caf(XmlPayloadMixin):
             if ambiente is not None
             else None,
             # Mismo valor que `ambiente`, ya resuelto a `int` — la API lo
-            # entrega redundante así (`Caf::getCertificacion()` en
-            # libredte-lib-core es literalmente `getEnvironment()?->value`),
-            # se mantiene igual acá para no diverger del shape real.
+            # entrega redundante así (en libredte-lib-core es literalmente
+            # el valor de `ambiente`), se mantiene igual acá para no diverger
+            # del shape real.
             certificacion=data.get('certificacion'),
-            public_key=data['publicKey'],
-            private_key=data['privateKey'],
+            public_key=data['public_key'],
+            private_key=data['private_key'],
             xml_base64=data['xml'],
             raw=data,
         )

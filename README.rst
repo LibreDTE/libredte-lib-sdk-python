@@ -30,7 +30,11 @@ Uso
 
 .. code-block:: python
 
+    import dataclasses
+
     from libredte_lib_sdk import LibreDTE
+    from libredte_lib_sdk.billing.common import SII_RUT
+    from libredte_lib_sdk.billing.integration import SiiRequestOptions
     from libredte_lib_sdk.billing.trading_parties import Mandatario
 
     sdk = LibreDTE()  # base_url y api_token también vía env vars, ver abajo
@@ -46,6 +50,7 @@ Uso
                 'RUTEmisor': '76192083-9',
                 'RznSoc': 'SASCO SpA',
                 'GiroEmis': 'Servicios',
+                'Acteco': 620200,
                 'DirOrigen': 'Santiago',
                 'CmnaOrigen': 'Santiago',
             },
@@ -72,7 +77,7 @@ Uso
         codigo_documento=33, folio_desde=1, folio_hasta=100,
     )
     certificate = b.trading_parties.mandatario_manager.create_fake_certificate(
-        Mandatario(rut='76192083-9', nombre='SASCO SpA', email='sasco@example.com'),
+        Mandatario(run='76192083-9', nombre='SASCO SpA', email='sasco@example.com'),
     )
 
     # En producción: cargar y validar el CAF real que el SII le entregó
@@ -88,17 +93,46 @@ Uso
         input_data, caf_xml=caf.xml_base64, certificate=certificate,
     )
 
-    # 3. Envío al SII (arma el sobre EnvioDTE y luego lo envía).
-    # `documento` ya trae certificate/emisor incluidos — no hace falta
-    # pasarlos aparte.
-    sobre = b.document.dispatcher.create(documento)
-    envio = b.integration.sii_dte.send(
-        sobre.xml_base64, certificate=certificate, company_rut='76192083-9',
+    # 3. Sobres. El envío normal usa dos: uno para el SII y otro para el
+    # receptor del documento (el cliente). `documento` ya trae
+    # certificate/emisor incluidos — no hace falta pasarlos aparte, salvo
+    # `autorizacion_dte` del emisor (`fecha_resolucion` y
+    # `numero_resolucion`), que va en la carátula.
+    documento = dataclasses.replace(
+        documento,
+        emisor={
+            **documento.emisor,
+            'autorizacion_dte': {
+                'fecha_resolucion': '2019-12-23',
+                'numero_resolucion': 0,
+            },
+        },
     )
 
-    # 4. Estado del envío, por Track ID.
+    # El sobre para el SII siempre tiene al SII como receptor.
+    sobre_sii = b.document.dispatcher.create(documento, receptor_rut=SII_RUT)
+
+    # El sobre para el cliente toma el receptor del documento.
+    sobre_cliente = b.document.dispatcher.create(documento)
+
+    # 4. Envío al SII y estado del envío, por Track ID.
+    envio = b.integration.sii_dte.send(
+        sobre_sii.xml_base64, certificate=certificate,
+        company_rut='76192083-9',
+    )
     estado = b.integration.sii_dte.check_status(
         envio.track_id, certificate=certificate, company_rut='76192083-9',
+    )
+
+    # Las boletas (tipos 39 y 41) se envían por otra API del SII, solo
+    # disponible en Lib Pro: `b.integration.sii_boleta` tiene `send()`,
+    # `check_status()` y `validate_document()` con la misma forma.
+
+    # Reintentos y tiempos de una llamada al SII (todos opcionales; la API
+    # usa los suyos si no se indican y los ajusta a su rango).
+    estado = b.integration.sii_dte.check_status(
+        envio.track_id, certificate=certificate, company_rut='76192083-9',
+        options=SiiRequestOptions(retries=3, timeout=20, max_duration=60),
     )
 
     # 5. HTML o PDF — misma forma de respuesta para ambos.
@@ -210,7 +244,10 @@ levanta ``libredte_lib_sdk.LibreDteApiError``, con ``.status_code``,
 si la API la informó — ej. ``DocumentException``, o una excepción de
 autenticación del SII). Un ``429`` de la API levanta
 ``LibreDteRateLimitError`` (subclase de lo anterior), con
-``.retry_after``/``.limit``/``.remaining``. Un problema de red levanta
+``.retry_after`` y ``.reset_at`` (cuándo se libera), ``.policy`` (cuál límite
+se agotó), el cupo del usuario (``.limit``/``.remaining``, solo con
+autenticación) y el límite por IP (``.ip_limit``/``.ip_remaining``). Cada
+dato es ``None`` si la API no lo informa. Un problema de red levanta
 ``libredte_lib_sdk.LibreDteConnectionError``.
 
 Desarrollo
@@ -225,6 +262,17 @@ Desarrollo
 Los tests unitarios no hacen red real: mockean la API con ``respx``. Los
 de ``tests/integration/`` sí (marker ``live``), y están excluidos por
 defecto de ``pytest``/``make test``/``make check``.
+
+Los tests ``live`` usan ``LIBREDTE_LIB_SDK_BASE_URL`` y
+``LIBREDTE_LIB_SDK_TOKEN``. Los de ``tests/integration/test_sii_certification.py``
+envían documentos reales al ambiente de certificación del SII y se omiten si
+faltan estas variables de entorno:
+
+- ``LIBREDTE_CERTIFICATE_CERT`` y ``LIBREDTE_CERTIFICATE_PKEY``: certificado
+  digital y su clave privada, en PEM (un ``\n`` literal vale como salto de
+  línea).
+- ``LIBREDTE_CAF_DIR``: directorio con los CAF de certificación, uno por tipo
+  de documento (``033.xml``, ``034.xml``, ``039.xml``, ...).
 
 Términos y condiciones de uso
 ------------------------------

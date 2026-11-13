@@ -5,7 +5,7 @@
 Tests en vivo para `DocumentRendererService.render()`.
 
 La API envuelve todo render (texto o binario) en el sobre JSON habitual,
-como `data.renderings`: una lista de `{content, mimeType, filename,
+como `data.renderings`: una lista de `{content, mime_type, filename,
 label, copies, copyNumber}` con `content` en base64. Sin la opción
 `renderings`, genera una única copia `'tributaria'` (default); pasando
 `renderings={'tributaria': 2, 'cedible': 1}` (o similar) pide varias
@@ -33,6 +33,8 @@ Corre contra la API real (sin mocks) — requiere una API que soporte
 """
 
 from __future__ import annotations
+
+import re
 
 import pytest
 
@@ -129,7 +131,7 @@ def test_unknown_presentation_raises_a_clear_api_error(
             renderings={'noexiste': 1},
         )
 
-    assert 'no existe' in exc_info.value.detail
+    assert re.search(r'no existe|does not exist', exc_info.value.detail)
 
 
 def test_no_generatable_presentation_raises_a_clear_api_error(
@@ -148,4 +150,6 @@ def test_no_generatable_presentation_raises_a_clear_api_error(
             renderings={'cedible': 1},
         )
 
-    assert 'ninguna' in exc_info.value.detail.lower()
+    assert re.search(
+        r'ninguna|any rendering', exc_info.value.detail, re.IGNORECASE
+    )

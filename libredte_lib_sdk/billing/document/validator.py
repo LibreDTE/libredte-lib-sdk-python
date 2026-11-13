@@ -20,9 +20,9 @@ class DocumentValidatorService:
     """
 
     _VALIDATE_OPERATION = 'billing.document.validator::validate'
-    _VALIDATE_SCHEMA_OPERATION = 'billing.document.validator::validateSchema'
+    _VALIDATE_SCHEMA_OPERATION = 'billing.document.validator::validate_schema'
     _VALIDATE_SIGNATURE_OPERATION = (
-        'billing.document.validator::validateSignature'
+        'billing.document.validator::validate_signature'
     )
 
     def __init__(self, client: ApiClient) -> None:
@@ -58,8 +58,13 @@ class DocumentValidatorService:
         """
         Valida la firma electrónica del documento.
 
-        Devuelve un `dict` vacío en caso de éxito. Si la firma no es
-        válida, la API levanta `LibreDteApiError`.
+        Devuelve `{'valid': bool, 'error': str | None, 'signature': {...}}`.
+        La API responde con éxito tanto si la firma es válida como si no
+        lo es: el resultado está en `valid`, y `error` explica el motivo
+        cuando es `False` (por ejemplo, que el contenido se modificó
+        después de firmarlo). `signature` trae los datos de la firma
+        (`reference`, `signature_method`, `digest_method`, el certificado
+        y `signer`, con los datos del certificado del firmante).
         """
         return cast(
             'dict[str, Any]',

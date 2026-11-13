@@ -80,6 +80,7 @@ def test_build_envio_recibos_result_chains_into_validator(
 
     results = service.validate_signature(built.xml_base64)
     assert len(results) >= 1
+    assert all(result['valid'] is True for result in results)
 
 
 def test_build_respuesta_envio_returns_the_datos_and_the_xml(
@@ -110,3 +111,4 @@ def test_build_respuesta_envio_result_chains_into_validator(
 
     results = service.validate_signature(built.xml_base64)
     assert len(results) >= 1
+    assert all(result['valid'] is True for result in results)

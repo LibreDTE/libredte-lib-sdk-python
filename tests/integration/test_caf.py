@@ -43,7 +43,7 @@ def test_caf_loader_round_trips_a_real_caf_xml(fake_caf, real_sdk):
     assert loaded.folio_desde == fake_caf.folio_desde
     assert loaded.folio_hasta == fake_caf.folio_hasta
     assert loaded.emisor['rut'] == '76192083-9'
-    # `CafFaker::IDK` en libredte-lib-core — un CAF ficticio nunca
+    # IDK 666 de los CAF ficticios — un CAF ficticio nunca
     # corresponde a un ambiente real del SII.
     assert loaded.idk == 666
     assert loaded.ambiente is None

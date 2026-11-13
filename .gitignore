@@ -17,5 +17,7 @@ docs/_build/
 docs/libredte_lib_sdk*.rst
 docs/modules.rst
 
+.env
+
 # Archivos específicos del sistema operativo.
 .DS_Store

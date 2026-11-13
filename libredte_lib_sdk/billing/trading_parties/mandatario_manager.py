@@ -21,10 +21,10 @@ class MandatarioManagerService:
     """
 
     _CREATE_FAKE_OPERATION = (
-        'billing.trading_parties.mandatario_manager::createFakeCertificate'
+        'billing.trading_parties.mandatario_manager::create_fake_certificate'
     )
     _CREATE_FROM_CERTIFICATE_OPERATION = (
-        'billing.trading_parties.mandatario_manager::createFromCertificate'
+        'billing.trading_parties.mandatario_manager::create_from_certificate'
     )
 
     def __init__(self, client: ApiClient) -> None:

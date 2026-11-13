@@ -106,6 +106,10 @@ def test_call_response_has_no_data_type_for_a_non_json_response(api_client):
 
 _B = 'libredte\\lib\\Core\\Package\\Billing\\Component\\'
 _SII = _B + 'Integration\\Support\\Response\\'
+_PRO_SII = (
+    'libredte\\lib\\Pro\\Package\\Billing\\Component\\'
+    'Integration\\Support\\Response\\SiiBoleta\\'
+)
 
 
 @pytest.mark.parametrize(
@@ -160,6 +164,26 @@ _SII = _B + 'Integration\\Support\\Response\\'
             _SII + 'SiiRcv\\ListDocumentEventsResponse',
             'ListDocumentEventsResponse',
         ),
+        (
+            _SII + 'SiiRtc\\CheckAecSentStatusResponse',
+            'CheckAecSentStatusResponse',
+        ),
+        (
+            _SII + 'SiiRtc\\GetAssignmentStatusResponse',
+            'GetAssignmentStatusResponse',
+        ),
+        (
+            _PRO_SII + 'SendXmlDocumentResponse',
+            'SiiBoletaSendXmlDocumentResponse',
+        ),
+        (
+            _PRO_SII + 'CheckXmlDocumentSentStatusResponse',
+            'SiiBoletaCheckXmlDocumentSentStatusResponse',
+        ),
+        (
+            _PRO_SII + 'ValidateDocumentResponse',
+            'SiiBoletaValidateDocumentResponse',
+        ),
     ],
 )
 def test_every_response_class_has_its_dto(php_class, dto):
@@ -167,4 +191,4 @@ def test_every_response_class_has_its_dto(php_class, dto):
 
 
 def test_no_unexpected_response_class_is_registered():
-    assert len(_REGISTRY) == 21
+    assert len(_REGISTRY) == 26

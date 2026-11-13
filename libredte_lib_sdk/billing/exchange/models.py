@@ -18,7 +18,7 @@ from ..common import XmlPayloadMixin
 @dataclass(frozen=True, slots=True)
 class EnvioRecibos(XmlPayloadMixin):
     """
-    XML `EnvioRecibos` construido (`document_response::buildEnvioRecibos`).
+    XML `EnvioRecibos` construido (`document_response::build_envio_recibos`).
 
     Recibo de mercaderías o servicios prestados por un proveedor.
     `datos` es la estructura ya parseada, `xml_base64` el XML completo
@@ -43,7 +43,7 @@ class EnvioRecibos(XmlPayloadMixin):
 @dataclass(frozen=True, slots=True)
 class RespuestaEnvio(XmlPayloadMixin):
     """
-    XML `RespuestaDTE` construido (`document_response::buildRespuestaEnvio`).
+    XML `RespuestaDTE` construido (`document_response::build_respuesta_envio`).
 
     Acuse de recibo del envío (`RecepcionEnvio`) o resultado de
     validación por documento (`ResultadoDTE`), según los datos

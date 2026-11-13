@@ -12,12 +12,16 @@ son de integración real, sin mocks, y están excluidos por defecto (ver
 
 from __future__ import annotations
 
+import base64
 import dataclasses
+import os
+import re
+from pathlib import Path
 
 import pytest
 
 from libredte_lib_sdk import LibreDTE
-from libredte_lib_sdk.billing.trading_parties import Mandatario
+from libredte_lib_sdk.billing.trading_parties import Certificate, Mandatario
 
 _INPUT_DATA = {
     'Encabezado': {
@@ -26,6 +30,7 @@ _INPUT_DATA = {
             'RUTEmisor': '76192083-9',
             'RznSoc': 'SASCO SpA',
             'GiroEmis': 'Servicios',
+            'Acteco': 620200,
             'DirOrigen': 'Santiago',
             'CmnaOrigen': 'Santiago',
         },
@@ -141,3 +146,51 @@ def signed_envelope(real_sdk, signed_document):
         },
     )
     return real_sdk.billing.document.dispatcher.create(bag)
+
+
+@pytest.fixture
+def sii_certificate():
+    """
+    Certificado digital real, para operar contra el SII de certificación.
+
+    Se lee de `LIBREDTE_CERTIFICATE_CERT` y `LIBREDTE_CERTIFICATE_PKEY`
+    (PEM; un `\\n` literal vale como salto de línea). Sin ellas el test
+    se omite: ninguna otra fixture necesita un certificado real.
+    """
+    cert = os.environ.get('LIBREDTE_CERTIFICATE_CERT')
+    pkey = os.environ.get('LIBREDTE_CERTIFICATE_PKEY')
+    if not cert or not pkey:
+        pytest.skip(
+            'Falta LIBREDTE_CERTIFICATE_CERT / LIBREDTE_CERTIFICATE_PKEY.',
+        )
+
+    return Certificate(
+        certificate=cert.replace('\\n', '\n'),
+        private_key=pkey.replace('\\n', '\n'),
+    )
+
+
+@pytest.fixture
+def sii_caf():
+    """
+    Entrega `(caf_xml_base64, folio_desde, folio_hasta)` de un CAF real.
+
+    Los CAF de certificación están en el directorio `LIBREDTE_CAF_DIR`,
+    uno por tipo de documento (`033.xml`, `034.xml`, `039.xml`...). Sin él
+    el test se omite.
+    """
+    directory = os.environ.get('LIBREDTE_CAF_DIR')
+    if not directory:
+        pytest.skip('Falta LIBREDTE_CAF_DIR.')
+
+    def load(document_type: int) -> tuple[str, int, int]:
+        path = Path(directory) / f'{document_type:03d}.xml'
+        if not path.is_file():
+            pytest.skip(f'No existe el CAF {path}.')
+        xml = path.read_bytes()
+        folio_desde = int(re.search(rb'<D>(\d+)</D>', xml)[1])
+        folio_hasta = int(re.search(rb'<H>(\d+)</H>', xml)[1])
+
+        return base64.b64encode(xml).decode(), folio_desde, folio_hasta
+
+    return load

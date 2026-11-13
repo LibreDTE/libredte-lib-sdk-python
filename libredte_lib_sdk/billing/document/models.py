@@ -31,15 +31,15 @@ class DocumentBag:
     """
     Bolsa de un documento tributario.
 
-    Devuelta por `document.builder::build`/`document.loader::loadXml`/
+    Devuelta por `document.builder::build`/`document.loader::load_xml`/
     `document.parser::parse` — todas en esta misma forma, con los campos
     que correspondan a cuánto se hizo con el documento. `document`
     (`Encabezado`/`Detalle`, con el merge de `libredte_data.extra.dte`
     si se pasó al renderizar) es la vista "de datos" limpia del
     documento — SIN los campos opcionales no usados (se omiten, no
-    quedan en `False`). `document_normalized` es la data cruda tal como
+    quedan en `None`). `document_normalized` es la data cruda tal como
     la usa el builder internamente para generar el XML (con esos
-    campos opcionales en `False` en vez de omitidos): es la que hay que
+    campos opcionales en `None` en vez de omitidos): es la que hay que
     guardar para poder reconstruir el documento después con
     `options={'normalizer': {'normalize': False}}` sin volver a
     normalizar — usar `document` para eso corrompe la reconstrucción.
@@ -48,8 +48,8 @@ class DocumentBag:
     puede ser un borrador, un documento timbrado, o timbrado y firmado,
     no una subclase distinta: es el mismo recurso en distintos estados
     según qué datos se le hayan pasado a `DocumentBuilderService`. Un
-    borrador sin folio asignado tiene folio `0` en `document_id` (ver
-    `AbstractDocument::getId()` en la biblioteca), nunca lanza error.
+    borrador sin folio asignado tiene folio `0` en `document_id`
+    (criterio de la biblioteca), nunca lanza error.
 
     `document_stamp_base64` es el TED — `None` si el documento aún no
     está timbrado (ver `is_timbrado`). `document_extra` son los campos
@@ -64,7 +64,7 @@ class DocumentBag:
     ninguna al construir/cargar el documento.
 
     `certificate`/`caf` son `None` salvo que el documento se haya
-    construido con ellos (`build_signed`, o un `loadXml` de un XML ya
+    construido con ellos (`build_signed`, o un `load_xml` de un XML ya
     firmado/timbrado) — un borrador (`build_draft`) no los trae.
     `emisor`/`receptor` sí están siempre que haya un documento
     construido (`Encabezado.Emisor`/`Encabezado.Receptor` ya
@@ -209,8 +209,8 @@ class DocumentEnvelope(XmlPayloadMixin):
 
     `documents` trae una bolsa (`DocumentBag`) por cada documento
     tributario que el sobre contiene — uno solo si se armó con
-    `create()`, uno o más si se armó con `createMany()` o si se cargó
-    con `loadXml()` un sobre que agrupaba varios documentos. `caratula`
+    `create()`, uno o más si se armó con `create_many()` o si se cargó
+    con `load_xml()` un sobre que agrupaba varios documentos. `caratula`
     es el `dict` con los datos de la carátula del sobre (`RutEmisor`,
     `RutEnvia`, `RutReceptor`, `FchResol`, `NroResol`, `TmstFirmaEnv`,
     `SubTotDTE`).
@@ -249,9 +249,8 @@ class RenderedDocument:
     liquidación de sueldo, que siempre es un único archivo).
     `copies`/`copy_number` identifican esta copia entre las pedidas de
     ese mismo `label` (ej. `copies=2, copy_number=1` es la primera de
-    2 copias tributarias). El nombre de los campos en la API
-    (`content`/`mimeType`/`filename`/`copyNumber`) es camelCase; acá
-    quedan en snake_case como el resto del SDK.
+    2 copias tributarias). La API entrega los campos como
+    `content`/`mime_type`/`filename`/`copy_number`.
     """
 
     content_base64: str
@@ -271,11 +270,11 @@ class RenderedDocument:
         """Construye desde un ítem de `data.renderings`."""
         return cls(
             content_base64=data['content'],
-            mime_type=data['mimeType'],
+            mime_type=data['mime_type'],
             filename=data['filename'],
             label=data.get('label'),
             copies=data['copies'],
-            copy_number=data['copyNumber'],
+            copy_number=data['copy_number'],
         )
 
 

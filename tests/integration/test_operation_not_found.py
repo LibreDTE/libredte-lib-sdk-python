@@ -19,8 +19,8 @@ pytestmark = pytest.mark.live
 
 def test_unknown_operation_raises_operation_not_found(real_sdk):
     with pytest.raises(LibreDteOperationNotFoundError) as exc_info:
-        real_sdk._client.call('billing.document.parser::noExiste')
+        real_sdk._client.call('billing.document.parser::no_existe')
 
     error = exc_info.value
     assert error.status_code == 500
-    assert error.operation_id == 'billing.document.parser::noExiste'
+    assert error.operation_id == 'billing.document.parser::no_existe'

@@ -53,3 +53,4 @@ def test_build_result_chains_into_validate_schema_and_signature(
 
     results = worker.validate_signature(built_aec.xml_base64)
     assert len(results) >= 1
+    assert all(result['valid'] is True for result in results)

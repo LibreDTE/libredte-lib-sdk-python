@@ -9,8 +9,8 @@ y de firma dentro de `libredte-lib-core`) — por eso alcanza con un
 certificado ficticio (`fake_certificate`) para tener una firma real que
 validar, sin necesitar credenciales de un RUT real.
 
-`document.validator::validateSignature`/`document.dispatcher
-::validateSignature` no tenían el shape de su respuesta confirmado por
+`document.validator::validate_signature`/`document.dispatcher
+::validate_signature` no tenían el shape de su respuesta confirmado por
 ningún fixture de `libredte-lib-core-dispatcher` (solo se verificaba
 éxito, no contenido) — se confirmó acá, en vivo: ambas devuelven vacío
 en caso de éxito (un `dict` para el documento, una lista de `dict` para
@@ -18,6 +18,8 @@ el sobre, uno por firma).
 """
 
 from __future__ import annotations
+
+import base64
 
 import pytest
 
@@ -56,7 +58,25 @@ def test_validator_validate_signature_succeeds_on_a_signed_document(
         signed_document.xml_base64,
     )
 
-    assert result == {}
+    assert result['valid'] is True
+    assert result['error'] is None
+    assert 'signer' in result['signature']
+
+
+def test_validator_validate_signature_reports_a_document_changed_after_signing(
+    signed_document,
+    real_sdk,
+):
+    xml = base64.b64decode(signed_document.xml_base64).decode('latin-1')
+    assert 'Producto A' in xml
+    changed = base64.b64encode(
+        xml.replace('Producto A', 'Producto B').encode('latin-1'),
+    ).decode()
+
+    result = real_sdk.billing.document.validator.validate_signature(changed)
+
+    assert result['valid'] is False
+    assert result['error']
 
 
 def test_dispatcher_load_xml_rebuilds_the_envelope(signed_envelope, real_sdk):
@@ -102,8 +122,8 @@ def test_dispatcher_validate_signature_succeeds_on_a_signed_envelope(
     )
 
     assert isinstance(result, list)
-    assert all(item == {} for item in result)
     assert len(result) >= 1
+    assert all(item['valid'] is True for item in result)
 
 
 def test_validator_validate_rejects_malformed_xml(real_sdk):

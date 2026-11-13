@@ -245,3 +245,117 @@ def test_call_raises_a_rate_limit_error_for_a_429(api_client):
     assert error.retry_after == 30.0
     assert error.limit == 3600
     assert error.remaining == 0
+    assert error.ip_limit is None
+    assert error.ip_remaining is None
+
+
+@respx.mock
+def test_a_429_by_ip_carries_the_ip_limit_and_no_user_quota(api_client):
+    """Un 429 por IP sale antes del cupo del usuario: solo trae el de IP."""
+    respx.post(f'{TEST_BASE_URL}/billing/document/builder/build').mock(
+        return_value=httpx.Response(
+            429,
+            json={'detail': 'Too many requests.'},
+            headers={
+                'Retry-After': '12',
+                'X-RateLimit-IP-Limit': '300',
+                'X-RateLimit-IP-Remaining': '0',
+            },
+        ),
+    )
+
+    with pytest.raises(LibreDteRateLimitError) as exc_info:
+        api_client.call('billing.document.builder::build', bag={})
+
+    error = exc_info.value
+    assert error.retry_after == 12.0
+    assert error.ip_limit == 300
+    assert error.ip_remaining == 0
+    assert error.limit is None
+    assert error.remaining is None
+
+
+@respx.mock
+def test_a_429_carries_the_policy_and_the_time_it_is_released(api_client):
+    """Cabeceras de un 429 real por IP, medido contra la API."""
+    respx.post(f'{TEST_BASE_URL}/billing/document/builder/build').mock(
+        return_value=httpx.Response(
+            429,
+            json={'detail': 'Demasiadas solicitudes.'},
+            headers={
+                'X-RateLimit-Policy': 'ip',
+                'X-RateLimit-IP-Limit': '10',
+                'X-RateLimit-IP-Remaining': '0',
+                'Retry-After': '57',
+                'X-RateLimit-Reset': '1794608771',
+            },
+        ),
+    )
+
+    with pytest.raises(LibreDteRateLimitError) as exc_info:
+        api_client.call('billing.document.builder::build', bag={})
+
+    error = exc_info.value
+    assert error.policy == 'ip'
+    assert error.reset_at == 1794608771.0
+    assert error.retry_after == 57.0
+    assert (error.ip_limit, error.ip_remaining) == (10, 0)
+    assert (error.limit, error.remaining) == (None, None)
+
+
+@respx.mock
+def test_a_429_without_the_policy_nor_the_reset_leaves_them_empty(api_client):
+    respx.post(f'{TEST_BASE_URL}/billing/document/builder/build').mock(
+        return_value=httpx.Response(429, json={'detail': 'Too many.'}),
+    )
+
+    with pytest.raises(LibreDteRateLimitError) as exc_info:
+        api_client.call('billing.document.builder::build', bag={})
+
+    error = exc_info.value
+    assert error.policy is None
+    assert error.reset_at is None
+    assert error.retry_after is None
+
+
+@respx.mock
+def test_a_429_with_a_reset_that_is_not_a_number_leaves_it_empty(api_client):
+    respx.post(f'{TEST_BASE_URL}/billing/document/builder/build').mock(
+        return_value=httpx.Response(
+            429,
+            headers={
+                'X-RateLimit-Reset': 'tomorrow',
+                'X-RateLimit-Policy': '',
+            },
+        ),
+    )
+
+    with pytest.raises(LibreDteRateLimitError) as exc_info:
+        api_client.call('billing.document.builder::build', bag={})
+
+    assert exc_info.value.reset_at is None
+    assert exc_info.value.policy is None
+
+
+@respx.mock
+def test_a_429_by_the_user_quota_carries_both_limits(api_client):
+    respx.post(f'{TEST_BASE_URL}/billing/document/builder/build').mock(
+        return_value=httpx.Response(
+            429,
+            json={'detail': 'Too many requests.'},
+            headers={
+                'X-RateLimit-Limit': '1000',
+                'X-RateLimit-Remaining': '0',
+                'X-RateLimit-IP-Limit': '300',
+                'X-RateLimit-IP-Remaining': '120',
+            },
+        ),
+    )
+
+    with pytest.raises(LibreDteRateLimitError) as exc_info:
+        api_client.call('billing.document.builder::build', bag={})
+
+    error = exc_info.value
+    assert (error.limit, error.remaining) == (1000, 0)
+    assert (error.ip_limit, error.ip_remaining) == (300, 120)
+    assert error.retry_after is None
