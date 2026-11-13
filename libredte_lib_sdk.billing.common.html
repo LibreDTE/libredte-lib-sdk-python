@@ -91,6 +91,16 @@
   <section id="module-libredte_lib_sdk.billing.common">
 <span id="libredte-lib-sdk-billing-common-module"></span><h1>libredte_lib_sdk.billing.common module<a class="headerlink" href="#module-libredte_lib_sdk.billing.common" title="Link to this heading"></a></h1>
 <p>Utilidades compartidas entre los componentes de <cite>billing</cite>.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="libredte_lib_sdk.billing.common.SII_RUT">
+<span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.common.</span></span><span class="sig-name descname"><span class="pre">SII_RUT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'60803000-K'</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.common.SII_RUT" title="Link to this definition"></a></dt>
+<dd><p>RUT del SII, receptor de la carátula de todo sobre que se envía al SII.</p>
+<p>Un sobre para el SII (<cite>SiiDteService.send</cite>, <cite>SiiBoletaService.send</cite>) se
+arma con <cite>receptor_rut=SII_RUT</cite>. Un sobre para el receptor real del
+documento (el cliente) se arma sin <cite>receptor_rut</cite>: la carátula toma el
+receptor del primer documento.</p>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.common.XmlPayloadMixin">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.common.</span></span><span class="sig-name descname"><span class="pre">XmlPayloadMixin</span></span><a class="headerlink" href="#libredte_lib_sdk.billing.common.XmlPayloadMixin" title="Link to this definition"></a></dt>

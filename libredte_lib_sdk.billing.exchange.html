@@ -166,7 +166,9 @@ cual el formato SII. <cite>caratula</cite> trae <cite>RutResponde</cite>/<cite>R
 <p><cite>EnvioRecibos</cite> trae múltiples firmas (una por recibo, más la
 del <cite>SetRecibos</cite>); <cite>RespuestaDTE</cite> trae solo la del nodo
 <cite>Resultado</cite>. En ambos casos se devuelve una lista, un ítem por
-firma.</p>
+firma, cada uno con <cite>{“valid”: bool, “error”: str | None,
+“signature”: {…}}</cite>. Una firma inválida no levanta error, hay
+que revisar <cite>valid</cite>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -175,7 +177,7 @@ firma.</p>
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.exchange.EnvioRecibos">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.exchange.</span></span><span class="sig-name descname"><span class="pre">EnvioRecibos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.exchange.EnvioRecibos" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.XmlPayloadMixin" title="libredte_lib_sdk.billing.common.XmlPayloadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">XmlPayloadMixin</span></code></a></p>
-<p>XML <cite>EnvioRecibos</cite> construido (<cite>document_response::buildEnvioRecibos</cite>).</p>
+<p>XML <cite>EnvioRecibos</cite> construido (<cite>document_response::build_envio_recibos</cite>).</p>
 <p>Recibo de mercaderías o servicios prestados por un proveedor.
 <cite>datos</cite> es la estructura ya parseada, <cite>xml_base64</cite> el XML completo
 — permite encadenar a <cite>validate_schema</cite>/<cite>validate_signature</cite>.</p>
@@ -208,7 +210,7 @@ firma.</p>
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.exchange.RespuestaEnvio">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.billing.exchange.</span></span><span class="sig-name descname"><span class="pre">RespuestaEnvio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xml_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.billing.exchange.RespuestaEnvio" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="libredte_lib_sdk.billing.common.html#libredte_lib_sdk.billing.common.XmlPayloadMixin" title="libredte_lib_sdk.billing.common.XmlPayloadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">XmlPayloadMixin</span></code></a></p>
-<p>XML <cite>RespuestaDTE</cite> construido (<cite>document_response::buildRespuestaEnvio</cite>).</p>
+<p>XML <cite>RespuestaDTE</cite> construido (<cite>document_response::build_respuesta_envio</cite>).</p>
 <p>Acuse de recibo del envío (<cite>RecepcionEnvio</cite>) o resultado de
 validación por documento (<cite>ResultadoDTE</cite>), según los datos
 entregados.</p>

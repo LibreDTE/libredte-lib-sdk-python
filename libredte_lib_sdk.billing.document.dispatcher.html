@@ -99,23 +99,33 @@
 <p>Arma y valida el sobre <cite>EnvioDTE</cite> (<cite>billing.document.dispatcher</cite>).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create" title="Link to this definition"></a></dt>
-<dd><p>Envuelve y firma un documento ya timbrado en un sobre <cite>EnvioDTE</cite>.</p>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">receptor_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create" title="Link to this definition"></a></dt>
+<dd><p>Envuelve y firma un documento ya timbrado en un sobre.</p>
 <p><cite>bag</cite> es el <cite>DocumentBag</cite> ya timbrado y firmado que devuelve
 <cite>DocumentBuilderService.build_signed()</cite> — trae <cite>certificate</cite>/
 <cite>emisor</cite> incluidos, no hace falta pasarlos aparte. El sobre
 resultante es lo que se envía al SII (<cite>SiiDteService.send</cite>).</p>
+<p><cite>receptor_rut</cite> es el RUT del receptor de la carátula del sobre.
+Sin indicarlo es el receptor del documento, que es el sobre para
+enviar al cliente. El sobre que va al SII se arma con
+<cite>receptor_rut=SII_RUT</cite> (<cite>60803000-K</cite>): el SII lo exige y rechaza
+el envío con otro receptor. El envío normal usa dos sobres, uno
+para el SII y otro para el cliente. Para enviar el sobre al SII
+el emisor debe traer <cite>autorizacion_dte</cite>, con <cite>fecha_resolucion</cite> y
+<cite>numero_resolucion</cite> de su autorización.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create_many">
-<span class="sig-name descname"><span class="pre">create_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create_many" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentBag" title="libredte_lib_sdk.billing.document.models.DocumentBag"><span class="pre">DocumentBag</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">receptor_rut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libredte_lib_sdk.billing.document.models.html#libredte_lib_sdk.billing.document.models.DocumentEnvelope" title="libredte_lib_sdk.billing.document.models.DocumentEnvelope"><span class="pre">DocumentEnvelope</span></a></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.dispatcher.DocumentDispatcherService.create_many" title="Link to this definition"></a></dt>
 <dd><p>Envuelve y firma 2+ documentos ya timbrados en un sobre <cite>EnvioDTE</cite>.</p>
 <p>Igual que <cite>create()</cite>, pero para un sobre que agrupa más de un
 documento — cada <cite>DocumentBag</cite> trae su propio <cite>certificate</cite>/
 <cite>emisor</cite>. El sobre resultante queda firmado con el certificado
 del PRIMER <cite>DocumentBag</cite> (el sobre en sí también se firma, no
 solo cada documento).</p>
+<p><cite>receptor_rut</cite> funciona igual que en <cite>create()</cite>: es el receptor
+de la carátula del sobre, y para el SII debe ser <cite>SII_RUT</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -148,7 +158,9 @@ ej. <cite>EnvioDTE.SetDTE.Caratula…</cite>).</p>
 <dd><p>Valida cada firma electrónica encontrada en el sobre.</p>
 <p>Un sobre trae más de una firma (la del DTE y la del propio
 <cite>EnvioDTE</cite>) — devuelve una lista, un ítem por firma. Cada ítem
-es un <cite>dict</cite> vacío en caso de éxito.</p>
+es <cite>{“valid”: bool, “error”: str | None, “signature”: {…}}</cite>,
+igual que en <cite>DocumentValidatorService.validate_signature()</cite>: una
+firma inválida no levanta error, hay que revisar <cite>valid</cite>.</p>
 </dd></dl>
 
 </dd></dl>

@@ -177,7 +177,9 @@ con <cite>RUT</cite>/<cite>Nombre</cite>); <cite>cesionario</cite> trae <cite>RU
 <span class="sig-name descname"><span class="pre">validate_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.ownership_transfer.AecService.validate_signature" title="Link to this definition"></a></dt>
 <dd><p>Valida cada firma electrónica del AEC.</p>
 <p>El AEC trae múltiples firmas (<cite>DTECedido</cite>, <cite>Cesion</cite>, <cite>AEC</cite>) —
-devuelve una lista, un ítem por firma.</p>
+devuelve una lista, un ítem por firma, cada uno con
+<cite>{“valid”: bool, “error”: str | None, “signature”: {…}}</cite>. Una
+firma inválida no levanta error, hay que revisar <cite>valid</cite>.</p>
 </dd></dl>
 
 </dd></dl>

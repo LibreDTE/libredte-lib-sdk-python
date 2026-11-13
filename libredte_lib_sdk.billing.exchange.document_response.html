@@ -133,7 +133,9 @@ cual el formato SII. <cite>caratula</cite> trae <cite>RutResponde</cite>/<cite>R
 <p><cite>EnvioRecibos</cite> trae múltiples firmas (una por recibo, más la
 del <cite>SetRecibos</cite>); <cite>RespuestaDTE</cite> trae solo la del nodo
 <cite>Resultado</cite>. En ambos casos se devuelve una lista, un ítem por
-firma.</p>
+firma, cada uno con <cite>{“valid”: bool, “error”: str | None,
+“signature”: {…}}</cite>. Una firma inválida no levanta error, hay
+que revisar <cite>valid</cite>.</p>
 </dd></dl>
 
 </dd></dl>

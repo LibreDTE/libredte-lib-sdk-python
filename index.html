@@ -95,7 +95,11 @@ infraestructura de la biblioteca (catálogos reales, carga de certificados
 </section>
 <section id="uso">
 <h2>Uso<a class="headerlink" href="#uso" title="Link to this heading"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">libredte_lib_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">LibreDTE</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">libredte_lib_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">LibreDTE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libredte_lib_sdk.billing.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">SII_RUT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libredte_lib_sdk.billing.integration</span><span class="w"> </span><span class="kn">import</span> <span class="n">SiiRequestOptions</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">libredte_lib_sdk.billing.trading_parties</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mandatario</span>
 
 <span class="n">sdk</span> <span class="o">=</span> <span class="n">LibreDTE</span><span class="p">()</span>  <span class="c1"># base_url y api_token también vía env vars, ver abajo</span>
@@ -111,6 +115,7 @@ infraestructura de la biblioteca (catálogos reales, carga de certificados
             <span class="s1">'RUTEmisor'</span><span class="p">:</span> <span class="s1">'76192083-9'</span><span class="p">,</span>
             <span class="s1">'RznSoc'</span><span class="p">:</span> <span class="s1">'SASCO SpA'</span><span class="p">,</span>
             <span class="s1">'GiroEmis'</span><span class="p">:</span> <span class="s1">'Servicios'</span><span class="p">,</span>
+            <span class="s1">'Acteco'</span><span class="p">:</span> <span class="mi">620200</span><span class="p">,</span>
             <span class="s1">'DirOrigen'</span><span class="p">:</span> <span class="s1">'Santiago'</span><span class="p">,</span>
             <span class="s1">'CmnaOrigen'</span><span class="p">:</span> <span class="s1">'Santiago'</span><span class="p">,</span>
         <span class="p">},</span>
@@ -137,7 +142,7 @@ infraestructura de la biblioteca (catálogos reales, carga de certificados
     <span class="n">codigo_documento</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span> <span class="n">folio_desde</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">folio_hasta</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">certificate</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">trading_parties</span><span class="o">.</span><span class="n">mandatario_manager</span><span class="o">.</span><span class="n">create_fake_certificate</span><span class="p">(</span>
-    <span class="n">Mandatario</span><span class="p">(</span><span class="n">rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span> <span class="n">nombre</span><span class="o">=</span><span class="s1">'SASCO SpA'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'sasco@example.com'</span><span class="p">),</span>
+    <span class="n">Mandatario</span><span class="p">(</span><span class="n">run</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span> <span class="n">nombre</span><span class="o">=</span><span class="s1">'SASCO SpA'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'sasco@example.com'</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1"># En producción: cargar y validar el CAF real que el SII le entregó</span>
@@ -153,17 +158,46 @@ infraestructura de la biblioteca (catálogos reales, carga de certificados
     <span class="n">input_data</span><span class="p">,</span> <span class="n">caf_xml</span><span class="o">=</span><span class="n">caf</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># 3. Envío al SII (arma el sobre EnvioDTE y luego lo envía).</span>
-<span class="c1"># `documento` ya trae certificate/emisor incluidos — no hace falta</span>
-<span class="c1"># pasarlos aparte.</span>
-<span class="n">sobre</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">documento</span><span class="p">)</span>
-<span class="n">envio</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
-    <span class="n">sobre</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">company_rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span>
+<span class="c1"># 3. Sobres. El envío normal usa dos: uno para el SII y otro para el</span>
+<span class="c1"># receptor del documento (el cliente). `documento` ya trae</span>
+<span class="c1"># certificate/emisor incluidos — no hace falta pasarlos aparte, salvo</span>
+<span class="c1"># `autorizacion_dte` del emisor (`fecha_resolucion` y</span>
+<span class="c1"># `numero_resolucion`), que va en la carátula.</span>
+<span class="n">documento</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="n">documento</span><span class="p">,</span>
+    <span class="n">emisor</span><span class="o">=</span><span class="p">{</span>
+        <span class="o">**</span><span class="n">documento</span><span class="o">.</span><span class="n">emisor</span><span class="p">,</span>
+        <span class="s1">'autorizacion_dte'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'fecha_resolucion'</span><span class="p">:</span> <span class="s1">'2019-12-23'</span><span class="p">,</span>
+            <span class="s1">'numero_resolucion'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
 <span class="p">)</span>
 
-<span class="c1"># 4. Estado del envío, por Track ID.</span>
+<span class="c1"># El sobre para el SII siempre tiene al SII como receptor.</span>
+<span class="n">sobre_sii</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">documento</span><span class="p">,</span> <span class="n">receptor_rut</span><span class="o">=</span><span class="n">SII_RUT</span><span class="p">)</span>
+
+<span class="c1"># El sobre para el cliente toma el receptor del documento.</span>
+<span class="n">sobre_cliente</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">dispatcher</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">documento</span><span class="p">)</span>
+
+<span class="c1"># 4. Envío al SII y estado del envío, por Track ID.</span>
+<span class="n">envio</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+    <span class="n">sobre_sii</span><span class="o">.</span><span class="n">xml_base64</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span>
+    <span class="n">company_rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">estado</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">check_status</span><span class="p">(</span>
     <span class="n">envio</span><span class="o">.</span><span class="n">track_id</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">company_rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Las boletas (tipos 39 y 41) se envían por otra API del SII, solo</span>
+<span class="c1"># disponible en Lib Pro: `b.integration.sii_boleta` tiene `send()`,</span>
+<span class="c1"># `check_status()` y `validate_document()` con la misma forma.</span>
+
+<span class="c1"># Reintentos y tiempos de una llamada al SII (todos opcionales; la API</span>
+<span class="c1"># usa los suyos si no se indican y los ajusta a su rango).</span>
+<span class="n">estado</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">sii_dte</span><span class="o">.</span><span class="n">check_status</span><span class="p">(</span>
+    <span class="n">envio</span><span class="o">.</span><span class="n">track_id</span><span class="p">,</span> <span class="n">certificate</span><span class="o">=</span><span class="n">certificate</span><span class="p">,</span> <span class="n">company_rut</span><span class="o">=</span><span class="s1">'76192083-9'</span><span class="p">,</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">SiiRequestOptions</span><span class="p">(</span><span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">max_duration</span><span class="o">=</span><span class="mi">60</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1"># 5. HTML o PDF — misma forma de respuesta para ambos.</span>
@@ -267,7 +301,10 @@ levanta <code class="docutils literal notranslate"><span class="pre">libredte_li
 si la API la informó — ej. <code class="docutils literal notranslate"><span class="pre">DocumentException</span></code>, o una excepción de
 autenticación del SII). Un <code class="docutils literal notranslate"><span class="pre">429</span></code> de la API levanta
 <code class="docutils literal notranslate"><span class="pre">LibreDteRateLimitError</span></code> (subclase de lo anterior), con
-<code class="docutils literal notranslate"><span class="pre">.retry_after</span></code>/<code class="docutils literal notranslate"><span class="pre">.limit</span></code>/<code class="docutils literal notranslate"><span class="pre">.remaining</span></code>. Un problema de red levanta
+<code class="docutils literal notranslate"><span class="pre">.retry_after</span></code> y <code class="docutils literal notranslate"><span class="pre">.reset_at</span></code> (cuándo se libera), <code class="docutils literal notranslate"><span class="pre">.policy</span></code> (cuál límite
+se agotó), el cupo del usuario (<code class="docutils literal notranslate"><span class="pre">.limit</span></code>/<code class="docutils literal notranslate"><span class="pre">.remaining</span></code>, solo con
+autenticación) y el límite por IP (<code class="docutils literal notranslate"><span class="pre">.ip_limit</span></code>/<code class="docutils literal notranslate"><span class="pre">.ip_remaining</span></code>). Cada
+dato es <code class="docutils literal notranslate"><span class="pre">None</span></code> si la API no lo informa. Un problema de red levanta
 <code class="docutils literal notranslate"><span class="pre">libredte_lib_sdk.LibreDteConnectionError</span></code>.</p>
 </section>
 <section id="desarrollo">
@@ -280,6 +317,17 @@ make<span class="w"> </span>test-live<span class="w">   </span><span class="c1">
 <p>Los tests unitarios no hacen red real: mockean la API con <code class="docutils literal notranslate"><span class="pre">respx</span></code>. Los
 de <code class="docutils literal notranslate"><span class="pre">tests/integration/</span></code> sí (marker <code class="docutils literal notranslate"><span class="pre">live</span></code>), y están excluidos por
 defecto de <code class="docutils literal notranslate"><span class="pre">pytest</span></code>/<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>/<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code>.</p>
+<p>Los tests <code class="docutils literal notranslate"><span class="pre">live</span></code> usan <code class="docutils literal notranslate"><span class="pre">LIBREDTE_LIB_SDK_BASE_URL</span></code> y
+<code class="docutils literal notranslate"><span class="pre">LIBREDTE_LIB_SDK_TOKEN</span></code>. Los de <code class="docutils literal notranslate"><span class="pre">tests/integration/test_sii_certification.py</span></code>
+envían documentos reales al ambiente de certificación del SII y se omiten si
+faltan estas variables de entorno:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LIBREDTE_CERTIFICATE_CERT</span></code> y <code class="docutils literal notranslate"><span class="pre">LIBREDTE_CERTIFICATE_PKEY</span></code>: certificado
+digital y su clave privada, en PEM (un <code class="docutils literal notranslate"><span class="pre">\n</span></code> literal vale como salto de
+línea).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIBREDTE_CAF_DIR</span></code>: directorio con los CAF de certificación, uno por tipo
+de documento (<code class="docutils literal notranslate"><span class="pre">033.xml</span></code>, <code class="docutils literal notranslate"><span class="pre">034.xml</span></code>, <code class="docutils literal notranslate"><span class="pre">039.xml</span></code>, …).</p></li>
+</ul>
 </section>
 <section id="terminos-y-condiciones-de-uso">
 <h2>Términos y condiciones de uso<a class="headerlink" href="#terminos-y-condiciones-de-uso" title="Link to this heading"></a></h2>

@@ -149,14 +149,67 @@ cualquier otro error de servidor.</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError">
-<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteRateLimitError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">429</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Límite</span> <span class="pre">de</span> <span class="pre">solicitudes</span> <span class="pre">excedido.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'about:blank'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">LibreDteRateLimitError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">429</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Límite</span> <span class="pre">de</span> <span class="pre">solicitudes</span> <span class="pre">excedido.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'about:blank'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libredte_lib_sdk.exceptions.RateLimitInfo" title="libredte_lib_sdk.exceptions.RateLimitInfo"><span class="pre">RateLimitInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#libredte_lib_sdk.exceptions.LibreDteApiError" title="libredte_lib_sdk.exceptions.LibreDteApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibreDteApiError</span></code></a></p>
 <p>La API rechazó la llamada por exceso de solicitudes (HTTP 429).</p>
-<p><cite>retry_after</cite> trae el valor del header <cite>Retry-After</cite> en segundos
-(<cite>None</cite> si la API no lo informó). <cite>limit</cite>/<cite>remaining</cite> traen
-<cite>X-RateLimit-Limit</cite>/<cite>X-RateLimit-Remaining</cite> cuando la API los
-informa. No hay retry/backoff automático: quien llame decide si
-reintentar, y cuándo, con esta información.</p>
+<p>Todo dato es <cite>None</cite> cuando la API no lo informa:</p>
+<ul class="simple">
+<li><p><cite>retry_after</cite>: el valor de <cite>Retry-After</cite>, en segundos.</p></li>
+<li><p><cite>reset_at</cite>: la hora en que se libera el límite
+(<cite>X-RateLimit-Reset</cite>), en segundos desde el epoch.</p></li>
+<li><p><cite>policy</cite>: cuál límite se agotó (<cite>X-RateLimit-Policy</cite>, por ejemplo
+<cite>ip</cite>).</p></li>
+<li><p><cite>limit</cite>/<cite>remaining</cite>: el cupo del usuario
+(<cite>X-RateLimit-Limit</cite>/<cite>X-RateLimit-Remaining</cite>). Solo existe cuando
+la solicitud va autenticada, y un 429 por IP sale antes de llegar
+a él.</p></li>
+<li><p><cite>ip_limit</cite>/<cite>ip_remaining</cite>: el límite por IP
+(<cite>X-RateLimit-IP-Limit</cite>/<cite>X-RateLimit-IP-Remaining</cite>).</p></li>
+</ul>
+<p>No hay retry/backoff automático: quien llame decide si reintentar,
+y cuándo, con esta información.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError.ip_limit">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ip_limit</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError.ip_limit" title="Link to this definition"></a></dt>
+<dd><p>Tope del límite por IP (<cite>X-RateLimit-IP-Limit</cite>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError.ip_remaining">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ip_remaining</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError.ip_remaining" title="Link to this definition"></a></dt>
+<dd><p>Lo que queda del límite por IP (<cite>X-RateLimit-IP-Remaining</cite>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError.limit">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">limit</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError.limit" title="Link to this definition"></a></dt>
+<dd><p>Tope del cupo del usuario (<cite>X-RateLimit-Limit</cite>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError.policy">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">policy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError.policy" title="Link to this definition"></a></dt>
+<dd><p>Cuál límite se agotó (<cite>X-RateLimit-Policy</cite>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError.remaining">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">remaining</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError.remaining" title="Link to this definition"></a></dt>
+<dd><p>Lo que queda del cupo del usuario (<cite>X-RateLimit-Remaining</cite>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError.reset_at">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">reset_at</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError.reset_at" title="Link to this definition"></a></dt>
+<dd><p>Hora en que se libera el límite, en segundos desde el epoch.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.LibreDteRateLimitError.retry_after">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">retry_after</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.LibreDteRateLimitError.retry_after" title="Link to this definition"></a></dt>
+<dd><p>Segundos que informa <cite>Retry-After</cite>.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py exception">
@@ -174,6 +227,66 @@ reintentar, y cuándo, con esta información.</p>
 <p>Ocurre si la API devolvió una clase sin DTO registrado, o distinta de la
 que esperaba el servicio. Una clase PHP nueva en la API obliga a crear
 su DTO y registrarlo con <cite>response_registry.api_response()</cite>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">RateLimit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimit" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cifras de uno de los límites de la API: el tope y lo que queda.</p>
+<p>Cada una es <cite>None</cite> cuando la API no la informó.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimit.limit">
+<span class="sig-name descname"><span class="pre">limit</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimit.limit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimit.remaining">
+<span class="sig-name descname"><span class="pre">remaining</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimit.remaining" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimitInfo">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">libredte_lib_sdk.exceptions.</span></span><span class="sig-name descname"><span class="pre">RateLimitInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">retry_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_at</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quota</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libredte_lib_sdk.exceptions.RateLimit" title="libredte_lib_sdk.exceptions.RateLimit"><span class="pre">RateLimit</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libredte_lib_sdk.exceptions.RateLimit" title="libredte_lib_sdk.exceptions.RateLimit"><span class="pre">RateLimit</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimitInfo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Lo que la API informa de un rechazo por exceso de solicitudes.</p>
+<p>Cada dato es <cite>None</cite> cuando la API no lo informó.</p>
+<ul class="simple">
+<li><p><cite>retry_after</cite>: segundos que informa <cite>Retry-After</cite>.</p></li>
+<li><p><cite>reset_at</cite>: hora en que se libera el límite (<cite>X-RateLimit-Reset</cite>),
+en segundos desde el epoch.</p></li>
+<li><p><cite>policy</cite>: cuál límite se agotó (<cite>X-RateLimit-Policy</cite>, por ejemplo
+<cite>ip</cite>).</p></li>
+<li><p><cite>quota</cite>: cifras del cupo del usuario.</p></li>
+<li><p><cite>ip</cite>: cifras del límite por IP.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimitInfo.ip">
+<span class="sig-name descname"><span class="pre">ip</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#libredte_lib_sdk.exceptions.RateLimit" title="libredte_lib_sdk.exceptions.RateLimit"><span class="pre">RateLimit</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimitInfo.ip" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimitInfo.policy">
+<span class="sig-name descname"><span class="pre">policy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimitInfo.policy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimitInfo.quota">
+<span class="sig-name descname"><span class="pre">quota</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#libredte_lib_sdk.exceptions.RateLimit" title="libredte_lib_sdk.exceptions.RateLimit"><span class="pre">RateLimit</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimitInfo.quota" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimitInfo.reset_at">
+<span class="sig-name descname"><span class="pre">reset_at</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimitInfo.reset_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libredte_lib_sdk.exceptions.RateLimitInfo.retry_after">
+<span class="sig-name descname"><span class="pre">retry_after</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#libredte_lib_sdk.exceptions.RateLimitInfo.retry_after" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>

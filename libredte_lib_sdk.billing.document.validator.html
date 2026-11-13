@@ -121,8 +121,13 @@ la tipa, ya que su forma depende del tipo de documento.</p>
 <dt class="sig sig-object py" id="libredte_lib_sdk.billing.document.validator.DocumentValidatorService.validate_signature">
 <span class="sig-name descname"><span class="pre">validate_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libredte_lib_sdk.billing.document.validator.DocumentValidatorService.validate_signature" title="Link to this definition"></a></dt>
 <dd><p>Valida la firma electrónica del documento.</p>
-<p>Devuelve un <cite>dict</cite> vacío en caso de éxito. Si la firma no es
-válida, la API levanta <cite>LibreDteApiError</cite>.</p>
+<p>Devuelve <cite>{“valid”: bool, “error”: str | None, “signature”: {…}}</cite>.
+La API responde con éxito tanto si la firma es válida como si no
+lo es: el resultado está en <cite>valid</cite>, y <cite>error</cite> explica el motivo
+cuando es <cite>False</cite> (por ejemplo, que el contenido se modificó
+después de firmarlo). <cite>signature</cite> trae los datos de la firma
+(<cite>reference</cite>, <cite>signature_method</cite>, <cite>digest_method</cite>, el certificado
+y <cite>signer</cite>, con los datos del certificado del firmante).</p>
 </dd></dl>
 
 </dd></dl>
